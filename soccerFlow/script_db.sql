@@ -1,0 +1,10 @@
+USE soccerflow;
+
+CREATE TABLE user (
+ID INT AUTOINCREMENT PRIMARY KEY,
+name VARCHAR(80),
+email VARCHAR(100) UNIQUE,
+rol ENUM('admin','user') NOT NULL DEFAULT('user'),
+email_verified_at TIMESTAMP NULL DEFAULT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+);
