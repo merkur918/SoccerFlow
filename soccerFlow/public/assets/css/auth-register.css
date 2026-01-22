@@ -41,6 +41,7 @@ h2{
     justify-content: center;
     gap: 15px;
     padding: 60px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .register__form{
@@ -56,6 +57,12 @@ h2{
     height: 40px;
     border-radius: 14px;
     border: #05702E solid 2px;
+     transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+    &:hover{
+          transform: scale(1.00);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
 }
 
 .register__form input::placeholder{
