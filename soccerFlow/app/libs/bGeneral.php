@@ -5,26 +5,6 @@
  * 
  */
 
-function cabecera($titulo = "") // el archivo actual
-{
-?>
-    <!DOCTYPE html>
-    <html lang="es">
-
-    <head>
-        <title> <?= $titulo ?> </title>
-        <meta charset="utf-8" />
-    </head>
-
-    <body>
-    <?php
-}
-
-function pie()
-{
-    echo "</body>
-	</html>";
-}
 
 
 //***** Funciones de sanitización **** //
@@ -249,6 +229,46 @@ function cRadio(string $text, string $campo, array &$errores, array $valores, bo
     }
     $errores[$campo] = "Error en el campo $campo";
     return false;
+}
+
+function cEmail(string $email, string $campo, array &$errores,bool $requerido = TRUE):bool{
+
+    if(empty($email) && $requerido === TRUE){
+        $errores[$campo] = "El campo $campo no puede estar vacio";
+        return false;
+    }
+
+    if(empty($email)&&$requerido === false){
+        return true;
+    }
+
+    if(filter_var($email,FILTER_VALIDATE_EMAIL)){
+        return true;
+    }
+    else{
+        $errores[$campo]= 'Email no valido';
+        return false;
+    }
+
+}
+
+function cPassword(string $password, string $campo, array &$errores, bool $requerido = TRUE):bool{
+
+     $patron = '/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
+
+     if(empty($password)){
+        $errores[$campo] = "El campo $campo no puede estar vacio";
+        return false;
+     }
+
+     if(preg_match($patron,$password)){
+        return true;
+     }else{
+        $errores[$campo] = 'La contraseña debe contener carácteres especiales, una mayuscula y un número';
+        return false;
+     }
+
+
 }
 
 function cSelect(string $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE)
