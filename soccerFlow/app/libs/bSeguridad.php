@@ -13,7 +13,3 @@ function comprobarhash($pass, $passBD) {
         // Primero comprobamos si se ha empleado una contraseña correcta:
         return password_verify($pass, $passBD);
 }
-    
-    
-?>
-

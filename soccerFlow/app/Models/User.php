@@ -1,15 +1,32 @@
 <?php
-class User { 
-    private PDO $db; 
-    public int $id; 
-    public string $name; 
-    public string $email; 
-    public string $password; 
-    public string $rol; 
-    public ?string $email_verified_at; 
-    public string $created_at; 
 
-    public function __construct(PDO $db) { 
-        $this->db = $db; 
-        }
+class User
+{
+    private PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getConexion();
+    }
+
+    public function emailExists(string $email): bool
+    {
+        $sql = "SELECT id FROM users WHERE email = :email LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch() !== false;
+    }
+
+    public function create(string $name, string $email, string $password): bool
+    {
+        $sql = "INSERT INTO users (name, email, password)
+                VALUES (:name, :email, :password)";
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            'name'     => $name,
+            'email'    => $email,
+            'password' => $password
+        ]);
+    }
 }
