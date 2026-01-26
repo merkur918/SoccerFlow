@@ -12,8 +12,9 @@ $appBaseDir = __DIR__ . '/../';
 // El orden no importa, pero es bueno ser explícito.
 const CLASS_PATHS = [
     'Core/',         
-    'modelo/',       
-    'controlador/',
+    'Models/',       
+    'Controllers/',
+    'libs/',
 ];
 
 /**

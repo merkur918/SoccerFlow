@@ -1,11 +1,9 @@
 <?php
 
-include_once __DIR__ . '/../libs/bGeneral.php';
-
 class AuthController extends Controller
 {
-    // Muestra el formulario
-    public function index()
+    // Mostrar formulario
+    public function index(): void
     {
         $this->render('auth/register', [
             'title' => 'Registro',
@@ -13,41 +11,44 @@ class AuthController extends Controller
         ]);
     }
 
-    // Procesa el formulario
-    public function create()
+    // Procesar registro (SOLO POST)
+    public function create(): void
     {
-        $erroresRegistro = [];
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            $nombre = recoge('nombre');
-            $email = recoge('email');
-            $password = recoge('password');
-            $passwordVerify = recoge('password_confirm');
-            $activarNoticias = recoge('activar_notificaciones');
-
-            cTexto($nombre, 'nombre', $erroresRegistro, 20, 3);
-            cEmail($email, 'email', $erroresRegistro);
-            cPassword($password, 'password', $erroresRegistro);
-            cPassword($passwordVerify, 'password_confirm', $erroresRegistro);
-
-            if (empty($erroresRegistro)) {
-                // Aquí iría guardar en BD
-                $this->render('home/index', [
-                    'title' => 'Home'
-                ]);
-                return;
-            }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /register');
+            exit;
         }
 
-        // Si hay errores, volvemos al formulario
-        $this->render('auth/register', [
-            'title' => 'Registro',
-            'errores' => $erroresRegistro
-        ]);
+        $erroresRegistro = [];
+
+        $nombre = recoge('nombre');
+        $email = recoge('email');
+        $password = recoge('password');
+        $passwordVerify = recoge('password_confirm');
+
+        cTexto($nombre, 'nombre', $erroresRegistro);
+        cEmail($email, 'email', $erroresRegistro);
+        cPassword($password, 'password', $erroresRegistro);
+
+        if ($password !== $passwordVerify) {
+            $erroresRegistro['password_confirm'] = 'Las contraseñas no coinciden';
+        }
+
+        if (!empty($erroresRegistro)) {
+            $this->render('auth/register', [
+                'title' => 'Registro',
+                'errores' => $erroresRegistro
+            ]);
+            return;
+        }
+
+        // Aquí guardas en BD
+
+        header('Location: /home');
+        exit;
     }
 
-    public function login()
+    public function login(): void
     {
         $this->render('auth/login', [
             'title' => 'Login'

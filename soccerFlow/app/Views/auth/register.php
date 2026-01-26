@@ -13,7 +13,7 @@
    
 
     
-        <form class="register__form" action="/auth/create" method="post">
+        <form class="register__form" action="index.php?ctl=register_post" method="post">
 
             <h2>REGISTRO</h2>
 
