@@ -2,7 +2,7 @@
 
 class AuthController extends Controller
 {
-    // Mostrar formulario
+    // GET /register
     public function index(): void
     {
         $this->render('auth/register', [
@@ -11,43 +11,54 @@ class AuthController extends Controller
         ]);
     }
 
-    // Procesar registro (SOLO POST)
+    // POST /register_post
     public function create(): void
     {
+        // Solo permitir POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            var_dump(headers_sent($file, $line));
+            var_dump($file, $line);
+            exit;
+
             header('Location: /register');
             exit;
         }
 
-        $erroresRegistro = [];
-
+        // Recoger datos
         $nombre = recoge('nombre');
         $email = recoge('email');
         $password = recoge('password');
-        $passwordVerify = recoge('password_confirm');
+        $passwordConfirm = recoge('password_confirm');
 
-        cTexto($nombre, 'nombre', $erroresRegistro);
-        cEmail($email, 'email', $erroresRegistro);
-        cPassword($password, 'password', $erroresRegistro);
+        // Validar
+        $errores = [];
 
-        if ($password !== $passwordVerify) {
-            $erroresRegistro['password_confirm'] = 'Las contraseñas no coinciden';
+        cTexto($nombre, 'nombre', $errores);
+        cEmail($email, 'email', $errores);
+        cPassword($password, 'password', $errores);
+
+        if ($password !== $passwordConfirm) {
+            $errores['password_confirm'] = 'Las contraseñas no coinciden';
         }
 
-        if (!empty($erroresRegistro)) {
+        // 4️⃣ Si hay errores → volver al formulario (render)
+        if (!empty($errores)) {
             $this->render('auth/register', [
                 'title' => 'Registro',
-                'errores' => $erroresRegistro
+                'errores' => $errores
             ]);
             return;
         }
 
-        // Aquí guardas en BD
+        // Guardar en BD (aquí iría el insert)
+        // password_hash($password, PASSWORD_DEFAULT);
 
-        header('Location: /home');
+        // Redirect tras POST (NO render)
+        header('Location: /login');
         exit;
     }
 
+    // GET /login
     public function login(): void
     {
         $this->render('auth/login', [

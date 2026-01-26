@@ -14,7 +14,6 @@ const CLASS_PATHS = [
     'Core/',         
     'Models/',       
     'Controllers/',
-    'libs/',
 ];
 
 /**

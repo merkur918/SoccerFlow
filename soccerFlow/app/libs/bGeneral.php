@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /****
  * Librería con funciones generales y de validación
@@ -413,4 +413,3 @@ function crypt_blowfish($password) {
     
     return $pass;
     }
-    ?>
