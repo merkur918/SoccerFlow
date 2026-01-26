@@ -1,7 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-=======
 class User { 
     private PDO $db; 
     public int $id; 
@@ -16,4 +13,3 @@ class User {
         $this->db = $db; 
         }
 }
->>>>>>> 5b302a0cae97c1a67f7b129f365dd65bf4f96679
