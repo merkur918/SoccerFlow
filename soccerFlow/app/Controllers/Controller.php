@@ -17,12 +17,11 @@ class Controller
         $cssFile = str_replace('/', '-', $view) . '.css';
         $jsFile  = str_replace('/', '-', $view) . '.js';
 
-        // 1️⃣ Renderizar la vista en buffer
+        
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
 
-        // 2️⃣ Renderizar el layout (UNA sola salida)
         require __DIR__ . '/../Views/layouts/main.php';
     }
 }

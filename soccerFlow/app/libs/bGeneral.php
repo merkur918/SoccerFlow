@@ -252,24 +252,35 @@ function cEmail(string $email, string $campo, array &$errores,bool $requerido = 
 
 }
 
-function cPassword(string $password, string $campo, array &$errores, bool $requerido = TRUE):bool{
+function cPassword(
+    string $password,
+    string $campo,
+    array &$errores,
+    bool $requerido = true
+): bool {
 
-     $patron = '/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
+    $patron = '/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
 
-     if(empty($password)){
-        $errores[$campo] = "El campo $campo no puede estar vacio";
-        return false;
-     }
-
-     if(preg_match($patron,$password)){
+    // Si está vacío
+    if (empty($password)) {
+        if ($requerido) {
+            $errores[$campo] = "El campo $campo no puede estar vacío";
+            return false;
+        }
+        // No requerido y vacío → válido
         return true;
-     }else{
-        $errores[$campo] = 'La contraseña debe contener carácteres especiales, una mayuscula y un número';
+    }
+
+    // Validación del patrón
+    if (!preg_match($patron, $password)) {
+        $errores[$campo] =
+            'La contraseña debe tener mínimo 8 caracteres, una mayúscula, un número y un carácter especial';
         return false;
-     }
+    }
 
-
+    return true;
 }
+
 
 function cSelect(string $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE)
 {
