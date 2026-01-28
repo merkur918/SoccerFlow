@@ -5,7 +5,7 @@
 
 
     <div class="register__header">
-    <h1 class="register__title">SOCCER FLOW<span style="color: #079C40;">W</span></h1>
+    <h1 class="register__title">SOCCER FLO<span style="color: #079C40;">W</span></h1>
     <img class="register__logo" src="/assets/img/logo.png" alt="Logo Soccer Flow">
 
     </div>
