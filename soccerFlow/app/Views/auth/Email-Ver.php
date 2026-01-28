@@ -6,7 +6,7 @@
 
         <div class="email__header">
             <h1 class="email__title2">SOCCER FLO<span style="color: #079C40;">W</span></h1>
-            <img class="email__logo" src="logo.png" alt="Logo Soccer Flow">
+            <img class="email__logo" src="/assets/img/logo.png" alt="Logo Soccer Flow">
 
         </div>
         <div class="email__form">

@@ -2,7 +2,7 @@
     <div class="email__body">
         <div class="email__header">
             <h1 class="email__title">SOCCER FLO<span style="color: #079C40;">W</span></h1>
-            <img class="email__logo" src="logo.png" alt="Logo Soccer Flow">
+            <img class="email__logo" src="/assets/img/logo.png" alt="Logo Soccer Flow">
         </div>
         <div class="email__form">
             <h2>CONFIRMACIÓN DE CORREO ELECTRÓNICO</h2>
