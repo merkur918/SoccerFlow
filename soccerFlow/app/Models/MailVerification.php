@@ -2,11 +2,16 @@
 
 class MailVerification {
 
-     private PDO $db;
+    private PDO $db;
 
     public function __construct()
     {
         $this->db = Database::getConexion();
+    }
+
+    public function createToken()
+    {
+        
     }
 
 }
