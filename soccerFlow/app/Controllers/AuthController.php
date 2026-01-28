@@ -62,14 +62,19 @@ class AuthController extends Controller
             ]);
             return;
         }
-$mail = new MailConfig();
 
-$mail->send(
-    $email,
-    'Verificacion de Email',
-    '<h2>Bienvenido</h2><p>Verifica tu cuenta</p>',
-    '<button>Verifica</button>'
-);
+        $verification = new MailVerification();
+        $token = $verification->createTokenforUser($email,60*60*24);
+
+        $verifyUrl = 'http://localhost:8080/verify-email?token='. urlencode($token);
+
+        $mail = new MailConfig();
+        $mail->send(
+            $email,
+            'Verifica tu cuenta',
+            "<h2>Hola $nombre</h2>",
+            "<p><a>Verifica tu cuenta $verifyUrl</a></p>"
+        );
 
         // Registro exitoso → redirige a login
         header('Location: /login');

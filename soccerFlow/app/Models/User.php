@@ -17,6 +17,8 @@ class User
         return $stmt->fetch() !== false;
     }
 
+ 
+
     public function create(string $name, string $email, string $password): bool
     {
         $sql = "INSERT INTO users (name, email, password)
