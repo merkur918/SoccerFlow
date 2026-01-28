@@ -12,6 +12,8 @@ class Controller
     protected function render(string $view, array $data = []): void
     {
         extract($data);
+        
+        $session = $this->session;
 
         // Archivos opcionales
         $cssFile = str_replace('/', '-', $view) . '.css';
