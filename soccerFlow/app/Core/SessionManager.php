@@ -1,39 +1,42 @@
 <?php
-/**
- * Gestión segura de sesiones
- */
+
 class SessionManager
 {
-    private string $loginPage;
-    private int $timeout;
-
-    private const ROLE_INVITADO    = 0;
-    private const ROLE_USUARIO    = 1;
-    private const ROLE_ADMINISTRADOR = 9;
-
-    public function __construct(string $loginPage = 'index.php', int $timeout = 600)
+    public function __construct()
     {
-        $this->loginPage = $loginPage;
-        $this->timeout   = $timeout;
-
-        // CLAVE: solo iniciar si no existe sesión
         if (session_status() === PHP_SESSION_NONE) {
-            $this->start();
+            session_start();
         }
     }
 
-    private function start(array $options = []): void
+    public function setUser($userData): void
     {
-        // ini_set SOLO antes de session_start
-        ini_set('session.use_strict_mode', '1');
-        ini_set('session.cookie_httponly', '1');
-        ini_set('session.cookie_samesite', 'Lax');
-        ini_set('session.cookie_secure', '0');
+        $_SESSION['user'] = $userData;
+        $_SESSION['logged_in'] = true;
+    }
 
+    public function getUser()
+    {
+        return $_SESSION['user'] ?? null;
+    }
+
+    public function isLoggedIn(): bool
+    {
+        return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+    }
+
+    public function logout(): void
+    {
+        session_unset();
+        session_destroy();
         session_start();
+    }
 
-        if (!isset($_SESSION['usuarioNivel'])) {
-            $_SESSION['usuarioNivel'] = self::ROLE_INVITADO;
-        }
+    public function hasLevel($requiredLevel): bool
+    {
+        $user = $this->getUser();
+        if (!$user) return false;
+        
+        return ($user['nivel'] ?? 0) >= $requiredLevel;
     }
 }

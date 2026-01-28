@@ -29,4 +29,12 @@ class User
             'password' => $password
         ]);
     }
+
+    public function findByEmail(string $email)
+    {
+        $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

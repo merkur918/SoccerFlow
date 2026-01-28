@@ -9,7 +9,7 @@
             <img class="login__logo" src="/assets/img/logo.png" alt="Logo Soccer Flow">
 
         </div>
-        <form class="login__form" action="/auth/create" method="post">
+            <form class="login__form" action="/login_post" method="post">
 
             <h2>INICIO DE SESIÓN</h2>
 

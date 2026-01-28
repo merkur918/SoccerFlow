@@ -45,6 +45,18 @@ $map = [
         'action' => 'login',
         'nivel' => 0
     ],
+
+    'login_post' => [
+        'controller' => 'AuthController',
+        'action' => 'authenticate',
+        'nivel' => 0
+    ],
+
+    'logout' => [
+        'controller' => 'AuthController',
+        'action' => 'logout',
+        'nivel' => 1 
+    ],
 ];
 
 // ------------------------------

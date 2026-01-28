@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 
 <header class="header">
     <div class="header-container">
@@ -23,29 +23,46 @@
                 </svg>
             </button>
             
-            <!-- Botón de usuario con menú desplegable -->
             <div class="user-dropdown">
-                <!-- AÑADIDO: id="userMenuButton" -->
                 <button class="icon-btn user-btn" aria-label="Perfil de usuario" id="userMenuButton">
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                 </button>
                 
-                <!-- Menú desplegable - AÑADIDO: id="userDropdown" -->
                 <div class="dropdown-menu" id="userDropdown">
-                    <a href="/login" class="dropdown-item">
-                        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
-                        </svg>
-                        Iniciar Sesión
-                    </a>
-                    <a href="/register" class="dropdown-item">
-                        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
-                        Registrarse
-                    </a>
+                    <?php if (isset($session) && $session->isLoggedIn()): ?>
+                        <!-- Usuario logueado -->
+                        <div class="dropdown-header">
+                            <strong><?php echo htmlspecialchars($session->getUser()['name'] ?? 'Usuario'); ?></strong>
+                        </div>
+                        <a href="/perfil" class="dropdown-item">
+                            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            Mi Perfil
+                        </a>
+                        <a href="/logout" class="dropdown-item">
+                            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                            </svg>
+                            Cerrar Sesión
+                        </a>
+                    <?php else: ?>
+                        <!-- Usuario no logueado -->
+                        <a href="/login" class="dropdown-item">
+                            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
+                            </svg>
+                            Iniciar Sesión
+                        </a>
+                        <a href="/register" class="dropdown-item">
+                            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            Registrarse
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
             
@@ -61,4 +78,4 @@
     </div>
 </header>
 
-<script src="../../assets/js/header.js"></script>
+<script src="/assets/js/header.js"></script>
