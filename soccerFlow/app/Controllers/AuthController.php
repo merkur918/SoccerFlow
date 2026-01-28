@@ -62,6 +62,14 @@ class AuthController extends Controller
             ]);
             return;
         }
+$mail = new MailConfig();
+
+$mail->send(
+    $email,
+    'Verificacion de Email',
+    '<h2>Bienvenido</h2><p>Verifica tu cuenta</p>',
+    '<button>Verifica</button>'
+);
 
         // Registro exitoso → redirige a login
         header('Location: /login');
@@ -80,6 +88,8 @@ class AuthController extends Controller
         $this->render('auth/login', [
             'title' => 'Login'
         ]);
+
+
     }
 
     // POST /login
@@ -121,3 +131,4 @@ class AuthController extends Controller
         exit;
     }
 }
+
