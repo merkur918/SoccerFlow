@@ -18,3 +18,8 @@
     </div>
 </div>
 </div>
+<script>
+setTimeout(() => {
+    window.location.href = "/login";
+}, 10000);
+</script>

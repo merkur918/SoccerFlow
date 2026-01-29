@@ -19,8 +19,8 @@ class MailConfig
             $mail->SMTPAuth   = true;
             $mail->Username   = 'davgarcol05@gmail.com';
             $mail->Password   = 'ocjq ibgg kpql ztxs';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
 
             $mail->setFrom('davgarcol05@gmail.com', 'SoccerFlow');
             $mail->addAddress($to);

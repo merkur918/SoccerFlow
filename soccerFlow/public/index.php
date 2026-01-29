@@ -58,6 +58,11 @@ $map = [
         'action' => 'logout',
         'nivel' => 1 
     ],
+    'verify-email' => [
+    'controller' => 'AuthController',
+    'action' => 'verifyEmail',
+    'nivel' => 0
+],
 ];
 
 // ------------------------------

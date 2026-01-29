@@ -1,7 +1,7 @@
-<?php 
+<?php
+
 class AuthController extends Controller
 {
-    // GET /register
     public function index(): void
     {
         $this->render('auth/register', [
@@ -10,14 +10,8 @@ class AuthController extends Controller
         ]);
     }
 
-    // POST /register
     public function create(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /register');
-            exit;
-        }
-
         $nombre = recoge('nombre');
         $email = recoge('email');
         $password = recoge('password');
@@ -34,10 +28,7 @@ class AuthController extends Controller
         }
 
         if (!empty($errores)) {
-            $this->render('auth/register', [
-                'title' => 'Registro',
-                'errores' => $errores
-            ]);
+            $this->render('auth/register', compact('errores'));
             return;
         }
 
@@ -45,95 +36,73 @@ class AuthController extends Controller
 
         if ($userModel->emailExists($email)) {
             $errores['email'] = 'Este email ya está registrado';
-            $this->render('auth/register', [
-                'title' => 'Registro',
-                'errores' => $errores
-            ]);
+            $this->render('auth/register', compact('errores'));
             return;
         }
 
         $passwordHash = encriptar($password);
+        $userModel->create($nombre, $email, $passwordHash);
 
-        if (!$userModel->create($nombre, $email, $passwordHash)) {
-            $errores['general'] = 'Error al crear el usuario';
-            $this->render('auth/register', [
-                'title' => 'Registro',
-                'errores' => $errores
-            ]);
+        $user = $userModel->findByEmail($email);
+
+        $verification = new MailVerification();
+        $token = $verification->createTokenForUser($user['ID'], 86400);
+
+        $verifyUrl = "http://localhost:8080/verify-email?token=$token";
+
+        $result = MailConfig::send($email, 'Verifica tu cuenta',
+            "<h2>Hola $nombre</h2>
+             <p>Haz click para verificar tu cuenta:</p>
+             <a href='$verifyUrl'>Verificar cuenta</a>" );
+
+        if ($result !== true) {
+            // Guarda el error en logs o muestra un mensaje
+            error_log("Error enviando email: " . $result);
+            $errores['email'] = 'Error enviando correo de verificación';
+            $this->render('auth/register', compact('errores'));
+        return;
+}
+
+        $this->render('auth/Email');
+    }
+
+    public function verifyEmail(): void
+    {
+        $token = $_GET['token'] ?? '';
+
+        $verification = new MailVerification();
+        if (!$verification->verifyToken($token)) {
+            echo "Token inválido o expirado";
             return;
         }
 
-        $verification = new MailVerification();
-        $token = $verification->createTokenforUser($email,60*60*24);
-
-        $verifyUrl = 'http://localhost:8080/verify-email?token='. urlencode($token);
-
-        $mail = new MailConfig();
-        $mail->send(
-            $email,
-            'Verifica tu cuenta',
-            "<h2>Hola $nombre</h2>",
-            "<p><a>Verifica tu cuenta $verifyUrl</a></p>"
-        );
-
-        // Registro exitoso → redirige a login
-        header('Location: /login');
-        exit;
+        $this->render('auth/Email-Ver');
     }
 
-    // GET /login
     public function login(): void
     {
-        // Si ya está logueado, redirigir a home
-        if ($this->session->isLoggedIn()) {
-            header('Location: /home');
-            exit;
-        }
-        
-        $this->render('auth/login', [
-            'title' => 'Login'
-        ]);
-
-
+        $this->render('auth/login');
     }
 
-    // POST /login
     public function authenticate(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /login');
-            exit;
-        }
-
         $email = recoge('email');
         $password = recoge('password');
 
-        $userModel = new User();
-        $user = $userModel->findByEmail($email);
+        $user = (new User())->findByEmail($email);
 
         if (!$user || !comprobarhash($password, $user['password'])) {
-            $this->render('auth/login', [
-                'title' => 'Login',
-                'error' => 'Email o contraseña incorrectos'
-            ]);
+            $this->render('auth/login', ['error' => 'Credenciales incorrectas']);
             return;
         }
 
-        // Guardar datos del usuario en sesión
+        if ($user['email_verified_at'] === null) {
+            $this->render('auth/login', ['error' => 'Debes verificar tu email']);
+            return;
+        }
+
         unset($user['password']);
         $this->session->setUser($user);
-
-        // Login exitoso → redirigir a home
         header('Location: /home');
-        exit;
-    }
-
-    // GET /logout
-    public function logout(): void
-    {
-        $this->session->logout();
-        header('Location: /login');
-        exit;
     }
 }
-

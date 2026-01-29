@@ -12,9 +12,9 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 CREATE TABLE email_verifications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    verified_at TIMESTAMP DEFAULT NULL,
     token VARCHAR(255) NOT NULL,
     expires_at TIMESTAMP NOT NULL,
+    verified_at TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(ID) ON DELETE CASCADE
 );
 CREATE TABLE password_resets (
