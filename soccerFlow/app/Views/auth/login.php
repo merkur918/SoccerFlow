@@ -26,7 +26,7 @@
             </div>
 
             <div class="login__row">
-                <p class="forgot-password">¿Has olvidado tu contraseña?</p>
+                <a class="forgot-password" href="/passw">¿Has olvidado tu contraseña?</a>
                 <button class="login__button" type="submit">Enviar</button>
             </div>
 

@@ -58,11 +58,40 @@ $map = [
         'action' => 'logout',
         'nivel' => 1 
     ],
+
     'verify-email' => [
-    'controller' => 'AuthController',
-    'action' => 'verifyEmail',
-    'nivel' => 0
-],
+        'controller' => 'AuthController',
+        'action' => 'verifyEmail',
+        'nivel' => 0
+    ],
+
+    // Vista donde se introduce el email (passw.php)
+    'passw' => [
+        'controller' => 'AuthController',
+        'action' => 'requestPassword',
+        'nivel' => 0
+    ],
+
+    // Procesa el email y envía el correo
+    'email_post' => [
+        'controller' => 'AuthController',
+        'action' => 'sendPasswordEmail',
+        'nivel' => 0
+    ],
+
+    // Enlace desde el correo (con token)
+    'password-verify' => [
+        'controller' => 'AuthController',
+        'action' => 'passwordVerify',
+        'nivel' => 0
+    ],
+
+    // Procesa la nueva contraseña
+    'password_post' => [
+        'controller' => 'AuthController',
+        'action' => 'passwordUpdate',
+        'nivel' => 0
+    ],
 ];
 
 // ------------------------------
@@ -90,17 +119,6 @@ if (!isset($map[$ruta])) {
 $controlador  = $map[$ruta]['controller'];
 $actionName   = $map[$ruta]['action'];
 $requiredLevel = $map[$ruta]['nivel'];
-
-// ------------------------------
-// (Permisos – lo activas luego)
-// ------------------------------
-/*
-if (!$session->hasLevel($requiredLevel)) {
-    header("HTTP/1.0 403 Forbidden");
-    echo "<h1>403: No tienes permisos</h1>";
-    exit;
-}
-*/
 
 // ------------------------------
 // Ejecutar controlador
