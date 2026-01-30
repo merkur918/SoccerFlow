@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="/assets/css/auth-password">
+<link rel="stylesheet" href="/assets/css/auth-password.css">
 
 <div class="password">
     <div class="password__body">
         <div class="password__header">
-            <h1 class="password__title">SOCCER FLO<span style="color: #079C40;">W</span></h1>
+            <h1 class="password__title">SOCCER FLO<span style="color:#079C40;">W</span></h1>
             <img class="password__logo" src="/assets/img/logo.png" alt="Logo Soccer Flow">
         </div>
 
@@ -14,7 +14,6 @@
                 ¡No te preocupes! Introduce el e-mail con el que te registraste y te enviaremos un correo para cambiarla.
             </p>
 
-            <p><span style="color: #079C40;">Email:</span></p>
             <input type="email" name="email" placeholder="tucorreo@gmail.com" required>
 
             <button class="password__button" type="submit">Enviar</button>
