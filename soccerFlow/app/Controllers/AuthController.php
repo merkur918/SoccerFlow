@@ -50,18 +50,12 @@ class AuthController extends Controller
 
         $verifyUrl = "http://localhost:8080/verify-email?token=$token";
 
+            $html = 
+
         $result = MailConfig::send($email, 'Verifica tu cuenta',
             "<h2>Hola $nombre</h2>
              <p>Haz click para verificar tu cuenta:</p>
              <a href='$verifyUrl'>Verificar cuenta</a>" );
-
-        if ($result !== true) {
-            // Guarda el error en logs o muestra un mensaje
-            error_log("Error enviando email: " . $result);
-            $errores['email'] = 'Error enviando correo de verificación';
-            $this->render('auth/register', compact('errores'));
-        return;
-}
 
         $this->render('auth/Email');
     }
@@ -104,5 +98,12 @@ class AuthController extends Controller
         unset($user['password']);
         $this->session->setUser($user);
         header('Location: /home');
+    }
+        // GET /logout
+    public function logout(): void
+    {
+        $this->session->logout();
+        header('Location: /login');
+        exit;
     }
 }
