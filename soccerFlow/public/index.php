@@ -92,6 +92,12 @@ $map = [
         'action' => 'passwordUpdate',
         'nivel' => 0
     ],
+    //Cargar pagina de contacto
+    'contactanos' => [
+        'controller' => 'ContactController',
+        'action'     => 'index',
+        'nivel'      => 0
+],
 ];
 
 // ------------------------------
