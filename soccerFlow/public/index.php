@@ -56,7 +56,7 @@ $map = [
     'logout' => [
         'controller' => 'AuthController',
         'action' => 'logout',
-        'nivel' => 1 
+        'nivel' => 5 
     ],
 
     'verify-email' => [
@@ -119,6 +119,13 @@ if (!isset($map[$ruta])) {
 $controlador  = $map[$ruta]['controller'];
 $actionName   = $map[$ruta]['action'];
 $requiredLevel = $map[$ruta]['nivel'];
+
+
+if ($requiredLevel > 0 && !$session->hasLevel($requiredLevel)) {
+    echo "<h1>Acceso denegado</h1>";
+    exit;
+}
+
 
 // ------------------------------
 // Ejecutar controlador
