@@ -9,21 +9,12 @@ class Controller
         $this->session = $session;
     }
 
-    protected function render(string $view, array $data = []): void
+    protected function render(string $view, array $data = [], bool $showLayout = true): void
     {
         extract($data);
-        
-        $session = $this->session;
+         $session = $this->session;
 
-        // Archivos opcionales
-        $cssFile = str_replace('/', '-', $view) . '.css';
-        $jsFile  = str_replace('/', '-', $view) . '.js';
-
-        
-        ob_start();
-        require __DIR__ . "/../Views/$view.php";
-        $content = ob_get_clean();
-
-        require __DIR__ . '/../Views/layouts/main.php';
+        // 🔥 SIEMPRE cargar layout completo (HTML + HEAD + CSS)
+        require __DIR__ . '/../views/layouts/main.php';
     }
 }

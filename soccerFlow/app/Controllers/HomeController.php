@@ -1,15 +1,14 @@
 <?php
 
 
+class HomeController extends Controller
+{
+    public function index(): void
+    {
+      
 
-class HomeController extends Controller {
-
-    public function index() {
-
-        $this->render('home/index',[
-            'title' => 'Home'
+        $this->render('home/index', [
+            'title'   => 'Home'   // <-- si lo necesitas
         ]);
     }
-
-
 }
