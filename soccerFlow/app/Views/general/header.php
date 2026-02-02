@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/assets/css/main.css">
+
 
 <header class="header">
     <div class="header-container">
@@ -70,6 +70,9 @@
             </button>
         </div>
     </div>
-</header>
+    </main>
 
 <script src="/assets/js/header.js"></script>
+
+</body>
+</header>
