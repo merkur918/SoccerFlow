@@ -1103,11 +1103,24 @@ body {
 /* ============================================
    PRODUCTOS - DETALLE DE PRODUCTO
    ============================================ */
-   .product__body {
+
+.product__body {
+    width: 100%;
+    height: 100vh; 
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    box-sizing: border-box;
+}
+
+.product__container {
     width: 100%;
     max-width: 1400px;
-    height: 95vh;
-    margin: 20px auto;
+    height: 95vh; 
     background: white;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.1);
@@ -1118,7 +1131,7 @@ body {
     display: flex;
 }
 
-/* Columna de previsualización de imágenes (15%) */
+
 .product__images-preview-column {
     width: 15%;
     background: #f8f9fa;
@@ -1148,7 +1161,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Columna de imagen principal (50%) */
 .product__image {
     width: 50%;
     background: #fafafa;
@@ -1165,22 +1177,22 @@ body {
     object-fit: contain;
 }
 
-/* Columna de formulario e información (35%) */
+
 .product__form-column {
     width: 35%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    max-height: 95vh;
+    max-height: 100%;
 }
 
-/* Formulario del producto */
+
 .product__form {
     padding: 30px;
     flex-grow: 1;
 }
 
-/* Título del producto */
+
 .product__title {
     font-size: 22px;
     font-weight: 700;
@@ -1190,7 +1202,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Precio */
+
 .product__price {
     font-size: 26px;
     font-weight: 800;
@@ -1198,7 +1210,7 @@ body {
     margin-bottom: 12px;
 }
 
-/* Mensaje de envío gratis */
+
 .product__form > span[style*="color: #079C40"] {
     display: inline-block;
     background-color: #f0f9f0;
@@ -1210,7 +1222,7 @@ body {
     font-size: 15px;
 }
 
-/* BOTÓN DE CANTIDAD MEJORADO */
+
 .quantity-container {
     margin-bottom: 20px;
 }
@@ -1278,7 +1290,7 @@ body {
     outline: none;
 }
 
-/* Deshabilitar flechas del input number */
+
 .quantity-input::-webkit-inner-spin-button,
 .quantity-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -1289,7 +1301,7 @@ body {
     -moz-appearance: textfield;
 }
 
-/* Etiqueta de talla */
+
 .product__size-label {
     display: block;
     font-weight: 600;
@@ -1298,7 +1310,7 @@ body {
     font-size: 14px;
 }
 
-/* Select de talla */
+
 .product__size-select {
     width: 160px;
     padding: 12px 15px;
@@ -1318,44 +1330,38 @@ body {
     box-shadow: 0 0 0 3px rgba(7, 156, 64, 0.2);
 }
 
-/* Botón de agregar al carrito */
-/* ANIMACIÓN PARA EL BOTÓN AGREGAR AL CARRITO */
+
 .product__cart-button {
-    border-radius: 14px;
-    border: transparent 1px;
-    background-color: #079C40;
+    background: linear-gradient(to right, #079C40, #0ab04e);
     color: white;
-    font-weight: 700;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    /* Mantenemos las dimensiones originales del botón */
+    border: none;
     padding: 15px 25px;
     font-size: 17px;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
     margin: 20px 0;
     width: 100%;
     max-width: 280px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(7, 156, 64, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    /* Eliminamos el gradiente anterior */
-    background: linear-gradient(to right, #079C40, #0ab04e);
-    /* Mantenemos la sombra base */
-    box-shadow: 0 4px 15px rgba(7, 156, 64, 0.2);
 }
 
 .product__cart-button:hover {
-    background-color: #09BD4E;
-    background: linear-gradient(to right, #09BD4E, #0cc05a);
-    transform: scale(1.06);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    background: linear-gradient(to right, #0ab04e, #0cc05a);
+    box-shadow: 0 6px 20px rgba(7, 156, 64, 0.3);
+    transform: translateY(-3px);
 }
 
 .product__cart-button:active {
-    transform: scale(1.03);
+    transform: translateY(-1px);
 }
 
-/* Descripción del producto */
+
 .product__description {
     padding: 25px 30px;
     border-top: 1px solid #eee;
@@ -1381,41 +1387,18 @@ body {
     padding-right: 10px;
 }
 
-/* Estilos específicos para el select */
+
 select.product__size-select {
     appearance: none;
-      background-repeat: no-repeat;
+    background-repeat: no-repeat;
     background-position: right 15px center;
     background-size: 16px;
     padding-right: 45px;
 }
 
-/* Mejoras de foco para accesibilidad */
+
 .form-control:focus,
 .product__size-select:focus,
-
-
-/* Corrección de clase typo en el HTML */
-.profuct__body {
-    width: 100%;
-    max-width: 1400px;
-    height: 95vh;
-    margin: 20px auto;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    line-height: 1.5;
-    display: flex;
-}
-
-/* Ajustes para eliminar scroll vertical en el body */
-body {
-    margin: 0;
-    padding: 10px;
-    overflow: hidden;
-    height: 100vh;
-    background: #f5f5f5;
+.product__cart-button:focus {
+    outline: none;
 }
