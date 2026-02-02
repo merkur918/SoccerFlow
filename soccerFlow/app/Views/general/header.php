@@ -34,7 +34,7 @@
                     <?php if (isset($session) && $session->isLoggedIn()): ?>
                         <!-- Usuario logueado -->
                         <div class="dropdown-header">
-                            <strong><?php echo htmlspecialchars($session->getUser()['name'] ?? 'Usuario'); ?></strong>
+                          <strong><?= htmlspecialchars($session->getUserName() ?: 'Usuario'); ?></strong>
                         </div>
                         <a href="/logout" class="dropdown-item">
                             <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

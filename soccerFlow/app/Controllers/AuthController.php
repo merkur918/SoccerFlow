@@ -96,8 +96,13 @@ class AuthController extends Controller
         }
 
         unset($user['password']);
-        $this->session->setUser($user);
+       $this->session->login(
+        $user['ID'],
+        $user['name'],
+        5
+);
         header('Location: /home');
+        exit;
     }
 
     public function requestPassword(): void

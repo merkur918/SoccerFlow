@@ -134,4 +134,21 @@ class SessionManager
     {
         return $this->getUserLevel() >= $requiredLevel;
     }
+
+    public function setUser(array $user): void
+{
+    $this->login(
+        $user['ID'],
+        $user['name'],
+        $user['usuarioNivel'] ?? self::ROLE_USUARIO
+    );
+}
+
+public function requireLogin(): void
+{
+    if (!$this->isLoggedIn()) {
+        header("Location: {$this->loginPage}");
+        exit;
+    }
+}
 }
