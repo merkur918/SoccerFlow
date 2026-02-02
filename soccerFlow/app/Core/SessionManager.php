@@ -24,7 +24,7 @@ class SessionManager
     /**
      * Constructor: inicializa sesión y establece timeout
      */
-    public function __construct(string $loginPage = 'index.php', int $timeout = 600)
+    public function __construct(string $loginPage = 'login', int $timeout = 600)
     {
         $this->loginPage = $loginPage;
         $this->timeout   = $timeout;
