@@ -134,10 +134,4 @@ class SessionManager
     {
         return $this->getUserLevel() >= $requiredLevel;
     }
-
-    // Funciones convenientes para cada rol
-    public function isUser(): bool      { return $this->getUserLevel() === self::ROLE_USUARIO; }
-    public function isAdmin(): bool   { return $this->getUserLevel() === self::ROLE_ADMIN; }
 }
-?>
-
