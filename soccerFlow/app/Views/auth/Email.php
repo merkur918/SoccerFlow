@@ -1,3 +1,5 @@
+    <link rel="stylesheet" href="/assets/css/main.css">
+
     <div class="email">
     <div class="email__body">
         <div class="email__header">

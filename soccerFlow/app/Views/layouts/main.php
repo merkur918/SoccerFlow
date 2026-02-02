@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?? 'SoccerFlow' ?></title>
-    <link rel="stylesheet" href="/assets/css/estilos.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">

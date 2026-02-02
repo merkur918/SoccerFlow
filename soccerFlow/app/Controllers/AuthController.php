@@ -69,7 +69,7 @@ class AuthController extends Controller
             return;
         }
 
-        $this->render('auth/Email-Ver');
+        $this->render('auth/login');
     }
 
     public function login(): void

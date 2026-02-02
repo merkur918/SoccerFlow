@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/assets/css/auth-password.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
 
 <div class="password">
     <div class="password__body">
