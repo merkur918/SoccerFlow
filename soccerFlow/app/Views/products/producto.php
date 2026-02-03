@@ -15,7 +15,7 @@
                     <p class="product__price">59,99 €</p>
                     <span style="color: #079C40;">¡Envío Gratis!</span>
 
-                    <!-- NUEVO BOTÓN DE CANTIDAD MEJORADO -->
+                  
                     <div class="quantity-container">
                         <div class="quantity-label">Cantidad</div>
                         <div class="quantity-control">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    <!-- Select de talla -->
+                    
                     <label class="product__size-label" for="size">Talla:</label>
                     <select class="product__size-select" id="size" name="size">
                         <option value="" disabled selected>Escoge tu talla</option>
