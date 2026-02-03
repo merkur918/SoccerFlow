@@ -7,7 +7,7 @@ class ContactController extends Controller
         $this->render('contact/contactanos', [
             'title'   => 'Contáctanos',
             'cssFile' => 'main.css',
-            'jsFile'  => 'header.js'
+            'jsFile'  => 'contacto.js'
         ]);
     }
 }

@@ -36,7 +36,7 @@
                         <div class="contacto__info-text">
                             <strong>Dirección</strong>
                             Calle del Fútbol, 123<br>
-                            28001 Madrid, España
+                            46011 Valencia, España
                         </div>
                     </div>
                     
@@ -66,11 +66,6 @@
                         </div>
                         
                         <div class="contacto__form-group">
-                            <label for="telefono" class="contacto__form-label">Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" class="contacto__form-input" placeholder="+34 600 000 000">
-                        </div>
-                        
-                        <div class="contacto__form-group">
                             <label for="asunto" class="contacto__form-label">Asunto <span class="contacto__form-required">*</span></label>
                             <select id="asunto" name="asunto" class="contacto__form-input" required>
                                 <option value="">Selecciona un asunto</option>
@@ -95,3 +90,4 @@
             <div class="contacto__map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7603.848690032771!2d-0.3936869099219587!3d39.46842559840074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f46da4855e1%3A0x9c6c795bc92d164e!2sIES%20Abastos!5e1!3m2!1ses!2ses!4v1770068554225!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        </div>
     </main>
+    <div id="mensajeExito" class="mensaje-exito">¡Mensaje enviado con éxito!</div>
