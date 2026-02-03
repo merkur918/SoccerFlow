@@ -15,6 +15,7 @@ class SessionManager
     // CONFIGURACIÓN
     private string $loginPage;
     private int $timeout;
+    private bool $apiMode = false; // Si es true no hace redirecciones y si es false(por defecto) asume la web
 
     // Niveles de acceso
     private const ROLE_INVITADO     = 0;
@@ -24,11 +25,27 @@ class SessionManager
     /**
      * Constructor: inicializa sesión y establece timeout
      */
-    public function __construct(string $loginPage = 'login', int $timeout = 600)
+    public function __construct(string $loginPage = 'login', int $timeout = 600, ?bool $apiMode = null)
     {
         $this->loginPage = $loginPage;
         $this->timeout   = $timeout;
+
+        //pasa el parametri explicito, 
+
+        $this->apiMode = $apiMode ;
+
+        //Si pasan el parametro 
         $this->start();
+    }
+
+    /**
+     * Decide si redirgir web o api
+     */
+
+    private function shouldRedirect(?bool $redirect):bool{
+
+        return $redirect ?? !$this->apiMode;
+
     }
 
     // INICIALIZACIÓN SEGURA DE LA SESIÓN
@@ -144,11 +161,20 @@ class SessionManager
     );
 }
 
-public function requireLogin(): void
+public function requireLogin(?bool $redirect = null): bool
 {
-    if (!$this->isLoggedIn()) {
+    if($this->isLoggedIn()) return true;
+    
+    if($this->shouldRedirect($redirect)){
         header("Location: {$this->loginPage}");
-        exit;
+        exit();
     }
+
+    /**
+     * Si $redirect es true redirige 
+     * Si $redirect es false no redirige
+     * Si $redirect es null decide segun Api Mode
+     */
+    return false;
 }
 }

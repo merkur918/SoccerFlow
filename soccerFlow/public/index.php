@@ -10,12 +10,42 @@ require_once __DIR__ . '/../app/libs/bSeguridad.php';
 require_once __DIR__ . '/../app/libs/Config.php';
 require_once __DIR__ . '/../app/libs/MailConfig.php';
 
-if (headers_sent($file, $line)) {
-    die("HEADERS YA ENVIADOS antes de SessionManager en: $file:$line");
+
+
+// ------------------------------
+// Resolver ruta (URLs limpias)
+// ------------------------------
+$ruta = $_GET['ctl']
+    ?? trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
+if ($ruta === '') {
+    $ruta = 'home';
 }
 
+
+/**
+ * ------Detectar API por URL---------
+ * PHP_URL_PATH coge /api/v1/auth/login sin ?x=1
+ *str_starts_with($path, '/api'): API si la URL real empieza por /api.
+ *str_starts_with($ruta, 'api/'): por si la $ruta viene de ctl o ya va “recortada”.
+ *HTTP para que pidan JSON si o si
+ */
+
+$path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '';
+
+$isApi =
+    str_starts_with($path, '/api') ||
+    str_starts_with($ruta, 'api/') ||
+    (stripos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false);
+
+
+
+
+
+
 // Crear sesión UNA sola vez
-$session = new SessionManager();
+$session = new SessionManager('login',600, $isApi);
+$session->checkSecurity();
 
 // ------------------------------
 // Definición de rutas
@@ -92,24 +122,56 @@ $map = [
         'action' => 'passwordUpdate',
         'nivel' => 0
     ],
+
+    /**
+     * API V1 - AUTH
+     */
+
+    // ------------------------------
+// API v1 - Auth
+// ------------------------------
+'api/v1/auth/register' => [
+    'controller' => 'ApiAuthController',
+    'action' => 'register',
+    'nivel' => 0
+],
+'api/v1/auth/login' => [
+    'controller' => 'ApiAuthController',
+    'action' => 'login',
+    'nivel' => 0
+],
+'api/v1/auth/me' => [
+    'controller' => 'ApiAuthController',
+    'action' => 'me',
+    'nivel' => 5
+],
+'api/v1/auth/logout' => [
+    'controller' => 'ApiAuthController',
+    'action' => 'logout',
+    'nivel' => 5
+],
+'api/v1/auth/verify-email' => [
+    'controller' => 'ApiAuthController',
+    'action' => 'verifyEmail',
+    'nivel' => 0
+],
 ];
-
-// ------------------------------
-// Resolver ruta (URLs limpias)
-// ------------------------------
-$ruta = $_GET['ctl']
-    ?? trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-
-if ($ruta === '') {
-    $ruta = 'home';
-}
 
 // ------------------------------
 // Ruta no encontrada
 // ------------------------------
 if (!isset($map[$ruta])) {
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>Error 404: Ruta '$ruta' no encontrada</h1>";
+    if ($isApi) {
+        http_response_code(404);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'ok' => false,
+            'message' => "Ruta '$ruta' no encontrada"
+        ], JSON_UNESCAPED_UNICODE);
+    } else {
+        header("HTTP/1.0 404 Not Found");
+        echo "<h1>Error 404: Ruta '$ruta' no encontrada</h1>";
+    }
     exit;
 }
 
@@ -121,9 +183,29 @@ $actionName   = $map[$ruta]['action'];
 $requiredLevel = $map[$ruta]['nivel'];
 
 
+
+
+
+/**
+ * -------Verificacion de acceso--------
+ */
 if ($requiredLevel > 0 && !$session->hasLevel($requiredLevel)) {
-    echo "<h1>Acceso denegado</h1>";
-    exit;
+
+    $isLogged = $session->isLoggedIn();
+
+    if($isApi){
+        //401(no autenticado) o 403(Sin permisos)
+        http_response_code($isLogged ? 403 : 401);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'ok'=>false,
+            'message' => $isLogged ? 'No autorizado' : 'No autenticado'
+        ],JSON_UNESCAPED_UNICODE);
+    }else{
+        echo '<h1>Acceso Denegado</h1>';
+    }
+    exit();
+    
 }
 
 
@@ -133,8 +215,20 @@ if ($requiredLevel > 0 && !$session->hasLevel($requiredLevel)) {
 $controller = new $controlador($session);
 
 if (!method_exists($controller, $actionName)) {
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>Error 404: Acción '$actionName' no encontrada</h1>";
+
+    if($isApi) {
+        http_response_code(404);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'ok'=>false,
+            'message' => $actionName . " " . "No encontrado"
+        ],JSON_UNESCAPED_UNICODE);
+        
+    }else{
+        header("HTTP/1.0 404 Not Found");
+        echo "<h1>Error 404: Acción '$actionName' no encontrada</h1>";
+    }
+    
     exit;
 }
 
