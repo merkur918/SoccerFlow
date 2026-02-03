@@ -1,5 +1,3 @@
-    <link rel="stylesheet" href="/assets/css/main.css">
-
 <div class="password">
     <div class="password__body">
         <div class="password__header">
