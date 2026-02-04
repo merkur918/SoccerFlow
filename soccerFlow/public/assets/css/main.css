@@ -1407,120 +1407,220 @@ select.product__size-select {
    Productos tienda 
    ============================================ */
 
-.product__body-window {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  justify-content: center;
-  align-items: start;
-  box-sizing: border-box;
+    /* Contenedor principal */
+        .product__body-window {
+            width: 100%;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor de búsqueda - posición fija en la parte superior */
+        .product__search {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        /* Input de búsqueda */
+        .product__search-input {
+            padding: 14px 24px;
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #c3cfe2;
+            border-radius: 50px;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            background-color: #f8f9fa;
+        }
+
+        .product__search-input:focus {
+            border-color: #079C40;
+            box-shadow: 0 0 0 3px rgba(7, 156, 64, 0.15);
+            background-color: white;
+        }
+
+        .product__search-input::placeholder {
+            color: #777;
+            font-style: italic;
+        }
+
+        /* Contenedor de productos */
+        .product__container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            justify-content: center;
+            align-items: start;
+        }
+
+        /* Bloque individual de producto */
+        .product__block {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .product__block:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Imagen del producto */
+        .product__image-window {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.5s ease;
+        }
+
+        .product__block:hover .product__image-window {
+            transform: scale(1.05);
+        }
+
+        /* Contenido del producto */
+        .product__block h3 {
+            margin: 15px 20px 8px;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #222;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .precio {
+            margin: 0 20px 15px;
+            font-family: 'Arial', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: #079C40;
+            text-align: center;
+        }
+
+        /* Contenedor para las tallas */
+        .product__block p {
+            margin: 0 20px 20px;
+            text-align: center;
+            position: relative;
+            min-height: 24px;
+        }
+
+        /* Texto "tallas:" oculto por defecto */
+        .product__size-hidden {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(10px);
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            background: #f8f9fa;
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.4s ease 0.1s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto hover para mostrar las tallas */
+        .product__block:hover .product__size-hidden {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efecto de subrayado animado para "tallas:" */
+        .product__size-hidden::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #079C40;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .product__block:hover .product__size-hidden::after {
+            width: 80%;
+        }
+        
+        /* Contenedor general de los filtros */
+.product__order-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px;
+    background: white; 
+    border-radius: 8px;
+    align-items: center;
 }
 
-/* Bloque individual de producto */
-.product__block {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  cursor: pointer;
-  height: 100%;
+
+.product__order-filter select {
+    appearance: none;
+    padding: 10px 14px;
+    border: 2px solid #079C40;
+    border-radius: 6px;
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-width: 180px;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23079C40' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
 }
 
-.product__block:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+.product__order-filter select:hover {
+    border-color: #067a33;
 }
 
-/* Imagen del producto */
-.product__image-window {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-bottom: 1px solid #eee;
-  transition: transform 0.5s ease;
+.product__order-filter select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(7, 156, 64, 0.25);
 }
 
-.product__block:hover .product__image-window {
-  transform: scale(1.05);
+/* Opciones */
+.product__order-filter select option {
+    padding: 10px;
 }
 
-/* Contenido del producto */
-.product__block h3 {
-  margin: 15px 20px 8px;
-  font-family: 'Arial', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: #222;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.precio {
-  margin: 0 20px 15px;
-  font-family: 'Arial', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  color: #079C40;
-  text-align: center;
-}
-
-/* Contenedor para las tallas */
-.product__block p {
-  margin: 0 20px 20px;
-  text-align: center;
-  position: relative;
-  min-height: 24px;
-}
-
-/* Texto "tallas:" oculto por defecto */
-.product__size-hidden {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(10px);
-  font-family: 'Arial', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #555;
-  background: #f8f9fa;
-  padding: 6px 15px;
-  border-radius: 20px;
-  border: 1px solid #e0e0e0;
-  transition: all 0.4s ease 0.1s;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Efecto hover para mostrar las tallas */
-.product__block:hover .product__size-hidden {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Efecto de subrayado animado para "tallas:" */
-.product__size-hidden::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: #079C40;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.product__block:hover .product__size-hidden::after {
-  width: 80%;
-}
 
 
 /* ============================================
