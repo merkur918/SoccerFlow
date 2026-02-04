@@ -98,6 +98,12 @@ $map = [
         'action'     => 'index',
         'nivel'      => 0
 ],
+   // Cargar pagina de productos
+    'productos' => [
+        'controller' => 'ProductosController',
+        'action'     => 'index',
+        'nivel'      => 0
+    ],
 ];
 
 // ------------------------------
