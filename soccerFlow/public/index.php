@@ -134,6 +134,12 @@ $map = [
         'action'     => 'index',
         'nivel'      => 0
     ],
+    // Cargar pagina de carrito
+    'cart' => [
+        'controller' => 'CartController',
+        'action'     => 'cart',
+        'nivel'      => 5
+    ],
     /**
      * API V1 - AUTH
      */
