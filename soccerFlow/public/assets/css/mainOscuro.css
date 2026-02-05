@@ -266,6 +266,73 @@ body {
 }
 
 /* ============================================
+   NOTICIAS - TEMA OSCURO
+   ============================================ */
+.news {
+  background-image: none;
+  background-color: var(--bg-dark);
+}
+
+.news__inner {
+  background: var(--bg-dark-medium);
+  box-shadow: var(--shadow-dark);
+  border-radius: 0;
+}
+
+.news__title,
+.news__subtitle {
+  color: var(--text-light);
+}
+
+.news__status--error {
+  color: #ff7a7a;
+}
+
+.news__card {
+  background: var(--bg-card);
+  border-color: var(--border-dark);
+}
+
+.news__headline a {
+  color: var(--text-light);
+}
+
+.news__desc,
+.news__meta {
+  color: var(--text-gray);
+}
+
+.news__select {
+  background: var(--bg-dark-light);
+  border-color: var(--border-light);
+  color: var(--text-light);
+}
+
+.news__tab {
+  border-color: var(--border-light);
+  color: var(--text-light);
+}
+
+.news__tab--active {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.news__image-wrap--teams {
+  background: linear-gradient(120deg, rgba(8, 86, 40, 0.5), rgba(8, 58, 29, 0.5));
+}
+
+.news__team-name {
+  color: var(--text-light);
+}
+
+.news__vs {
+  color: var(--text-light);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
    FOOTER - TEMA OSCURO
    ============================================ */
 .footer {

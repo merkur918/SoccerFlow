@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?? 'SoccerFlow' ?></title>
+    <?php $isDarkTheme = (($_COOKIE['sf_theme'] ?? '') === 'dark'); ?>
 
     <!-- CSS GLOBAL -->
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link
+        rel="stylesheet"
+        href="/assets/css/mainOscuro.css"
+        id="dark-theme-css"
+        media="<?= $isDarkTheme ? 'all' : 'not all' ?>"
+        <?= $isDarkTheme ? '' : 'disabled' ?>
+    >
 
     <!-- CSS POR VISTA (opcional) -->
     <?php if (!empty($cssFile)): ?>

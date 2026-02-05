@@ -3,6 +3,7 @@
 abstract class ApiController
 {
     protected SessionManager $session;
+    private static ?array $envCache = null;
 
     public function __construct(SessionManager $session)
     {
@@ -14,6 +15,8 @@ abstract class ApiController
     {
         http_response_code($status);
         header('Content-Type: application/json; charset=utf-8');
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
         echo json_encode($payload, JSON_UNESCAPED_UNICODE);
         exit;
     }
@@ -58,5 +61,59 @@ abstract class ApiController
         $scheme = $https ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         return $scheme . '://' . $host;
+    }
+
+    protected function env(string $key, ?string $default = null): ?string
+    {
+        $value = getenv($key);
+        if ($value !== false && $value !== '') {
+            return $value;
+        }
+
+        if (self::$envCache === null) {
+            self::$envCache = $this->loadDotEnv();
+        }
+
+        if (array_key_exists($key, self::$envCache)) {
+            return self::$envCache[$key];
+        }
+
+        return $default;
+    }
+
+    private function loadDotEnv(): array
+    {
+        $path = __DIR__ . '/../../.env';
+        if (!is_readable($path)) {
+            return [];
+        }
+
+        $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if (!is_array($lines)) {
+            return [];
+        }
+
+        $values = [];
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if ($line === '' || str_starts_with($line, '#') || str_starts_with($line, ';')) {
+                continue;
+            }
+
+            $parts = explode('=', $line, 2);
+            if (count($parts) !== 2) {
+                continue;
+            }
+
+            $key = trim($parts[0]);
+            $value = trim($parts[1]);
+            $value = trim($value, "\"'");
+
+            if ($key !== '') {
+                $values[$key] = $value;
+            }
+        }
+
+        return $values;
     }
 }

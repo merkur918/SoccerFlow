@@ -1,4 +1,7 @@
      // Función para buscar productos por nombre
+alert('hola');
+
+
       const searchInput = document.querySelector('.product__search-input');
 
 searchInput.addEventListener('input', function () {

@@ -343,6 +343,244 @@ body {
   color: var(--text-dark);
 }
 
+/* ============================================
+   NOTICIAS
+   ============================================ */
+.news {
+  min-height: calc(100vh - 90px);
+  background-image: url("/assets/img/Fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0 0 120px;
+  width: 100%;
+}
+
+.news__inner {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+  background: rgba(197, 196, 196, 0.9);
+  border-radius: 0;
+  box-shadow: var(--shadow-medium);
+  padding: 28px 30px;
+}
+
+.news__header {
+  margin-bottom: 16px;
+}
+
+.news__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.news__select {
+  min-width: 260px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  padding: 10px;
+  background: #fff;
+}
+
+.news__tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.news__tab {
+  border: 1px solid var(--secondary-color);
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.news__tab--active {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.news__title {
+  font-size: 2.2rem;
+  margin-bottom: 6px;
+}
+
+.news__subtitle {
+  font-size: 1.2rem;
+}
+
+.news__status {
+  min-height: 22px;
+  margin-bottom: 12px;
+}
+
+.news__status--error {
+  color: #b51d1d;
+}
+
+.news__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.news__card {
+  background: #ffffffd9;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.news__image-wrap {
+  display: block;
+  width: 100%;
+  height: 170px;
+  overflow: hidden;
+}
+
+.news__image-wrap--teams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(120deg, rgba(7, 156, 64, 0.12), rgba(9, 189, 78, 0.2));
+}
+
+.news__team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 180px;
+  text-align: center;
+}
+
+.news__team-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.15);
+}
+
+.news__team-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.news__vs {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: #0e5d2d;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.news__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news__content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.news__headline {
+  font-size: 1.15rem;
+}
+
+.news__headline a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.news__headline a:hover {
+  text-decoration: underline;
+}
+
+.news__desc {
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.news__meta {
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .news {
+    padding: 0 0 120px;
+  }
+
+  .news__inner {
+    padding: 18px 12px;
+    min-height: calc(100vh - 100px);
+  }
+
+  .news__title {
+    font-size: 1.8rem;
+  }
+
+  .news__subtitle {
+    font-size: 1.05rem;
+  }
+
+  .news__select {
+    min-width: 100%;
+  }
+
+  .news__tabs {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .news__image-wrap {
+    height: 150px;
+  }
+
+  .news__image-wrap--teams {
+    gap: 8px;
+    padding: 10px 8px;
+  }
+
+  .news__team-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .news__team-name {
+    font-size: 0.84rem;
+    max-width: 120px;
+  }
+}
+
 .header {
   padding: 15px 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
