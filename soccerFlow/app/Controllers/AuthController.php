@@ -13,6 +13,17 @@ class AuthController extends Controller
         $this->render('auth/register', array_merge($defaults, $data), false);
     }
 
+    private function renderLogin(array $data = []): void
+    {
+        $defaults = [
+            'title' => 'Login',
+            'error' => '',
+            'jsFile' => 'auth-login.js'
+        ];
+
+        $this->render('auth/login', array_merge($defaults, $data), false);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | REGISTER VIEW
@@ -21,10 +32,7 @@ class AuthController extends Controller
 
     public function index(): void
     {
-        $this->render('auth/register', [
-            'title' => 'Registro',
-            'errores' => []
-        ], false); // 🔥 SIN HEADER/FOOTER
+        $this->renderRegister();
     }
 
 
@@ -52,16 +60,16 @@ class AuthController extends Controller
         }
 
         if (!empty($errores)) {
-            $this->render('auth/register', compact('errores'), false);
+            $this->renderRegister(compact('errores'));
             return;
         }
 
         $userModel = new User();
 
         if ($userModel->emailExists($email)) {
-            $this->render('auth/register', [
+            $this->renderRegister([
                 'errores' => ['email' => 'Este email ya está registrado']
-            ], false);
+            ]);
             return;
         }
 
@@ -115,7 +123,7 @@ class AuthController extends Controller
 
     public function login(): void
     {
-        $this->render('auth/login', [], false);
+        $this->renderLogin();
     }
 
 
@@ -134,16 +142,16 @@ class AuthController extends Controller
         $user = $userModel->findByEmail($email);
 
         if (!$user || !comprobarhash($password, $user['password'])) {
-            $this->render('auth/login', [
+            $this->renderLogin([
                 'error' => 'Credenciales incorrectas'
-            ], false);
+            ]);
             return;
         }
 
         if ($user['email_verified_at'] === null) {
-            $this->render('auth/login', [
+            $this->renderLogin([
                 'error' => 'Debes verificar tu email'
-            ], false);
+            ]);
             return;
         }
 

@@ -15,8 +15,14 @@
 
             <p class="login__notice">Accede a diseños exclusivos, experiencias, ofertas...<br><span style="color: #079C40;">¡Y mucho más!</span></p>
 
+            <?php if (!empty($error)): ?>
+                <p class="login__global-error" role="alert"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
+
             <input type="email" name="email" placeholder="DIRECCIÓN DE CORREO ELECTRÓNICO" required>
+            <p class="login__field-error" data-error-for="email"></p>
             <input type="password" name="password" placeholder="CONTRASEÑA" required>
+            <p class="login__field-error" data-error-for="password"></p>
 
             <div class="login__checkbox">
                 <input type="checkbox" name="MantenerSesion" id="mantenerSesion">
