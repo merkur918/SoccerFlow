@@ -2,6 +2,17 @@
 
 class AuthController extends Controller
 {
+    private function renderRegister(array $data = []): void
+    {
+        $defaults = [
+            'title' => 'Registro',
+            'errores' => [],
+            'jsFile' => 'auth-register.js'
+        ];
+
+        $this->render('auth/register', array_merge($defaults, $data), false);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | REGISTER VIEW
