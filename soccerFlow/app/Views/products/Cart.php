@@ -1,4 +1,8 @@
 <div class="cart__body-window">
+  <div class="cart__exit">
+      <a href="index.html" aria-label="Volver atras" title="Volver atras" style="text-decoration: none; color: var(--accent); font-weight: 700;">← Volver atras</a>
+
+   </div>
     <div class="cart__products">
       <h1>Mi Carrito</h1>
       <p>Fecha de salida: <span style="color: #079C40;">Mañana!</span></p>
@@ -27,11 +31,11 @@
     <div class="cart__payment">
       <h2>Resumen</h2>
       <p>Precio Total de productos</p>
-      <p>35.00$</p>
+      <p id="total-products">35.00$</p>
       <p>Gastos de envío</p>
       <p>0$</p>
       <p>Total a pagar</p>
-      <p>35.00$</p>
+      <p id="total-pay">35.00$</p>
       <button class="cart__checkout-button">Finalizar Compra 🛒</button>
     </div>
   </div>

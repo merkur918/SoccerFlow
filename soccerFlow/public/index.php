@@ -140,10 +140,23 @@ $map = [
         'action'     => 'index',
         'nivel'      => 0
     ],
+<<<<<<< HEAD
     // Cargar pagina de noticias
     'noticias' => [
         'controller' => 'NewsController',
         'action'     => 'index',
+=======
+    // Cargar pagina de carrito
+    'cart' => [
+        'controller' => 'CartController',
+        'action'     => 'cart',
+        'nivel'      => 5
+    ],
+    // Cargar detalles del producto
+    'product-details' => [
+        'controller' => 'ProductosDetailController',
+        'action'     => 'details',
+>>>>>>> 1363295a73a0fe98bbfb3e8868b3c96fa34e1c73
         'nivel'      => 0
     ],
     /**
