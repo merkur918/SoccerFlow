@@ -1,79 +1,75 @@
-     // Función para buscar productos por nombre
-      const searchInput = document.querySelector('.product__search-input');
+document.addEventListener('DOMContentLoaded', function () {
 
-searchInput.addEventListener('input', function () {
-   const searchTerm = this.value.trim().toLowerCase();
+    // --- BUSCADOR ---
+    const searchInput = document.querySelector('.product__search-input');
 
-    const products = document.querySelectorAll('.product__block');
-
-    products.forEach(product => {
-        const productName = product.querySelector('.product__name').textContent.toLowerCase();
-
-        if (productName.includes(searchTerm)) {
-            product.style.display = '';
-        } else {
-            product.style.display = 'none';
-        }
+    searchInput.addEventListener('input', function () {
+        filtrarProductos();
     });
-});
-// Función para ordenar productos por precio
-     const priceFilter = document.querySelector('.product__order-price');
-priceFilter.addEventListener('change', function () {
-    const selectedOption = this.value;
-    const productsContainer = document.querySelector('.product__container');
-    const products = Array.from(productsContainer.querySelectorAll('.product__block'));
 
-    if (selectedOption === 'price-asc') {
-        products.sort((a, b) => {
-            const priceA = parseFloat(a.querySelector('.precio').textContent.replace('Precio: $', ''));
-            const priceB = parseFloat(b.querySelector('.precio').textContent.replace('Precio: $', ''));
-            return priceA - priceB;
-        });
-    } else if (selectedOption === 'price-desc') {
-        products.sort((a, b) => {
-            const priceA = parseFloat(a.querySelector('.precio').textContent.replace('Precio: $', ''));
-            const priceB = parseFloat(b.querySelector('.precio').textContent.replace('Precio: $', ''));
-            return priceB - priceA;
+    // --- FILTROS ---
+    const selects = document.querySelectorAll('.product__order-filter select');
+
+    selects.forEach(select => {
+        select.addEventListener('change', filtrarProductos);
+    });
+
+    // --- ORDENAR POR PRECIO ---
+    const priceFilter = document.querySelector('.product__order-price');
+    priceFilter.addEventListener('change', ordenarPorPrecio);
+
+    function filtrarProductos() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        const category = document.querySelector('.product__filter-category').value;
+        const size = document.querySelector('.product__filter-size').value;
+        const team = document.querySelector('.product__filter-teams').value;
+        const brand = document.querySelector('.product__filter-brand').value;
+        const gender = document.querySelector('.product__filter-gender').value;
+
+        const products = document.querySelectorAll('.product__block');
+
+        products.forEach(product => {
+            const name = product.querySelector('.product__name').textContent.toLowerCase();
+            const pCategory = product.getAttribute('data-category');
+            const pSize = product.getAttribute('data-size');
+            const pTeam = product.getAttribute('data-team');
+            const pBrand = product.getAttribute('data-brand');
+            const pGender = product.getAttribute('data-gender');
+
+            let visible = true;
+
+            if (!name.includes(searchTerm)) visible = false;
+            if (category !== 'all' && pCategory !== category) visible = false;
+            if (size !== 'all-sizes' && pSize !== size.replace('size-', '')) visible = false;
+            if (team !== 'all-teams' && pTeam !== team) visible = false;
+            if (brand !== 'all-brands' && pBrand !== brand) visible = false;
+            if (gender !== 'all-genders' && pGender !== gender) visible = false;
+
+            product.style.display = visible ? '' : 'none';
         });
     }
 
-    // Reorganizar los productos en el contenedor
-    products.forEach(product => productsContainer.appendChild(product));
-}
-);
+    function ordenarPorPrecio() {
+        const selectedOption = this.value;
+        const productsContainer = document.querySelector('.product__container');
+        const products = Array.from(productsContainer.querySelectorAll('.product__block'));
 
-
-
-
-
-// Función para filtrar productos por categoría, talla, equipo, marca o género
-const filtros = document.querySelector('.product__order-filter');
-filtros.addEventListener('change', function () {
-    const selectedOption = this.value;
-    const products = document.querySelectorAll('.product__block');
-    products.forEach(product => {
-        const category = product.getAttribute('data-category');
-        const size = product.getAttribute('data-size');
-        const team = product.getAttribute('data-team');
-        const brand = product.getAttribute('data-brand');
-        const gender = product.getAttribute('data-gender');
-        let showProduct = true;
-        if (selectedOption.startsWith('category-') && category !== selectedOption.split('-')[1]) {
-            showProduct = false;
-        }
-        if (selectedOption.startsWith('size-') && size !== selectedOption.split('-')[1]) {
-            showProduct = false;
-        }
-        if (selectedOption.startsWith('team-') && team !== selectedOption.split('-')[1]) {
-            showProduct = false;
-        }
-        if (selectedOption.startsWith('brand-') && brand !== selectedOption.split('-')[1]) {
-            showProduct = false;
-        }
-        if (selectedOption.startsWith('gender-') && gender !== selectedOption.split('-')[1]) {
-            showProduct = false;
+        if (selectedOption === 'price-asc') {
+            products.sort((a, b) => {
+                const priceA = parseFloat(a.querySelector('.precio').textContent.replace('Precio: $', ''));
+                const priceB = parseFloat(b.querySelector('.precio').textContent.replace('Precio: $', ''));
+                return priceA - priceB;
+            });
+        } else if (selectedOption === 'price-desc') {
+            products.sort((a, b) => {
+                const priceA = parseFloat(a.querySelector('.precio').textContent.replace('Precio: $', ''));
+                const priceB = parseFloat(b.querySelector('.precio').textContent.replace('Precio: $', ''));
+                return priceB - priceA;
+            });
         }
 
-        product.style.display = showProduct ? '' : 'none';
-    });
+        products.forEach(product => productsContainer.appendChild(product));
+    }
+
 });
