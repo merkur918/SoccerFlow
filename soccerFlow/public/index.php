@@ -122,7 +122,18 @@ $map = [
         'action' => 'passwordUpdate',
         'nivel' => 0
     ],
-
+//Cargar pagina de contacto
+    'contactanos' => [
+        'controller' => 'ContactController',
+        'action'     => 'index',
+        'nivel'      => 0
+],
+   // Cargar pagina de productos
+    'productos' => [
+        'controller' => 'ProductosController',
+        'action'     => 'index',
+        'nivel'      => 0
+    ],
     /**
      * API V1 - AUTH
      */
