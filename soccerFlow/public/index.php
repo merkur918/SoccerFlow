@@ -146,6 +146,12 @@ $map = [
         'action'     => 'cart',
         'nivel'      => 5
     ],
+    // Cargar detalles del producto
+    'product-details' => [
+        'controller' => 'ProductosDetailController',
+        'action'     => 'details',
+        'nivel'      => 0
+    ],
     /**
      * API V1 - AUTH
      */
