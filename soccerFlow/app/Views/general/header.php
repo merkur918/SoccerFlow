@@ -8,7 +8,7 @@
         
         <nav class="main-nav">
             <ul class="nav-list">
-                <li class="nav-item"><a href="/tienda" class="nav-link">Tienda</a></li>
+                <li class="nav-item"><a href="/productos" class="nav-link">Tienda</a></li>
                 <li class="nav-item"><a href="/competiciones" class="nav-link">Competiciones</a></li>
                 <li class="nav-item"><a href="/noticias" class="nav-link">Noticias</a></li>
                 <li class="nav-item"><a href="/contactanos" class="nav-link">Contactanos</a></li>

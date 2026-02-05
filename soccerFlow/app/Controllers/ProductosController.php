@@ -1,6 +1,6 @@
 <?php
 
-class ContactController extends Controller
+class ProductosController extends Controller
 {
     public function index(): void
     {
