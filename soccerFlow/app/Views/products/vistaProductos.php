@@ -58,49 +58,49 @@
         <div class="product__container">
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 1</h3>
+                <h3 class="product__name">Nombre del Producto 1</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 2</h3>
+                <h3 class="product__name">Nombre del Producto 2</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 3</h3>
+                <h3 class="product__name">Nombre del Producto 3</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 4</h3>
+                <h3 class="product__name">Nombre del Producto 4</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 5</h3>
+                <h3 class="product__name">Nombre del Producto 5</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 6</h3>
+                <h3 class="product__name">Nombre del Producto 6</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 7</h3>
+                <h3 class="product__name">Nombre del Producto 7</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
             <div class="product__block">
                 <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3>Nombre del Producto 8</h3>
+                <h3 class="product__name">Nombre del Producto 8</h3>
                 <p class="precio">Precio: $XX.XX</p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
