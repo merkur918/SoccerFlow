@@ -134,6 +134,12 @@ $map = [
         'action'     => 'index',
         'nivel'      => 0
     ],
+    // Cargar pagina de competiciones
+    'competiciones' => [
+        'controller' => 'CompeticionesController',
+        'action'     => 'index',
+        'nivel'      => 0
+    ],
     /**
      * API V1 - AUTH
      */
