@@ -1,11 +1,10 @@
-
-
-<header class="header">
-    <div class="header-container">
-        <div class="brand-section">
-            <h1 class="title">SOCCER FLO<span class="green-w">W</span></h1>
-            <img class="soccer-ball" src="/assets/img/logo.png" alt="Pelota de fútbol">
-        </div>
+<header class="header"> 
+    <div class="header-container"> 
+        <div class="brand-section"> 
+            <a href="/" class="home-link"> 
+                <h1 class="title">SOCCER FLO<span class="green-w">W</span></h1> 
+            </a> 
+                <img class="soccer-ball" src="/assets/img/logo.png" alt="Pelota de fútbol">
         
         <nav class="main-nav">
             <ul class="nav-list">
