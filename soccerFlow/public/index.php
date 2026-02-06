@@ -134,6 +134,31 @@ $map = [
         'action'     => 'index',
         'nivel'      => 0
     ],
+    // Cargar pagina de competiciones
+    'competiciones' => [
+        'controller' => 'CompeticionesController',
+        'action'     => 'index',
+        'nivel'      => 0
+    ],
+    // Cargar pagina de noticias
+    'noticias' => [
+        'controller' => 'NewsController',
+        'action'     => 'index',
+        'nivel'      => 0
+    ],
+    // Cargar pagina de carrito
+    'cart' => [
+        'controller' => 'CartController',
+        'action'     => 'cart',
+        'nivel'      => 5
+    ],
+    // Cargar detalles del producto
+    'product-details' => [
+        'controller' => 'ProductosDetailController',
+        'action'     => 'details',
+
+        'nivel'      => 0
+    ],
     /**
      * API V1 - AUTH
      */
@@ -164,6 +189,12 @@ $map = [
 'api/v1/auth/verify-email' => [
     'controller' => 'ApiAuthController',
     'action' => 'verifyEmail',
+    'nivel' => 0
+],
+// API - Noticias
+'api/news' => [
+    'controller' => 'ApiNewsController',
+    'action' => 'index',
     'nivel' => 0
 ],
 ];

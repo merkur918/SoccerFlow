@@ -27,11 +27,11 @@
     <div class="cart__payment">
       <h2>Resumen</h2>
       <p>Precio Total de productos</p>
-      <p>35.00$</p>
+      <p id="total-products">35.00$</p>
       <p>Gastos de envío</p>
       <p>0$</p>
       <p>Total a pagar</p>
-      <p>35.00$</p>
+      <p id="total-pay">35.00$</p>
       <button class="cart__checkout-button">Finalizar Compra 🛒</button>
     </div>
   </div>
