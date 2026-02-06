@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS soccerflow;
+CREATE DATABASE soccerflow;
 USE soccerflow;
 
 CREATE TABLE users (
@@ -47,8 +49,8 @@ CREATE TABLE products (
 CREATE TABLE products_variants (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
-    size ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL'),
-    size_shoe ENUM('36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46'),
+    size VARCHAR(10),
+    size_shoe VARCHAR(10),
     color VARCHAR(50),
     stock INT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES products(ID) ON DELETE CASCADE,
