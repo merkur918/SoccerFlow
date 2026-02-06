@@ -1,8 +1,4 @@
 <div class="cart__body-window">
-  <div class="cart__exit">
-      <a href="index.html" aria-label="Volver atras" title="Volver atras" style="text-decoration: none; color: var(--accent); font-weight: 700;">← Volver atras</a>
-
-   </div>
     <div class="cart__products">
       <h1>Mi Carrito</h1>
       <p>Fecha de salida: <span style="color: #079C40;">Mañana!</span></p>
