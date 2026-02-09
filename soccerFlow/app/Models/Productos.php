@@ -182,5 +182,15 @@ public function getPortraitImageById(int $productId): ?string
 
     return $imagen !== false ? $imagen : null;
 }
+public function getImagesByProductId(int $id): array
+{
+    $sql = "SELECT image_url FROM product_images WHERE product_id = :id ORDER BY id ASC";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['id' => $id]);
+
+    $imagenes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    return $imagenes ?: [];
+}
 
  }

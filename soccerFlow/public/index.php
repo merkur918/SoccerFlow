@@ -197,6 +197,12 @@ $map = [
     'action' => 'index',
     'nivel' => 0
 ],
+'product-details' => [
+    'controller' => 'ProductosDetailController',
+    'action'     => 'details',
+    'nivel'      => 0
+],
+
 ];
 
 // ------------------------------

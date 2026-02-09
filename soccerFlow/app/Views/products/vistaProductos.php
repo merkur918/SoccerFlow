@@ -67,18 +67,20 @@
             $brand = htmlspecialchars($p['brand'] ?? '');
             $gender = htmlspecialchars($p['gender'] ?? '');
         ?>
-            <div class="product__block"
-                data-category="<?= $category ?>"
-                data-size=""
-                data-team="<?= $team ?>"
-                data-brand="<?= $brand ?>"
-                data-gender="<?= $gender ?>">
-                
-                <img src="<?= $img ?>" alt="<?= $name ?>" class="product__image-window">
-                <h3 class="product__name"><?= $name ?></h3>
-                <p class="precio">Precio: $<?= $price ?></p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
+<a href="/product-details?id=<?= $id ?>" class="product__block"
+    data-category="<?= $category ?>"
+    data-size=""
+    data-team="<?= $team ?>"
+    data-brand="<?= $brand ?>"
+    data-gender="<?= $gender ?>">
+
+    <img src="<?= $img ?>" alt="<?= $name ?>" class="product__image-window">
+    <h3 class="product__name"><?= $name ?></h3>
+    <p class="precio">Precio: $<?= $price ?></p>
+    <p><span class="product__size-hidden">tallas:</span></p>
+
+</a>
+
         <?php endforeach; ?>
     <?php else: ?>
         <p>No hay productos disponibles.</p>
