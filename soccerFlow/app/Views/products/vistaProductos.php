@@ -37,9 +37,9 @@
 
                 <select class="product__filter-brand">
                     <option value="all-brands">Filtrar por marca</option>
-                    <option value="brand-a">Marca A</option>
-                    <option value="brand-b">Marca B</option>
-                    <option value="brand-c">Marca C</option>
+                    <option value="brand-a">Nike</option>
+                    <option value="brand-b">Adidas</option>
+                    <option value="brand-c">Puma</option>
                 </select>
 
                 <select class="product__filter-gender">
@@ -55,56 +55,34 @@
         </div>
         
         <!-- LOS PRODUCTOS DEBEN ESTAR DENTRO DE ESTE CONTENEDOR -->
-        <div class="product__container">
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 1</h3>
-                <p class="precio">Precio: $XX.XX</p>
+       <div class="product__container">
+    <?php if (!empty($productos)): ?>
+        <?php foreach ($productos as $p): 
+            $id = $p['id'] ?? $p['ID'] ?? null;
+            $name = htmlspecialchars($p['name'] ?? 'Producto');
+            $price = number_format((float)($p['price'] ?? 0), 2);
+            $img = htmlspecialchars($p['image'] ?? '/assets/img/products/placeholder.png');
+            $category = htmlspecialchars($p['category'] ?? '');
+            $team = htmlspecialchars($p['team'] ?? '');
+            $brand = htmlspecialchars($p['brand'] ?? '');
+            $gender = htmlspecialchars($p['gender'] ?? '');
+        ?>
+            <div class="product__block"
+                data-category="<?= $category ?>"
+                data-size=""
+                data-team="<?= $team ?>"
+                data-brand="<?= $brand ?>"
+                data-gender="<?= $gender ?>">
+                
+                <img src="<?= $img ?>" alt="<?= $name ?>" class="product__image-window">
+                <h3 class="product__name"><?= $name ?></h3>
+                <p class="precio">Precio: $<?= $price ?></p>
                 <p><span class="product__size-hidden">tallas:</span></p>
             </div>
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 2</h3>
-                <p class="precio">Precio: $XX.XX</p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 3</h3>
-                <p class="precio">Precio: $XX.XX</p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 4</h3>
-                <p class="precio">Precio: $XX.XX</p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 5</h3>
-                <p class="precio">Precio: $XX.XX</p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 6</h3>
-                <p class="precio">Precio: $XX.XX</p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 7</h3>
-                <p class="precio">Precio: $XX.XX</p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
-            <div class="product__block">
-                <img src="zapatillas.jpg" alt="imagen del producto" class="product__image-window">
-                <h3 class="product__name">Nombre del Producto 8</h3>
-                <p class="precio">Precio: $XX.XX</p>
-                <p><span class="product__size-hidden">tallas:</span></p>
-            </div>
-        </div>
-      
-    </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No hay productos disponibles.</p>
+    <?php endif; ?>
+</div>
+
     </div>
