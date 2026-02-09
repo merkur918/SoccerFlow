@@ -244,7 +244,7 @@ if ($requiredLevel > 0 && !$session->hasLevel($requiredLevel)) {
             'message' => $isLogged ? 'No autorizado' : 'No autenticado'
         ],JSON_UNESCAPED_UNICODE);
     }else{
-        echo '<h1>Acceso Denegado</h1>';
+        require __DIR__ . '/../app/Views/error/error.php';
     }
     exit();
     
