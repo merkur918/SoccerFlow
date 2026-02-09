@@ -2650,3 +2650,112 @@ select.product__size-select {
     min-width: 100%;
   }
 }
+
+/* Ajustes solo para el listado de productos */
+.product__body-window .product__container { /* Solo afecta a la tienda */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 1200px; /* Limita el ancho maximo */
+  height: auto; /* Quita el alto fijo del detalle */
+  overflow: visible; /* Deja ver textos y contenido */
+  background: transparent; /* Quita fondo blanco del detalle */
+  box-shadow: none; /* Quita sombra del detalle */
+  border-radius: 0; /* Quita bordes redondeados del detalle */
+  display: grid; /* Activa grid para tarjetas */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Columnas responsivas */
+  gap: 24px; /* Espacio entre tarjetas */
+  padding: 8px; /* Aire interno del grid */
+}
+
+.product__body-window .product__block { /* Tarjeta individual */
+  height: auto; /* El alto lo define el contenido */
+  overflow: hidden; /* Recorta solo lo que se salga */
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 16px; /* Bordes suaves */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Sombra suave */
+  display: flex; /* Layout vertical */
+  flex-direction: column; /* Imagen arriba, texto abajo */
+  transition: transform 0.25s ease, box-shadow 0.25s ease; /* Animacion suave */
+}
+
+.product__body-window .product__block:hover { /* Hover tarjeta */
+  transform: translateY(-6px); /* Sube un poco */
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12); /* Sombra mas fuerte */
+}
+
+.product__body-window .product__media { /* Caja de la imagen */
+  width: 100%; /* Ancho total */
+  aspect-ratio: 4 / 3; /* Alto consistente para todas */
+  background: #f6f7f9; /* Fondo neutro */
+  display: flex; /* Centra imagen */
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+}
+
+.product__body-window .product__image-window { /* Imagen */
+  width: 100%; /* Ajuste al ancho */
+  height: 100%; /* Ajuste al alto */
+  object-fit: contain; /* Muestra completa sin recortar */
+  padding: 12px; /* Aire alrededor */
+}
+
+.product__body-window .product__info { /* Zona de texto */
+  padding: 14px 16px 18px; /* Espaciado interno */
+  display: flex; /* Orden vertical */
+  flex-direction: column; /* Nombre, precio, meta */
+  gap: 6px; /* Separacion entre lineas */
+  text-align: center; /* Centra el texto */
+}
+
+.product__body-window .product__name { /* Nombre */
+  font-size: 18px; /* Tamaño legible */
+  font-weight: 700; /* Destacado */
+  color: #222; /* Contraste alto */
+}
+
+.product__body-window .precio { /* Precio */
+  margin: 0; /* Quita margenes raros */
+  font-size: 20px; /* Tamaño fuerte */
+  font-weight: 800; /* Negrita */
+  color: #079c40; /* Verde marca */
+}
+
+.product__body-window .product__meta { /* Linea corta */
+  margin: 0; /* Sin margen extra */
+  font-size: 13px; /* Mas pequeña */
+  color: #666; /* Gris suave */
+}
+
+.product__body-window .product__block p { /* Ajuste general de p */
+  margin: 0; /* Evita saltos raros */
+}
+
+/* Cards del mismo tamaño en el grid */
+.product__body-window .product__container {
+  align-items: stretch; /* Estira todas las tarjetas a la misma altura */
+  grid-auto-rows: 1fr;  /* Fuerza filas de la misma altura */
+}
+
+.product__body-window .product__block {
+  height: 100%; /* La tarjeta ocupa toda la altura de la celda */
+}
+
+.product__body-window .product__info {
+  flex: 1; /* El texto ocupa el mismo espacio en todas */
+}
+
+/* Limita texto para que no cambie la altura */
+.product__body-window .product__name {
+  min-height: 44px; /* Reserva espacio fijo para 2 líneas */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Máximo 2 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product__body-window .product__meta {
+  min-height: 18px; /* Reserva espacio fijo para 1 línea */
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Máximo 1 línea */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
