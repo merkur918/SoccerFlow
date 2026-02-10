@@ -95,8 +95,9 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   display: block;
-  padding: 0 0 120px;
+  padding: 0 0 0px;
   width: 100%;
 }
 
@@ -352,7 +353,9 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 0 0 120px;
+  background-attachment: fixed;
+  display: block;
+  padding: 0 0 0px;
   width: 100%;
 }
 
@@ -2653,7 +2656,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  padding-bottom: 160px;
+  padding-bottom: 60px;
 }
 
 .contacto__body {

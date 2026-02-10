@@ -109,12 +109,13 @@ body {
 /* 1) LAYOUT GENERAL */
 .home-competitions {
   min-height: calc(100vh - 90px);
-  background-image: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.9)), url("/assets/img/Fondo.jpg");
+ background-image: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.9)), url("/assets/img/Fondo.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   display: block;
-  padding: 0 0 120px;
+  padding: 0 0 0px;
   width: 100%;
 }
 
@@ -612,11 +613,13 @@ body {
    ============================================ */
 .news {
   min-height: calc(100vh - 90px);
-  background-image: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.9)), url("/assets/img/Fondo.jpg");
+ background-image: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.9)), url("/assets/img/Fondo.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 0 0 120px;
+  background-attachment: fixed;
+  display: block;
+  padding: 0 0 0px;
   width: 100%;
 }
 
@@ -2684,7 +2687,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  padding-bottom: 160px;
+  padding-bottom: 60px;
 }
 
 .contacto__body {
