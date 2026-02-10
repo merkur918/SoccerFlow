@@ -1,17 +1,17 @@
 -- Insertar productos de botas
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
-('Nike Mercurial Superfly 10 Elite', 'Botas de fútbol de perfil alto para terreno firme', 279.99, 'Nike', NULL, 'botas', 'male'),
-('Nike Tiempo Maestro Academy', 'Botas de fútbol de perfil bajo para terreno blando', 89.99, 'Nike', NULL, 'botas', 'male'),
-('Nike Tiempo Ligera Pro LE', 'Botas de fútbol de perfil bajo para terreno firme', 159.99, 'Nike', NULL, 'botas', 'female'),
-('Nike Premier 3', 'Botas de fútbol de perfil bajo para terreno firme', 109.99, 'Nike', NULL, 'botas', 'female'),
+('Nike Mercurial Superfly 10 Elite', 'Botas de fútbol de perfil alto para terreno firme', 279.99, 'Nike', NULL, 'botas', 'Masculino'),
+('Nike Tiempo Maestro Academy', 'Botas de fútbol de perfil bajo para terreno blando', 89.99, 'Nike', NULL, 'botas', 'Masculino'),
+('Nike Tiempo Ligera Pro LE', 'Botas de fútbol de perfil bajo para terreno firme', 159.99, 'Nike', NULL, 'botas', 'Femenino'),
+('Nike Premier 3', 'Botas de fútbol de perfil bajo para terreno firme', 109.99, 'Nike', NULL, 'botas', 'Femenino'),
 ('Nike Phantom 6 Low Academy', 'Botas de fútbol para césped artificial', 89.99, 'Nike', NULL, 'botas', 'unisex'),
-('Adidas F50 LEAGUE', 'Bota de fútbol F50 LEAGUE césped natural seco / multisuperficie', 90.00, 'Adidas', NULL, 'botas', 'male'),
-('Adidas PREDATOR PRO FOLD-OVER Tongue', 'Bota de fútbol PREDATOR PRO FOLD-OVER Tongue césped natural seco', 160.00, 'Adidas', NULL, 'botas', 'male'),
-('Adidas COPA PURE IV', 'Bota de fútbol COPA PURE IV LEAGUE césped natural seco', 85.00, 'Adidas', NULL, 'botas', 'female'),
+('Adidas F50 LEAGUE', 'Bota de fútbol F50 LEAGUE césped natural seco / multisuperficie', 90.00, 'Adidas', NULL, 'botas', 'Masculino'),
+('Adidas PREDATOR PRO FOLD-OVER Tongue', 'Bota de fútbol PREDATOR PRO FOLD-OVER Tongue césped natural seco', 160.00, 'Adidas', NULL, 'botas', 'Masculino'),
+('Adidas COPA PURE IV', 'Bota de fútbol COPA PURE IV LEAGUE césped natural seco', 85.00, 'Adidas', NULL, 'botas', 'Femenino'),
 ('Adidas Predator Obsidian Strike', 'Bota de fútbol con lengüeta plegable Predator Obsidian Strike césped natural seco', 300.00, 'Adidas', NULL, 'botas', 'unisex'),
-('Puma FUTURE 8 MATCH RE-CHARGE FG/AG', 'Botas ligeras y ágiles con máximo agarre y control del balón.', 79.99, 'Puma', NULL, 'botas', 'male'),
-('Puma ULTRA 6 MATCH+ LIGHT UP FG/AG', 'Botas ultraligeras con máxima velocidad y estabilidad en césped natural y artificial.', 95.00, 'Puma', NULL, 'botas', 'female'),
-('New Balance 442 Pro FG V3', 'Botas clásicas y ligeras con ajuste cómodo y respuesta moderna', 120.00, 'New Balance', NULL, 'botas', 'male'),
+('Puma FUTURE 8 MATCH RE-CHARGE FG/AG', 'Botas ligeras y ágiles con máximo agarre y control del balón.', 79.99, 'Puma', NULL, 'botas', 'Masculino'),
+('Puma ULTRA 6 MATCH+ LIGHT UP FG/AG', 'Botas ultraligeras con máxima velocidad y estabilidad en césped natural y artificial.', 95.00, 'Puma', NULL, 'botas', 'Femenino'),
+('New Balance 442 Pro FG V3', 'Botas clásicas y ligeras con ajuste cómodo y respuesta moderna', 120.00, 'New Balance', NULL, 'botas', 'Masculino'),
 ('Under Armour Magnetico Pro 5 FG', 'Botas que se adaptan al pie para ofrecer control total y un ajuste personalizado.', 140.00, 'Under Armour', NULL, 'botas', 'unisex'),
 ('Joma Aguila Top FG', 'Bota clásica renovada con materiales modernos y rendimiento de máximo nivel.', 63.99, 'Joma', NULL, 'botas', 'unisex');
 
@@ -203,21 +203,21 @@ INSERT INTO product_images (product_id, image_url) VALUES
 
 -- Insertar camisetas
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
-('Camiseta Real Madrid 2025/26 Local', 'Camiseta auténtica inspirada en el nuevo Bernabéu, con diseño premium y rendimiento profesional.', 129.99, 'Adidas', 'Real Madrid', 'camisetas', 'male'),
-('Camiseta Real Madrid 2025/26 Visitante', 'Camiseta auténtica inspirada en las noches del Bernabéu, con diseño metalizado y rendimiento profesional.', 119.99, 'Adidas', 'Real Madrid', 'camisetas', 'female'),
-('Camiseta FC Barcelona 2025/26 Local', 'Camiseta Stadium del Barça 25/26 con franjas degradadas y tecnología Dri‑FIT para máxima comodidad.', 124.99, 'Nike', 'FC Barcelona', 'camisetas', 'male'),
-('Camiseta FC Barcelona 2025/26 Visitante', 'Camiseta Barça x Kobe 25/26 con diseño inspirado en la mentalidad Mamba y tecnología Dri‑FIT.', 114.99, 'Nike', 'FC Barcelona', 'camisetas', 'female'),
-('Camiseta Atlético de Madrid 2025/26 Local', 'Camiseta del Atlético 25/26 con diseño clásico renovado y tecnología Dri‑FIT para máximo confort.', 99.99, 'Nike', 'Atlético de Madrid', 'camisetas', 'male'),
-('Camiseta Valencia CF 2025/26 Local', 'Camiseta del Valencia 25/26 con diseño blanco inspirado en el trencadís y tecnología ULTRAWEAVE ultraligera.', 109.99, 'Puma', 'Valencia CF', 'camisetas', 'male'),
-('Camiseta Valencia CF 2025/26 Alternativa', 'Camiseta Senyera 25/26 con diseño renovado y tecnología ULTRAWEAVE ultraligera.', 99.99, 'Puma', 'Valencia CF', 'camisetas', 'male'),
-('Camiseta Liverpool FC 2025/26 Local', 'Camiseta del Liverpool 25/26 con diseño clásico rojo‑blanco y tecnología AEROREADY para máxima comodidad.', 104.99, 'Adidas', 'Liverpool FC', 'camisetas', 'male'),
-('Camiseta Betis 2025/26 Local', 'Camiseta del Betis 25/26 con diseño retro, tejido Jacquard avanzado y máxima ligereza ULTRAWEAVE.', 99.99, 'Hummel', 'Real Betis Balon pie', 'camisetas', 'female'),
+('Camiseta Real Madrid 2025/26 Local', 'Camiseta auténtica inspirada en el nuevo Bernabéu, con diseño premium y rendimiento profesional.', 129.99, 'Adidas', 'Real Madrid', 'camisetas', 'Masculino'),
+('Camiseta Real Madrid 2025/26 Visitante', 'Camiseta auténtica inspirada en las noches del Bernabéu, con diseño metalizado y rendimiento profesional.', 119.99, 'Adidas', 'Real Madrid', 'camisetas', 'Femenino'),
+('Camiseta FC Barcelona 2025/26 Local', 'Camiseta Stadium del Barça 25/26 con franjas degradadas y tecnología Dri‑FIT para máxima comodidad.', 124.99, 'Nike', 'FC Barcelona', 'camisetas', 'Masculino'),
+('Camiseta FC Barcelona 2025/26 Visitante', 'Camiseta Barça x Kobe 25/26 con diseño inspirado en la mentalidad Mamba y tecnología Dri‑FIT.', 114.99, 'Nike', 'FC Barcelona', 'camisetas', 'Femenino'),
+('Camiseta Atlético de Madrid 2025/26 Local', 'Camiseta del Atlético 25/26 con diseño clásico renovado y tecnología Dri‑FIT para máximo confort.', 99.99, 'Nike', 'Atlético de Madrid', 'camisetas', 'Masculino'),
+('Camiseta Valencia CF 2025/26 Local', 'Camiseta del Valencia 25/26 con diseño blanco inspirado en el trencadís y tecnología ULTRAWEAVE ultraligera.', 109.99, 'Puma', 'Valencia CF', 'camisetas', 'Masculino'),
+('Camiseta Valencia CF 2025/26 Alternativa', 'Camiseta Senyera 25/26 con diseño renovado y tecnología ULTRAWEAVE ultraligera.', 99.99, 'Puma', 'Valencia CF', 'camisetas', 'Masculino'),
+('Camiseta Liverpool FC 2025/26 Local', 'Camiseta del Liverpool 25/26 con diseño clásico rojo‑blanco y tecnología AEROREADY para máxima comodidad.', 104.99, 'Adidas', 'Liverpool FC', 'camisetas', 'Masculino'),
+('Camiseta Betis 2025/26 Local', 'Camiseta del Betis 25/26 con diseño retro, tejido Jacquard avanzado y máxima ligereza ULTRAWEAVE.', 99.99, 'Hummel', 'Real Betis Balon pie', 'camisetas', 'Femenino'),
 ('Camiseta España 2026 Local', 'Camiseta oficial de la selección española con tecnología AEROREADY', 114.99, 'Adidas', 'España', 'camisetas', 'unisex'),
 ('Camiseta Argentina 2026 Local', 'Camiseta oficial campeona del mundo con las 3 estrellas', 139.99, 'Adidas', 'Argentina', 'camisetas', 'unisex'),
 ('Camiseta Brasil 2026 Visitante', 'Camiseta oficial de la selección brasileña con tecnología Dri-FIT', 129.99, 'Nike', 'Brasil', 'camisetas', 'unisex'),
-('Camiseta Manchester City 2025/26 Local', 'Camiseta del Manchester City 25/26 con la icónica faja celeste y tecnología dryCELL para máximo confort.', 119.99, 'Puma', 'Manchester City', 'camisetas', 'male'),
-('Camiseta Bayern Munich 2025/26 Portero', 'Camiseta del Bayern Munich oficial de portero', 114.99, 'Adidas', 'Bayern Munich', 'camisetas', 'male'),
-('Camiseta PSG 2025/26 Visitante', 'Camiseta tradicional roja con franjas blancas', 114.99, 'Nike', 'Paris Saint-Germain', 'camisetas', 'female');
+('Camiseta Manchester City 2025/26 Local', 'Camiseta del Manchester City 25/26 con la icónica faja celeste y tecnología dryCELL para máximo confort.', 119.99, 'Puma', 'Manchester City', 'camisetas', 'Masculino'),
+('Camiseta Bayern Munich 2025/26 Portero', 'Camiseta del Bayern Munich oficial de portero', 114.99, 'Adidas', 'Bayern Munich', 'camisetas', 'Masculino'),
+('Camiseta PSG 2025/26 Visitante', 'Camiseta tradicional roja con franjas blancas', 114.99, 'Nike', 'Paris Saint-Germain', 'camisetas', 'Femenino');
 
 
 SET @realmadrid_local_id = (SELECT ID FROM products WHERE name = 'Camiseta Real Madrid 2025/26 Local');
@@ -365,8 +365,8 @@ INSERT INTO product_images (product_id, image_url) VALUES
 (@barcelona_local_id, 'soccerFlow/public/assets/img/products/camisetas/Barcelona-Local-2.webp'),
 (@barcelona_visitante_id, 'soccerFlow/public/assets/img/products/camisetas/Barcelona-Visitante-1.webp'),
 (@barcelona_visitante_id, 'soccerFlow/public/assets/img/products/camisetas/Barcelona-Visitante-2.webp'),
-(@ATM_id, 'soccerFlow/public/assets/img/products/camisetas/ATM-1.png'),
-(@ATM_id, 'soccerFlow/public/assets/img/products/camisetas/ATM-2.png'),
+(@ATM_id, 'soccerFlow/public/assets/img/products/camisetas/ATM-1.jpg'),
+(@ATM_id, 'soccerFlow/public/assets/img/products/camisetas/ATM-2.jpg'),
 (@VCF_local_id, 'soccerFlow/public/assets/img/products/camisetas/VCF-Local-1.avif'),
 (@VCF_local_id, 'soccerFlow/public/assets/img/products/camisetas/VCF-Local-2.avif'),
 (@VCF_visitante_id, 'soccerFlow/public/assets/img/products/camisetas/VCF-Alternativa-1.avif'),
@@ -390,15 +390,15 @@ INSERT INTO product_images (product_id, image_url) VALUES
 
 -- Insertar guantes
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
-('Adidas Predator League', 'Guantes adidas Predator League con palma URG 3.0 de gran agarre y ajuste estable para máximo control.', 70.00, 'Adidas', NULL, 'guantes', 'male'),
-('Nike Grip3', 'Guantes Nike Grip3 con espuma envolvente para mayor agarre, estabilidad y control en cada parada.', 69.99, 'Nike', NULL, 'guantes', 'male'),
-('Nike Match', 'Guantes con palma de espuma acolchada para absorber impactos, gran agarre y ventilación para mantener las manos frescas.', 29.99, 'Nike', NULL, 'guantes', 'male'),
-('Uhlsport Fangmaschine Aquagrip', 'Guantes Uhlsport Aquagrip HN con palma AQUAGRIP para máximo agarre en lluvia y corte negativo de gran comodidad.', 139.99, 'Uhlsport', NULL, 'guantes', 'male'),
-('Reusch Attrakt Freegel Fusion Goaliator', 'Guantes Reusch Attrakt Freegel Fusion Goaliator con palma Grip Fusion para agarre en cualquier clima, corte negativo y cierre AdaptiveFlex para ajuste profesional.', 129.99, 'Reusch', NULL, 'guantes', 'male'),
-('PUMA ULTRA Match Protect', 'Guantes PUMA con palma de látex de 3 mm para agarre superior, dorso flexible y protección en los 4 dedos para máxima seguridad en cada parada.', 60.00, 'Puma', NULL, 'guantes', 'male'),
-('Sells Total Contact Detonate Excel', 'Guantes Sells Total Contact Detonate Excel con palma Opti‑Response para agarre en cualquier clima, corte Total Contact envolvente y cierre de vendaje para máxima sujeción.', 60.00, 'Sells', NULL, 'guantes', 'male'),
-('New Balance Destroy Flat', 'Guantes New Balance Destroy Flat con látex Supersoft, tecnología Finger Sling y construcción ligera en textil y neopreno para un ajuste profesional y ultra cómodo.', 94.99, 'New Balance', NULL, 'guantes', 'male'),
-('Vende guantes Wrap Aqua Pure', 'Guantes españoles con látex alemán y protección de dedos', 59.99, 'Vende', NULL, 'guantes', 'male'),
+('Adidas Predator League', 'Guantes adidas Predator League con palma URG 3.0 de gran agarre y ajuste estable para máximo control.', 70.00, 'Adidas', NULL, 'guantes', 'Masculino'),
+('Nike Grip3', 'Guantes Nike Grip3 con espuma envolvente para mayor agarre, estabilidad y control en cada parada.', 69.99, 'Nike', NULL, 'guantes', 'Masculino'),
+('Nike Match', 'Guantes con palma de espuma acolchada para absorber impactos, gran agarre y ventilación para mantener las manos frescas.', 29.99, 'Nike', NULL, 'guantes', 'Masculino'),
+('Uhlsport Fangmaschine Aquagrip', 'Guantes Uhlsport Aquagrip HN con palma AQUAGRIP para máximo agarre en lluvia y corte negativo de gran comodidad.', 139.99, 'Uhlsport', NULL, 'guantes', 'Masculino'),
+('Reusch Attrakt Freegel Fusion Goaliator', 'Guantes Reusch Attrakt Freegel Fusion Goaliator con palma Grip Fusion para agarre en cualquier clima, corte negativo y cierre AdaptiveFlex para ajuste profesional.', 129.99, 'Reusch', NULL, 'guantes', 'Masculino'),
+('PUMA ULTRA Match Protect', 'Guantes PUMA con palma de látex de 3 mm para agarre superior, dorso flexible y protección en los 4 dedos para máxima seguridad en cada parada.', 60.00, 'Puma', NULL, 'guantes', 'Masculino'),
+('Sells Total Contact Detonate Excel', 'Guantes Sells Total Contact Detonate Excel con palma Opti‑Response para agarre en cualquier clima, corte Total Contact envolvente y cierre de vendaje para máxima sujeción.', 60.00, 'Sells', NULL, 'guantes', 'Masculino'),
+('New Balance Destroy Flat', 'Guantes New Balance Destroy Flat con látex Supersoft, tecnología Finger Sling y construcción ligera en textil y neopreno para un ajuste profesional y ultra cómodo.', 94.99, 'New Balance', NULL, 'guantes', 'Masculino'),
+('Vende guantes Wrap Aqua Pure', 'Guantes españoles con látex alemán y protección de dedos', 59.99, 'Vende', NULL, 'guantes', 'Masculino'),
 ('Ho Soccer Infantil Rage Plus Electric', 'Guantes para entrenamiento con agarre seco y mojadoGuante diseñado específicamente para terrenos artificiales.', 24.99, 'Ho Soccer', NULL, 'guantes', 'unisex');
 
 SET @guante1_id = (SELECT ID FROM products WHERE name = 'Adidas Predator League');
@@ -505,16 +505,16 @@ INSERT INTO product_images (product_id, image_url) VALUES
 
 -- Insertar chandals
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
-('Chandal Real Madrid 2025/26', 'Chándal adidas del Real Madrid 25/26 con escudo oficial y tecnología AEROREADY para máxima comodidad.', 130.00, 'Adidas', 'Real Madrid', 'chandals', 'male'),
-('Chandal FC Barcelona 2025/26', 'Chándal de entrenamiento del FC Barcelona con tecnología Nike Dri‑FIT, escudo oficial y diseño con chaqueta de cremallera y pantalón ajustable.', 139.99, 'Nike', 'FC Barcelona', 'chandals', 'male'),
-('Chandal Valencia CF 2025/26', 'Luce los colores de tu equipo con la colección de paseo 25/26.', 109.99, 'Puma', 'Valencia CF', 'chandals', 'male'),
-('Chandal Manchester City 2025/26', 'Sudadera y pantalones del Manchester City, cómodos y cálidos, ideales para relajarte mientras muestras tu orgullo Cityzen.', 94.99, 'Puma', 'Manchester City', 'chandals', 'male'),
+('Chandal Real Madrid 2025/26', 'Chándal adidas del Real Madrid 25/26 con escudo oficial y tecnología AEROREADY para máxima comodidad.', 130.00, 'Adidas', 'Real Madrid', 'chandals', 'Masculino'),
+('Chandal FC Barcelona 2025/26', 'Chándal de entrenamiento del FC Barcelona con tecnología Nike Dri‑FIT, escudo oficial y diseño con chaqueta de cremallera y pantalón ajustable.', 139.99, 'Nike', 'FC Barcelona', 'chandals', 'Masculino'),
+('Chandal Valencia CF 2025/26', 'Luce los colores de tu equipo con la colección de paseo 25/26.', 109.99, 'Puma', 'Valencia CF', 'chandals', 'Masculino'),
+('Chandal Manchester City 2025/26', 'Sudadera y pantalones del Manchester City, cómodos y cálidos, ideales para relajarte mientras muestras tu orgullo Cityzen.', 94.99, 'Puma', 'Manchester City', 'chandals', 'Masculino'),
 ('Chandal Bayern Munich 2025/26', 'Conjunto casual deportivo con sudadera y pantalón', 89.99, NULL, 'Bayern Munich', 'chandals', 'unisex'),
-('Chandal PSG 2025/26', 'Consigue el estilo de tus jugadores preferidos del equipo.', 82.99, 'Nike', 'PSG', 'chandals', 'male'),
+('Chandal PSG 2025/26', 'Consigue el estilo de tus jugadores preferidos del equipo.', 82.99, 'Nike', 'PSG', 'chandals', 'Masculino'),
 ('Chandal Atletico de Madrid 2025/26', 'Chándal de entrenamiento, con diseño Nike moderno que combina estilo y rendimiento para lucir la esencia rojiblanca.', 111.99, 'Nike', 'Atletico de Madrid', 'chandals', 'unisex'),
 ('Chandal Chelsea 2025/26', 'Conjunto de entrenamiento Nike con ajuste ceñido, tejido elástico y tecnología Dri‑FIT para mantenerte seco y moverte con libertad.', 75.00, 'Nike', 'Chelsea', 'chandals', 'unisex'),
-('Chandal Inter de Milan 2025/26', 'Chándal del Inter con tejido Woven ligero y cómodo, ideal para entrenar o relajarte con el estilo clásico de Nike.', 137.99, 'Nike', 'Inter de Milan', 'chandals', 'male'),
-('Chandal Francia 2026', 'Chándal de fútbol de tejido Knit Nike Dri-FIT - Hombre', 97.99, 'Nike', 'Francia', 'chandals', 'male');
+('Chandal Inter de Milan 2025/26', 'Chándal del Inter con tejido Woven ligero y cómodo, ideal para entrenar o relajarte con el estilo clásico de Nike.', 137.99, 'Nike', 'Inter de Milan', 'chandals', 'Masculino'),
+('Chandal Francia 2026', 'Chándal de fútbol de tejido Knit Nike Dri-FIT - Hombre', 97.99, 'Nike', 'Francia', 'chandals', 'Masculino');
 
 -- Insertar variantes para chandals 
 SET @chandal_realmadrid_id = (SELECT ID FROM products WHERE name = 'Chandal Real Madrid 2025/26');

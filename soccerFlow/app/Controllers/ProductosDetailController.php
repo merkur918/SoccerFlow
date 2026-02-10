@@ -21,6 +21,8 @@ class ProductosDetailController extends Controller
 
         // Obtener imágenes del producto
         $imagenes = $model->getImagesByProductId($id);
+        //Obtener color del producto
+        $color = $model->getColorById($id);
 
         // Normalizar rutas
         foreach ($imagenes as &$img) {
@@ -31,7 +33,8 @@ class ProductosDetailController extends Controller
         $this->render('products/productDetails', [
             'title' => $producto['name'],
             'producto' => $producto,
-            'imagenes' => $imagenes
+            'imagenes' => $imagenes,
+            'color' => $color
         ]);
     }
 }

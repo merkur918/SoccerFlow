@@ -1,18 +1,32 @@
+<?php
+if (!empty($producto)){
+    // $producto YA es un array individual, NO necesitas foreach
+    $nombre = $producto['name'];
+    $descripcion = $producto['description'];
+    $precio = number_format((float)($producto['price'] ?? 0), 2);
+    $marca = $producto['brand'];
+    $equipo = $producto['team'];
+    $categoria = $producto['category'];
+    $genero = $producto['gender'];
+    $color = $color ?? ''; 
+}
+?>
 <div class="product__body">
         <div class="product__container"> 
-            <div class="product__images-preview-column">
-                <img class="product__images-preview-img" src="preview1.jpg" alt="Imagen previa 1">
-                <img class="product__images-preview-img" src="preview2.jpg" alt="Imagen previa 2">
-                <img class="product__images-preview-img" src="preview3.jpg" alt="Imagen previa 3">
-                <img class="product__images-preview-img" src="preview4.jpg" alt="Imagen previa 4">
-            </div>
+            <?php if (!empty($imagenes)): ?>
+                <div class="product__images-preview-column">
+                    <?php foreach ($imagenes as $img): ?>
+                        <img class="product__images-preview-img" src="<?= htmlspecialchars($img) ?>" alt="Imagen previa">
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
             <div class="product__image">
-                <img src="zapatillas.jpg" class="product__img" alt="Imagen del producto">
+                <img src="<?php echo $imagenes[0] ?? '/assets/img/products/placeholder.png'; ?>" class="product__img" alt="Imagen del producto">
             </div>
             <div class="product__form-column">
                 <form class="product__form">
-                    <h1 class="product__title">GUANTES SP FÚTBOL ZERO ELITE</h1>
-                    <p class="product__price">59,99 €</p>
+                    <h1 class="product__title"><?php echo $nombre ?></h1>
+                    <p class="product__price"><?php echo $precio ?></p>
                     <span style="color: #079C40;">¡Envío Gratis!</span>
 
                   
@@ -38,8 +52,13 @@
                     <input class="product__cart-button" type="submit" value="🛒 Agregar al Carrito">
                 </form>
                 <div class="product__description">
-                    <h2 class="product__description-title">Descripción del Producto</h2>
-                    <p class="product__description-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <ul>
+                    <li><p class="product__description-text"><?php  echo $descripcion ?></p></li>
+                    <li><p class="product__description-text">Marca: <?php  echo $marca ?></li>
+                    <li><p class="product__description-text">Color: <?php  echo $color ?></p></li>
+                    <li><p class="product__description-text">Equipo: <?php  echo $equipo ?></p></li>
+                    <li><p class="product__description-text">Genero: <?php  echo $genero ?></p></li>
+                </ul>
                 </div>
             </div>
         </div>

@@ -42,7 +42,7 @@ CREATE TABLE products (
     brand VARCHAR(50),
     team VARCHAR(50) DEFAULT NULL,
     category VARCHAR(50) NOT NULL,
-    gender ENUM('male','female','unisex') DEFAULT 'unisex',
+    gender ENUM('Masculino','Femenino','Unisex') DEFAULT 'unisex',
     active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -127,7 +127,7 @@ public function update(int $id,string $nombre,string $descripcion,float $precio,
         $stmt->execute(['query' => '%' . $query . '%']);
         return $stmt->fetchAll();
     }
-   
+   //Seleccionar por categoria
     public function getByCategory(string $categoria): array
     {
         $sql = "SELECT * FROM products WHERE category = :categoria";
@@ -135,7 +135,7 @@ public function update(int $id,string $nombre,string $descripcion,float $precio,
         $stmt->execute(['categoria' => $categoria]);
         return $stmt->fetchAll();
     }
-   
+   //Seleccionar por talla 
    public function getBySize(string $size): array
 {
     $sql = "SELECT p.*
@@ -148,7 +148,7 @@ public function update(int $id,string $nombre,string $descripcion,float $precio,
 
     return $stmt->fetchAll();
 }
-
+//Seleccionar por percio
         public function getPriceById(int $id): ?float
 {
     $sql = "SELECT price FROM products WHERE id = :id LIMIT 1";
@@ -159,18 +159,21 @@ public function update(int $id,string $nombre,string $descripcion,float $precio,
 
     return $precio !== false ? (float)$precio : null;
 }
+//Seleccionar por equipo
 public function getByTeam(string $equipo): array {
     $sql = "SELECT * FROM products WHERE team = :equipo";
     $stmt = $this->db->prepare($sql);
     $stmt->execute(['equipo' => $equipo]);
     return $stmt->fetchAll();
 }
+//Seleccionar por marca
 public function getByBrand(string $marca): array {
     $sql = "SELECT * FROM products WHERE brand = :marca";
     $stmt = $this->db->prepare($sql);
     $stmt->execute(['marca' => $marca]);
     return $stmt->fetchAll();
 }
+//Seleccionar imagen principal por id
 public function getPortraitImageById(int $productId): ?string
 {
     $sql = "SELECT image_url FROM product_images WHERE product_id = :productId ORDER BY id ASC LIMIT 1";
@@ -182,6 +185,7 @@ public function getPortraitImageById(int $productId): ?string
 
     return $imagen !== false ? $imagen : null;
 }
+//Seleccionar imagenes por id del producto
 public function getImagesByProductId(int $id): array
 {
     $sql = "SELECT image_url FROM product_images WHERE product_id = :id ORDER BY id ASC";
@@ -192,5 +196,19 @@ public function getImagesByProductId(int $id): array
 
     return $imagenes ?: [];
 }
-
+//Seleccionar por genero
+public function getIdByGender(string $gender): array{
+    $sql = "SELECT gender by id FROM products WHERE gender=:gender";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['gender' => $gender]);
+    return $stmt-> fetchAll();
+}
+//Seleccionar color por id
+public function getColorById(int $id): ?string{
+    $sql = "SELECT color FROM products_variants WHERE product_id = :id LIMIT 1";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['id' => $id]);
+    $color = $stmt->fetchColumn();
+    return $color !== false ? $color : null;
+}
  }

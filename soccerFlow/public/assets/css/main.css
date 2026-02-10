@@ -1965,18 +1965,8 @@ body {
   margin-top: auto;
 }
 
-.product__description-title {
-  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: var(--text-dark);
-  padding-bottom: 10px;
-  border-bottom: 3px solid var(--primary-color);
-}
-
 .product__description-text {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:"Jersey 10", Arial, Helvetica, sans-serif;
   line-height: 1.7;
   color: #555;
   font-size: 1.1rem;
@@ -2239,7 +2229,7 @@ body {
             max-width: 400px;
             border: 2px solid #c3cfe2;
             border-radius: 50px;
-            font-family: 'Arial', sans-serif;
+            font-family:"Jersey 10", Arial, Helvetica, sans-serif;
             font-size: 16px;
             color: #333;
             outline: none;
@@ -2305,7 +2295,7 @@ body {
         /* Contenido del producto */
         .product__block h3 {
             margin: 15px 20px 8px;
-            font-family: 'Arial', sans-serif;
+            font-family: "Jersey 10", Arial, Helvetica, sans-serif;
             font-size: 18px;
             font-weight: 700;
             color: #222;
@@ -2315,7 +2305,7 @@ body {
 
         .precio {
             margin: 0 20px 15px;
-            font-family: 'Arial', sans-serif;
+            font-family: "Jersey 10", Arial, Helvetica, sans-serif;
             font-size: 20px;
             font-weight: 800;
             color: #079C40;
@@ -2335,7 +2325,7 @@ body {
             display: inline-block;
             opacity: 0;
             transform: translateY(10px);
-            font-family: 'Arial', sans-serif;
+            font-family:"Jersey 10", Arial, Helvetica, sans-serif;
             font-size: 14px;
             font-weight: 600;
             color: #555;
@@ -2437,7 +2427,7 @@ body {
       min-height: 100vh;
       box-sizing: border-box;
       align-items: flex-start;
-      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family:"Jersey 10", Arial, Helvetica, sans-serif;
       color: #222;
     }
 
@@ -3010,4 +3000,177 @@ body {
   -webkit-line-clamp: 1; /* Máximo 1 línea */
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+/* ============================================
+   PRODUCTO DETALLE - LISTAS DE DESCRIPCIÓN (TEMA CLARO)
+   ============================================ */
+.product__description ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product__description li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.product__description li:last-child {
+  border-bottom: none;
+}
+
+.product__description li p {
+  margin: 0;
+  color: #555;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.product__description li p strong {
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+/* ============================================
+   TIENDA - SELECTS DE FILTRO ESPECÍFICOS (TEMA CLARO)
+   ============================================ */
+.product__order-price,
+.product__filter-category,
+.product__filter-size,
+.product__filter-teams,
+.product__filter-brand,
+.product__filter-gender {
+  appearance: none;
+  padding: 10px 14px;
+  border: 2px solid var(--primary-color);
+  border-radius: 6px;
+  background-color: white;
+  color: #333;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 180px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23079C40' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+}
+
+.product__order-price:hover,
+.product__filter-category:hover,
+.product__filter-size:hover,
+.product__filter-teams:hover,
+.product__filter-brand:hover,
+.product__filter-gender:hover {
+  border-color: var(--light-color);
+}
+
+.product__order-price:focus,
+.product__filter-category:focus,
+.product__filter-size:focus,
+.product__filter-teams:focus,
+.product__filter-brand:focus,
+.product__filter-gender:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(7, 156, 64, 0.25);
+}
+
+.product__order-price option,
+.product__filter-category option,
+.product__filter-size option,
+.product__filter-teams option,
+.product__filter-brand option,
+.product__filter-gender option {
+  padding: 10px;
+  background: white;
+  color: #333;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+}
+
+/* Responsive para selects en móvil */
+@media (max-width: 768px) {
+  .product__order-price,
+  .product__filter-category,
+  .product__filter-size,
+  .product__filter-teams,
+  .product__filter-brand,
+  .product__filter-gender {
+    min-width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* ============================================
+   TIENDA - ENLACES DE PRODUCTO (TEMA CLARO)
+   ============================================ */
+.product__container a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.product__container a:hover {
+  text-decoration: none;
+}
+
+/* ============================================
+   TIENDA - MENSAJE SIN PRODUCTOS (TEMA CLARO)
+   ============================================ */
+.product__container > p {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  background: white;
+  border-radius: var(--border-radius);
+  border: 1px solid #e0e0e0;
+  margin: 20px 0;
+}
+
+/* ============================================
+   TIPOGRAFÍA JERSEY 10 PARA TIENDA (TEMA CLARO)
+   ============================================ */
+.product__block h3,
+.product__body-window .product__name {
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.precio,
+.product__body-window .precio {
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.product__size-hidden {
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+}
+
+/* Para el detalle del producto */
+.product__title,
+.product__price,
+.product__size-label,
+.product__size-select,
+.product__cart-button,
+.quantity-label,
+.quantity-btn,
+.quantity-input {
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+}
+
+/* Asegurar que los elementos de texto usen la tipografía correcta */
+.product__search-input,
+.product__order-filter select {
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
 }

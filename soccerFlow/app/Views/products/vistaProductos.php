@@ -44,9 +44,9 @@
 
                 <select class="product__filter-gender">
                     <option value="all-genders">Filtrar por género</option>
-                    <option value="male">Hombre</option>
-                    <option value="female">Mujer</option>
-                    <option value="unisex">Unisex</option>
+                    <option value="Masculino">Hombre</option>
+                    <option value="Femenino">Mujer</option>
+                    <option value="Unisex">Unisex</option>
                 </select>
                     
 
