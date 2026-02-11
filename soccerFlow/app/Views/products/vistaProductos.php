@@ -71,8 +71,8 @@
            
         </div>
         
-       
-      <div class="product__container"> <!-- Grid principal de tarjetas -->
+<!-- LOS PRODUCTOS DEBEN ESTAR DENTRO DE ESTE CONTENEDOR -->
+<div class="product__container"> <!-- Grid principal de tarjetas -->
     <?php if (!empty($productos)): ?> <!-- Si hay productos -->
         <?php foreach ($productos as $p): ?> <!-- Recorremos cada producto -->
             <?php
@@ -82,17 +82,17 @@
                 $img = htmlspecialchars($p['image'] ?? '/assets/img/products/placeholder.png'); // Imagen o placeholder
                 $category = htmlspecialchars($p['category'] ?? ''); // Categoria
                 $team = htmlspecialchars($p['team'] ?? ''); // Equipo
-                $brand = strtolower($p['brand'] ?? '');//Marca
+                $brand = strtolower($p['brand'] ?? ''); // Marca
                 $gender = htmlspecialchars($p['gender'] ?? ''); // Genero
                 $meta = trim($brand . ' - ' . $category); // Linea corta con marca y categoria
-                $sizes = htmlspecialchars($p['sizes']??'');
-                $sizes = htmlspecialchars(strtolower($sizes));
+                $sizes = htmlspecialchars($p['sizes'] ?? ''); // Tallas
+                $sizes = strtolower($sizes); // Convertir a minúsculas
             ?>
-            <div class="product__block"
+            <a href="/product-details?id=<?= $id ?>" class="product__block"
                 data-category="<?= $category ?>"
-                data-size="<?= $sizes ?>" 
-                data-team="<?= $team ?>" 
-                data-brand="<?= $brand ?>" 
+                data-size="<?= $sizes ?>"
+                data-team="<?= $team ?>"
+                data-brand="<?= $brand ?>"
                 data-gender="<?= $gender ?>"> 
                 
                 <div class="product__media"> <!-- Contenedor fijo de imagen -->
@@ -102,17 +102,16 @@
                 <div class="product__info"> <!-- Contenedor de texto -->
                     <h3 class="product__name"><?= $name ?></h3> <!-- Nombre -->
                     <p class="precio">Precio: $<?= $price ?></p> <!-- Precio -->
-                    <?php if ($meta !== ''): ?> <!-- Solo si hay meta -->
+                    <?php if ($meta !== '' && $meta !== ' - '): ?> <!-- Solo si hay meta válida -->
                         <p class="product__meta"><?= htmlspecialchars($meta) ?></p> <!-- Marca y categoria -->
                     <?php endif; ?>
-                    <p><span class="product__size-hidden"><?= htmlspecialchars($sizes) ?></span></p> <!-- Placeholder tallas -->
+                    <p><span class="product__size-hidden"><?= $sizes ?></span></p> <!-- Tallas -->
                 </div>
-            </div>
+            </a>
         <?php endforeach; ?> <!-- Fin del foreach -->
     <?php else: ?> <!-- Si no hay productos -->
         <p>No hay productos disponibles.</p> <!-- Mensaje -->
     <?php endif; ?> <!-- Fin del if -->
 </div>
-
 
     </div>

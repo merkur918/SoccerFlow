@@ -212,5 +212,30 @@ public function getSizesMap(): array
     return $map; // Devuelve el mapa completo
 }
 
+//Seleccionar imagenes por id del producto
+public function getImagesByProductId(int $id): array
+{
+    $sql = "SELECT image_url FROM product_images WHERE product_id = :id ORDER BY id ASC";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['id' => $id]);
 
+    $imagenes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    return $imagenes ?: [];
+}
+//Seleccionar por genero
+public function getIdByGender(string $gender): array{
+    $sql = "SELECT gender by id FROM products WHERE gender=:gender";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['gender' => $gender]);
+    return $stmt-> fetchAll();
+}
+//Seleccionar color por id
+public function getColorById(int $id): ?string{
+    $sql = "SELECT color FROM products_variants WHERE product_id = :id LIMIT 1";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['id' => $id]);
+    $color = $stmt->fetchColumn();
+    return $color !== false ? $color : null;
+}
  }
