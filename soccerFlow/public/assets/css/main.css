@@ -3377,19 +3377,101 @@ gap: 18px;
 padding: 0 40px;
 }
 
-.home-featured__card {
-position: relative;
-padding: 22px;
-border-radius: 16px;
-background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9)),
-url('/assets/img/Fondo.jpg') center/cover no-repeat;
-border: 1px solid #e5e7eb;
-min-height: 190px;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-color: #10151b;
-box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+.home-featured__card_LaLiga {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoLaLiga.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
+}
+.home-featured__card_Premier {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoPremier.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
+}
+.home-featured__card_SerieA {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoSerieA.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
+}
+.home-featured__card_Bundes {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoBundes.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
+}
+.home-featured__card_Ligue1 {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoLigue1.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
+}
+.home-featured__card_Champions {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoChampions.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
+}
+.home-featured__card_Europa {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoEuropa.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
+}
+.home-featured__card_Conference {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: url('/assets/img/FondoConference.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f6f7;
 }
 
 .home-featured__logo {
@@ -3644,8 +3726,7 @@ font-weight: 700;
 .home-hero {
   position: relative;
   min-height: 480px;
-  background: radial-gradient(circle at top left, rgba(7, 156, 64, 0.2), transparent 55%),
-    url('/assets/img/Fondo.jpg') center/cover no-repeat;
+  background: url('/assets/img/hero.png') center/cover no-repeat;
   border-radius: 18px;
   overflow: hidden;
   margin: 20px 40px 0;
@@ -3655,7 +3736,6 @@ font-weight: 700;
 .home-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(110deg, rgba(7, 156, 64, 0.88), rgba(0, 0, 0, 0.35));
 }
 
 .home-hero__content {

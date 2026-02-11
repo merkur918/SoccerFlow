@@ -16,28 +16,54 @@
             <h2>Competiciones <span>destacadas</span></h2>
         </div>
         <div class="home-featured__grid">
-            <article class="home-featured__card home-featured__card--laliga">
+            <article class="home-featured__card_LaLiga home-featured__card--laliga">
                 <div class="home-featured__logo">LaLiga</div>
                 <h3>La Liga</h3>
                 <p>20 equipos</p>
                 <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
             </article>
-            <article class="home-featured__card home-featured__card--premier">
+            <article class="home-featured__card_Premier home-featured__card--premier">
                 <div class="home-featured__logo">Premier</div>
                 <h3>Premier League</h3>
                 <p>20 equipos</p>
                 <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
             </article>
-            <article class="home-featured__card home-featured__card--ucl">
-                <div class="home-featured__logo">UCL</div>
-                <h3>UEFA Champions</h3>
-                <p>36 equipos</p>
-                <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
-            </article>
-            <article class="home-featured__card home-featured__card--seriea">
+            <article class="home-featured__card_SerieA home-featured__card--seriea">
                 <div class="home-featured__logo">Serie A</div>
                 <h3>Serie A</h3>
                 <p>20 equipos</p>
+                <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
+            </article>
+            <article class="home-featured__card_Bundes home-featured__card--bundes">
+                <div class="home-featured__logo">Bundes</div>
+                <h3>Bundesliga</h3>
+                <p>18 equipos</p>
+                <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
+            </article>
+            <article class="home-featured__card_Ligue1 home-featured__card--
+            ligue1">
+            <div class="home-featured__logo">Ligue 1</div>
+            <h3>Ligue 1</h3>
+            <p>20 equipos</p>
+            <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
+        </article>
+        <article class="home-featured__card_Champions home-featured__card--ucl">
+            <div class="home-featured__logo">UCL</div>
+            <h3>UEFA Champions</h3>
+            <p>36 equipos</p>
+            <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
+        </article>
+            <article class="home-featured__card_Europa home-featured__card--uel
+">
+                <div class="home-featured__logo">UEL</div>
+                <h3>Europa League</h3>
+                <p>32 equipos</p>
+                <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
+            </article>
+            <article class="home-featured__card_Conference home-featured__card--uecl">
+                <div class="home-featured__logo">UECL</div>
+                <h3>Conference League</h3>
+                <p>32 equipos</p>
                 <a class="home-featured__link" href="#home-standings">Ver clasificación</a>
             </article>
         </div>
