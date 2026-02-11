@@ -27,10 +27,6 @@
 
     <link rel="shortcut icon" href="/assets/img/logo.png" />
 </head>
-<?php if (!empty($jsFile)): ?>
-    <script src="/assets/js/<?= $jsFile ?>"></script>
-<?php endif; ?>
-
 <body>
 
 

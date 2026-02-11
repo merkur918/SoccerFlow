@@ -33,6 +33,7 @@ class ProductosDetailController extends Controller
         $this->render('products/productDetails', [
             'title' => $producto['name'],
             'producto' => $producto,
+            'jsFile' => 'vistaProductosDetail.js',
             'imagenes' => $imagenes,
             'color' => $color
         ]);

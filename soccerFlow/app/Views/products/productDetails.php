@@ -34,7 +34,7 @@ if (!empty($producto)){
                         <div class="quantity-label">Cantidad</div>
                         <div class="quantity-control">
                             <button type="button" class="quantity-btn minus">-</button>
-                            <input type="number" class="quantity-input" value="1" min="1" max="99">
+                            <input type="number" class="quantity-input" value="0" min="1" max="10">
                             <button type="button" class="quantity-btn plus">+</button>
                         </div>
                     </div>
