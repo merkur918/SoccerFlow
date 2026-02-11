@@ -5,14 +5,19 @@ class ProductosController extends Controller
 {
     public function index(): void
     {
-        $model = new Productos();
+        $model = new Productos(); //Instancia del modelo
 
-        $productos = $model->getAll();
+        $productos = $model->getAll(); //Lista de productos
+
+        $sizesMap = $model->getSizesMap(); //Mapa de tallas del producto
+        
 
         // Agregar imagen principal a cada producto
         foreach ($productos as &$p) {
-            $imagePath = $model->getPortraitImageById((int)$p['ID']);
+            $id = (int)($p['id'] ?? $p['ID'] ?? 0);
+            $imagePath = $model->getPortraitImageById($id);
             $p['image'] = $this->normalizeImagePath($imagePath);
+            $p['sizes'] = $sizesMap[$id] ?? '';
         }
         unset($p);
 

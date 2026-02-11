@@ -185,30 +185,32 @@ public function getPortraitImageById(int $productId): ?string
 
     return $imagen !== false ? $imagen : null;
 }
-//Seleccionar imagenes por id del producto
-public function getImagesByProductId(int $id): array
+
+
+
+
+
+// Devuelve un mapa: [product_id => "38,39,40"]
+public function getSizesMap(): array
 {
-    $sql = "SELECT image_url FROM product_images WHERE product_id = :id ORDER BY id ASC";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute(['id' => $id]);
+    // Traemos todas las tallas agrupadas por producto
+    $sql = "SELECT product_id,
+                   GROUP_CONCAT(DISTINCT COALESCE(size_shoe, size) 
+                                ORDER BY COALESCE(size_shoe, size) SEPARATOR ',') AS sizes
+            FROM products_variants
+            GROUP BY product_id";
 
-    $imagenes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $stmt = $this->db->query($sql); // Ejecuta la consulta
+    $rows = $stmt->fetchAll();      // Obtiene todas las filas
 
-    return $imagenes ?: [];
+    $map = []; // Aqui guardaremos product_id => "38,39,40"
+
+    foreach ($rows as $row) {
+        $map[(int)$row['product_id']] = $row['sizes']; // Asigna el string de tallas
+    }
+
+    return $map; // Devuelve el mapa completo
 }
-//Seleccionar por genero
-public function getIdByGender(string $gender): array{
-    $sql = "SELECT gender by id FROM products WHERE gender=:gender";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute(['gender' => $gender]);
-    return $stmt-> fetchAll();
-}
-//Seleccionar color por id
-public function getColorById(int $id): ?string{
-    $sql = "SELECT color FROM products_variants WHERE product_id = :id LIMIT 1";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute(['id' => $id]);
-    $color = $stmt->fetchColumn();
-    return $color !== false ? $color : null;
-}
+
+
  }
