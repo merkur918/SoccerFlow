@@ -37,6 +37,8 @@
       <p>0$</p>
       <p>Total a pagar</p>
       <p id="total-pay">0.00$</p>
-      <button class="cart__checkout-button">Finalizar Compra 🛒</button>
+      <form method="POST" action="index.php?ctl=cart-checkout">
+        <button class="cart__checkout-button" type="submit">Finalizar Compra 🛒</button>
+      </form>
     </div>
   </div>

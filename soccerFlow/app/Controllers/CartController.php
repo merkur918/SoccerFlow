@@ -113,6 +113,78 @@ class CartController extends Controller
         echo json_encode(['ok' => (bool)$ok, 'itemId' => $cartItemId]);
     }
 
+    public function checkout()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: index.php?ctl=cart');
+            exit;
+        }
+
+        $userId = (int)($_SESSION['usuarioId'] ?? 0);
+        if ($userId <= 0) {
+            header('Location: index.php?ctl=login');
+            exit;
+        }
+
+        $cartModel = new Cart();
+        $cartId = $cartModel->getActiveCartId($userId);
+        if (!$cartId) {
+            header('Location: index.php?ctl=cart');
+            exit;
+        }
+
+        $items = $cartModel->getItems($cartId);
+        if (empty($items)) {
+            header('Location: index.php?ctl=cart');
+            exit;
+        }
+
+        $userModel = new User();
+        $user = $userModel->findById($userId);
+        $email = $user['email'] ?? null;
+        $nombre = $user['name'] ?? 'Usuario';
+
+        if (!$email) {
+            echo "No se pudo encontrar el email del usuario.";
+            exit;
+        }
+
+        $total = 0;
+        foreach ($items as $item) {
+            $qty = (int)($item['quantity'] ?? 0);
+            $price = (float)($item['unit_price'] ?? 0);
+            $total += $qty * $price;
+        }
+
+        $invoiceId = 'SF-' . date('Ymd') . '-' . rand(1000, 9999);
+        $invoiceDate = date('d/m/Y H:i');
+
+        ob_start();
+        include __DIR__ . '/../Views/emails/invoice.php';
+        $html = ob_get_clean();
+
+        $altText = "Factura SoccerFlow\n".
+            "Factura: {$invoiceId}\n".
+            "Fecha: {$invoiceDate}\n".
+            "Total: $" . number_format($total, 2);
+
+        $sendResult = MailConfig::send($email, 'Factura de tu compra - SoccerFlow', $html, $altText);
+
+        if ($sendResult !== true) {
+            echo "No se pudo enviar el email. Intenta más tarde.";
+            exit;
+        }
+
+        $cartModel->setCartStatus($cartId, 'converted');
+        $cartModel->clearCartItems($cartId);
+
+        $this->render('products/checkoutSuccess', [
+            'title' => 'Compra realizada',
+            'jsFile' => 'checkout-success.js'
+        ]);
+        exit;
+    }
+
 
 
 }

@@ -7,6 +7,7 @@
     // Función para calcular y actualizar el resumen del pago
     function updatePaymentSummary() {
         let totalProducts = 0;
+        let totalItems = 0;
         
         // Seleccionar todos los productos en el carrito
         const productBlocks = document.querySelectorAll('.cart__product-block');
@@ -26,6 +27,7 @@
             const price = parseFloat(String(priceFromData).replace(/[^0-9.]/g, '')) || 0;
             const quantity = parseInt(String(qtyFromData).replace(/[^0-9]/g, ''), 10) || 0;
             totalProducts += price * quantity;
+            totalItems += quantity;
         });
         
         // Gastos de envío
@@ -44,6 +46,11 @@
         
         if (totalPayElement) {
             totalPayElement.textContent = formatCurrency(totalToPay);
+        }
+
+        const cartBtn = document.querySelector('.cart-btn');
+        if (cartBtn) {
+            cartBtn.setAttribute('data-count', String(totalItems));
         }
         
         // Si el carrito está vacío

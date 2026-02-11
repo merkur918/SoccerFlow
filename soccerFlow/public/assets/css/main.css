@@ -721,7 +721,7 @@ body {
 }
 
 .cart-btn::after {
-  content: "0";
+  content: attr(data-count);
   position: absolute;
   top: 5px;
   right: 5px;
@@ -734,6 +734,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cart-btn[data-count="0"]::after {
+  opacity: 0;
+  transform: scale(0.8);
 }
 
 /* ============================================
@@ -3545,6 +3550,59 @@ body {
   .home-hero__actions {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* ============================================
+   CHECKOUT SUCCESS (LIGHT)
+   ============================================ */
+.checkout-success {
+  position: fixed;
+  inset: 0;
+  background: rgba(244, 246, 251, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.checkout-success__card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 32px 36px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+  max-width: 420px;
+  width: 100%;
+  color: #10151b;
+}
+
+.checkout-success__card h2 {
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.checkout-success__card p {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 6px;
+}
+
+.checkout-success__spinner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 5px solid #e2e8f0;
+  border-top-color: #1f8f4b;
+  margin: 0 auto;
+  animation: checkoutSpin 1s linear infinite;
+}
+
+@keyframes checkoutSpin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
