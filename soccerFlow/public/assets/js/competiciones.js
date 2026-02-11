@@ -508,6 +508,11 @@
 
         standingsRows = sortRowsByRank(standingsRows);
 
+        const limit = Number(standingsTable?.dataset?.limit || 0);
+        const limitedRows = Number.isFinite(limit) && limit > 0
+          ? standingsRows.slice(0, limit)
+          : standingsRows;
+
         let teams = [];
         if (leagueId && namesToTry.length > 0) {
           for (const name of namesToTry) {
@@ -527,9 +532,9 @@
           (Array.isArray(teams) ? teams : []).map((team) => [normalizeTeamName(team?.strTeam), team])
         );
 
-        renderStandings(standingsRows, teamsMap, league.__key);
+        renderStandings(limitedRows, teamsMap, league.__key);
 
-        const rankedTeams = standingsRows.map((row) => {
+        const rankedTeams = limitedRows.map((row) => {
           const teamName = row?.strTeam || "Equipo";
           const rank = readNumberStat(row, ["intRank", "strRank"]);
           const points = readNumberStat(row, ["intPoints", "strPoints"]);

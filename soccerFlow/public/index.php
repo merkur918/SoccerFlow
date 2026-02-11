@@ -152,6 +152,17 @@ $map = [
         'action'     => 'cart',
         'nivel'      => 5
     ],
+    'cart-remove' => [
+        'controller' => 'CartController',
+        'action'     => 'remove',
+        'nivel'      => 5
+    ],
+    'cart-add' => [
+        'controller' => 'CartController',
+        'action'     => 'add',
+        'nivel'      => 5
+    ],
+
     // Cargar detalles del producto
     'product-details' => [
         'controller' => 'ProductosDetailController',

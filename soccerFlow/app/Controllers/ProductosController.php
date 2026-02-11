@@ -28,6 +28,10 @@ class ProductosController extends Controller
         ]);
     }
 
+ 
+
+
+
     private function normalizeImagePath(?string $path): string
     {
         if (!$path) {

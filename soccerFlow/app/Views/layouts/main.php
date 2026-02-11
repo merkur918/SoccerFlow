@@ -6,10 +6,16 @@
     <?php $isDarkTheme = (($_COOKIE['sf_theme'] ?? '') === 'dark'); ?>
 
     <!-- CSS GLOBAL -->
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <?php
+        $mainCssPath = __DIR__ . '/../../../public/assets/css/main.css';
+        $mainCssVersion = file_exists($mainCssPath) ? filemtime($mainCssPath) : time();
+        $darkCssPath = __DIR__ . '/../../../public/assets/css/mainOscuro.css';
+        $darkCssVersion = file_exists($darkCssPath) ? filemtime($darkCssPath) : time();
+    ?>
+    <link rel="stylesheet" href="/assets/css/main.css?v=<?= $mainCssVersion ?>">
     <link
         rel="stylesheet"
-        href="/assets/css/mainOscuro.css"
+        href="/assets/css/mainOscuro.css?v=<?= $darkCssVersion ?>"
         id="dark-theme-css"
         media="<?= $isDarkTheme ? 'all' : 'not all' ?>"
         <?= $isDarkTheme ? '' : 'disabled' ?>
@@ -17,7 +23,11 @@
 
     <!-- CSS POR VISTA (opcional) -->
     <?php if (!empty($cssFile)): ?>
-        <link rel="stylesheet" href="/assets/css/<?= $cssFile ?>">
+        <?php
+            $viewCssPath = __DIR__ . '/../../../public/assets/css/' . $cssFile;
+            $viewCssVersion = file_exists($viewCssPath) ? filemtime($viewCssPath) : time();
+        ?>
+        <link rel="stylesheet" href="/assets/css/<?= $cssFile ?>?v=<?= $viewCssVersion ?>">
     <?php endif; ?>
 
     <!-- Google Fonts -->
@@ -45,7 +55,11 @@
 
 <!-- JS POR VISTA (opcional) -->
 <?php if (!empty($jsFile)): ?>
-    <script src="/assets/js/<?= $jsFile ?>"></script>
+    <?php
+        $jsPath = __DIR__ . '/../../../public/assets/js/' . $jsFile;
+        $jsVersion = file_exists($jsPath) ? filemtime($jsPath) : time();
+    ?>
+    <script src="/assets/js/<?= $jsFile ?>?v=<?= $jsVersion ?>"></script>
 <?php endif; ?>
 
 </body>

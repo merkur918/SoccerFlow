@@ -1,6 +1,7 @@
 // Función para formatear números como moneda
     function formatCurrency(amount) {
-        return amount.toFixed(2) + '$';
+        const value = Number.isFinite(amount) ? amount : 0;
+        return value.toFixed(2) + '$';
     }
 
     // Función para calcular y actualizar el resumen del pago
@@ -13,20 +14,18 @@
         // Calcular el total sumando el precio de cada producto
         productBlocks.forEach(product => {
             // Asegurarnos de seleccionar el elemento correcto del precio
-            const priceElement = product.querySelector('.cart__product-details p:nth-child(3)');
-            if (priceElement) {
-                const priceText = priceElement.textContent;
-                // Manejar diferentes formatos de precio
-                const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-                
-                const quantityElement = product.querySelector('.cart__product-details p:nth-child(2)');
-                if (quantityElement) {
-                    const quantityText = quantityElement.textContent;
-                    const quantity = parseInt(quantityText.replace(/[^0-9]/g, '')) || 1;
-                    
-                    totalProducts += price * quantity;
-                }
-            }
+            const priceFromData = product.dataset.price
+                || product.querySelector('.cart__price')?.dataset?.price
+                || product.querySelector('.cart__price')?.textContent
+                || '0';
+
+            const qtyFromData = product.dataset.qty
+                || product.querySelector('.cart__product-details p')?.textContent
+                || '0';
+
+            const price = parseFloat(String(priceFromData).replace(/[^0-9.]/g, '')) || 0;
+            const quantity = parseInt(String(qtyFromData).replace(/[^0-9]/g, ''), 10) || 0;
+            totalProducts += price * quantity;
         });
         
         // Gastos de envío
@@ -37,7 +36,7 @@
         
         // Usar los IDs que ya tienes en el HTML
         const totalProductsElement = document.getElementById('total-products');
-        const totalPayElement = document.querySelector('.total-pay');
+        const totalPayElement = document.getElementById('total-pay');
         
         if (totalProductsElement) {
             totalProductsElement.textContent = formatCurrency(totalProducts);
@@ -63,18 +62,40 @@
         document.querySelectorAll('.product__block-quit').forEach(button => {
             button.addEventListener('click', function() {
                 const productBlock = this.closest('.cart__product-block');
-                // Agregar animación de eliminación
-                productBlock.style.opacity = '0';
-                productBlock.style.transform = 'translateX(100px)';
-                
-                setTimeout(() => {
+                const cartItemId = productBlock?.dataset?.cartItemId;
+
+                if (!cartItemId) {
                     productBlock.remove();
                     updatePaymentSummary();
-                    // Mostrar mensaje si el carrito está vacío
-                    if (document.querySelectorAll('.cart__product-block').length === 0) {
-                        showEmptyCartMessage();
-                    }
-                }, 300);
+                    return;
+                }
+
+                fetch('index.php?ctl=cart-remove', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `cart_item_id=${encodeURIComponent(cartItemId)}`
+                }).then(resp => {
+                    if (!resp.ok) throw new Error('Error al eliminar');
+                    return resp.json();
+                }).then(data => {
+                    if (!data || !data.ok) throw new Error('No se pudo eliminar');
+                    // Agregar animación de eliminación
+                    productBlock.style.opacity = '0';
+                    productBlock.style.transform = 'translateX(100px)';
+                    setTimeout(() => {
+                        productBlock.remove();
+                        updatePaymentSummary();
+                        if (document.querySelectorAll('.cart__product-block').length === 0) {
+                            showEmptyCartMessage();
+                        }
+                    }, 300);
+                }).catch(() => {
+                    // Si falla, no eliminamos del DOM
+                    alert('No se pudo eliminar el producto del carrito.');
+                });
             });
         });
     }

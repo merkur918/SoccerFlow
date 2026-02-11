@@ -24,7 +24,9 @@ if (!empty($producto)){
                 <img src="<?php echo $imagenes[0] ?? '/assets/img/products/placeholder.png'; ?>" class="product__img" alt="Imagen del producto">
             </div>
             <div class="product__form-column">
-                <form class="product__form">
+                <form class="product__form" method="POST" action="index.php?ctl=cart-add">
+                    <input type="hidden" name="product_id" value="<?php echo $producto['ID']; ?>">
+
                     <h1 class="product__title"><?php echo $nombre ?></h1>
                     <p class="product__price"><?php echo $precio ?></p>
                     <span style="color: #079C40;">¡Envío Gratis!</span>
@@ -34,7 +36,7 @@ if (!empty($producto)){
                         <div class="quantity-label">Cantidad</div>
                         <div class="quantity-control">
                             <button type="button" class="quantity-btn minus">-</button>
-                            <input type="number" class="quantity-input" value="0" min="1" max="10">
+                            <input name="quantity" type="number" class="quantity-input" value="0" min="1" max="10">
                             <button type="button" class="quantity-btn plus">+</button>
                         </div>
                     </div>
@@ -50,6 +52,7 @@ if (!empty($producto)){
                     </select>
 
                     <input class="product__cart-button" type="submit" value="🛒 Agregar al Carrito">
+                    
                 </form>
                 <div class="product__description">
                     <ul>
