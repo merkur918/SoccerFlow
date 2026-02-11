@@ -638,5 +638,5 @@ INSERT INTO product_images (product_id, image_url) VALUES
 (@chandal_inter_id, 'soccerFlow/public/assets/img/products/chandals/9-3.png'),
 (@chandal_francia_id, 'soccerFlow/public/assets/img/products/chandals/10-1.png'),
 (@chandal_francia_id, 'soccerFlow/public/assets/img/products/chandals/10-2.png'),
-(@chandal_francia_id, 'soccerFlow/public/assets/img/products/chandals/10-3.png');
+(@chandal_francia_id, 'soccerFlow/public/assets/img/products/chandals/10-3.avif');
 
