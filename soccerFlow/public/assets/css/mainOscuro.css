@@ -229,8 +229,6 @@ body {
 .home-hero__overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.25), transparent 60%),
-    linear-gradient(180deg, rgba(5, 12, 18, 0.1), rgba(5, 12, 18, 0.9));
 }
 
 .home-hero__content {
