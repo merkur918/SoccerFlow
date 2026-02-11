@@ -45,10 +45,16 @@ if (!empty($producto)){
                     <label class="product__size-label" for="size">Talla:</label>
                     <select class="product__size-select" id="size" name="size">
                         <option value="" disabled selected>Escoge tu talla</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
+                        <?php if (!empty($sizes)): ?>
+                            <?php foreach ($sizes as $size): ?>
+                                <option value="<?= htmlspecialchars($size) ?>"><?= htmlspecialchars($size) ?></option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        <?php endif; ?>
                     </select>
 
                     <input class="product__cart-button" type="submit" value="🛒 Agregar al Carrito">

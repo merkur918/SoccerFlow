@@ -99,8 +99,37 @@ class Cart
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['cartId' => $cartId]);
-        return $stmt->fetchAll();
+    return $stmt->fetchAll();
 }
+
+    public function getCartCountByUser(int $userId): int
+    {
+        $sql = "
+            SELECT COALESCE(SUM(ci.quantity), 0) AS total
+            FROM carts c
+            INNER JOIN cart_items ci ON ci.cart_id = c.id
+            WHERE c.user_id = :uid AND c.status = 'active'
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['uid' => $userId]);
+        $total = $stmt->fetchColumn();
+        return $total !== false ? (int)$total : 0;
+    }
+
+    public function clearCartItems(int $cartId): void
+    {
+        $stmt = $this->db->prepare("DELETE FROM cart_items WHERE cart_id = :cartId");
+        $stmt->execute(['cartId' => $cartId]);
+    }
+
+    public function setCartStatus(int $cartId, string $status): void
+    {
+        $stmt = $this->db->prepare("UPDATE carts SET status = :status WHERE id = :cartId");
+        $stmt->execute([
+            'status' => $status,
+            'cartId' => $cartId
+        ]);
+    }
 
     public function removeItem(int $cartItemId, int $userId): bool
     {

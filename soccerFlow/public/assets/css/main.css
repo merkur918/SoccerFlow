@@ -721,7 +721,7 @@ body {
 }
 
 .cart-btn::after {
-  content: "0";
+  content: attr(data-count);
   position: absolute;
   top: 5px;
   right: 5px;
@@ -734,6 +734,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cart-btn[data-count="0"]::after {
+  opacity: 0;
+  transform: scale(0.8);
 }
 
 /* ============================================
@@ -3601,9 +3606,101 @@ text-decoration: none;
 font-weight: 700;
 }
 
-/* Competitions */
-.home-competitions {
-margin: 0 40px;
+@media (max-width: 900px) {
+  .home > section {
+    width: calc(100% - 40px);
+  }
+
+  .home-products {
+    width: calc(100% - 40px);
+  }
+
+  .home-hero__content {
+    padding: 60px 40px;
+  }
+
+  .home-news__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-hero__content {
+    padding: 50px 28px;
+  }
+
+  .home-hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.home-hero {
+  position: relative;
+  min-height: 480px;
+  background: radial-gradient(circle at top left, rgba(7, 156, 64, 0.2), transparent 55%),
+    url('/assets/img/Fondo.jpg') center/cover no-repeat;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 20px 40px 0;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+.home-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, rgba(7, 156, 64, 0.88), rgba(0, 0, 0, 0.35));
+}
+
+.home-hero__content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  padding: 60px 70px;
+  max-width: 760px;
+}
+
+.home-hero__content h1 {
+  font-size: clamp(2.4rem, 2.2rem + 1.5vw, 3.4rem);
+  margin-bottom: 18px;
+}
+
+.home-hero__content p {
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+.home-hero__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.home-hero__cta {
+  background: #ffffff;
+  color: #0f2f1f;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-hero__ghost {
+  background: transparent;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .home-competitions .product__container {

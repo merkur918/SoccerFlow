@@ -23,6 +23,8 @@ class ProductosDetailController extends Controller
         $imagenes = $model->getImagesByProductId($id);
         //Obtener color del producto
         $color = $model->getColorById($id);
+        // Obtener tallas reales del producto
+        $sizes = $model->getSizesByProductId($id);
 
         // Normalizar rutas
         foreach ($imagenes as &$img) {
@@ -35,7 +37,8 @@ class ProductosDetailController extends Controller
             'producto' => $producto,
             'jsFile' => 'vistaProductosDetail.js',
             'imagenes' => $imagenes,
-            'color' => $color
+            'color' => $color,
+            'sizes' => $sizes
         ]);
     }
 }

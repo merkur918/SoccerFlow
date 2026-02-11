@@ -238,4 +238,46 @@ public function getColorById(int $id): ?string{
     $color = $stmt->fetchColumn();
     return $color !== false ? $color : null;
 }
+
+    public function getSizesByProductId(int $id): array
+    {
+        $sql = "SELECT DISTINCT COALESCE(size_shoe, size) AS size
+                FROM products_variants
+                WHERE product_id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $sizes = $stmt->fetchAll(PDO::FETCH_COLUMN) ?: [];
+
+        $sizes = array_values(array_filter($sizes, fn($s) => $s !== null && $s !== ''));
+        if (empty($sizes)) return [];
+
+        $allNumeric = true;
+        foreach ($sizes as $s) {
+            if (!ctype_digit((string)$s)) {
+                $allNumeric = false;
+                break;
+            }
+        }
+
+        if ($allNumeric) {
+            usort($sizes, fn($a, $b) => (int)$a <=> (int)$b);
+            return $sizes;
+        }
+
+        $order = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+        usort($sizes, function ($a, $b) use ($order) {
+            $aKey = strtoupper((string)$a);
+            $bKey = strtoupper((string)$b);
+            $aIndex = array_search($aKey, $order, true);
+            $bIndex = array_search($bKey, $order, true);
+            if ($aIndex === false && $bIndex === false) {
+                return strnatcasecmp((string)$a, (string)$b);
+            }
+            if ($aIndex === false) return 1;
+            if ($bIndex === false) return -1;
+            return $aIndex <=> $bIndex;
+        });
+
+        return $sizes;
+    }
  }

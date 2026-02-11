@@ -157,6 +157,11 @@ $map = [
         'action'     => 'remove',
         'nivel'      => 5
     ],
+    'cart-checkout' => [
+        'controller' => 'CartController',
+        'action'     => 'checkout',
+        'nivel'      => 5
+    ],
     'cart-add' => [
         'controller' => 'CartController',
         'action'     => 'add',

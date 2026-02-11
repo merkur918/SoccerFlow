@@ -17,6 +17,14 @@ class User
         return $stmt->fetch();
     }
 
+    public function findById(int $id)
+    {
+        $sql = "SELECT * FROM users WHERE ID = :id LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch();
+    }
+
     public function emailExists(string $email): bool
     {
         return $this->findByEmail($email) !== false;
