@@ -2233,15 +2233,14 @@ body {
   max-width: 100%;
   height: auto;
   min-height: calc(100vh - 120px);
-  background: var(--bg-dark);
+  background: white;
   display: flex;
   margin: 0;
   border-radius: 0;
-  box-shadow: var(--shadow-medium);
+  box-shadow: none;
   overflow: visible;
   color: var(--text-dark);
   line-height: 1.6;
-  border: 1px solid var(--border-dark);
 }
 
 /* Solo afecta al detalle del producto */
