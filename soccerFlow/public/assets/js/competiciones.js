@@ -54,8 +54,16 @@
 
     let leaguesCache = [];
 
-    // Establecer límite por defecto (5 equipos)
-    standingsTable.dataset.limit = "5";
+    // Establecer límite según la página actual
+    const isHomePage = window.location.pathname === '/' ||
+      window.location.pathname === '/index.php' ||
+      window.location.pathname.includes('home');
+
+    if (isHomePage) {
+      standingsTable.dataset.limit = "5"; // HOME: solo 5 equipos
+    } else {
+      standingsTable.dataset.limit = "0"; // VISTA COMPLETA: todos los equipos
+    }
 
     // Mensajería de estado para feedback visual rápido.
     const setStatus = (message, isError = false) => {
@@ -138,13 +146,13 @@
     const renderStandings = (rows, teamsMap = new Map(), leagueKey = "") => {
       standingsBody.innerHTML = "";
       updateQualificationLegend(leagueKey);
-      
+
       // Obtener el límite actual del dataset
       const limit = Number(standingsTable?.dataset?.limit || 0);
       const rowsToRender = Number.isFinite(limit) && limit > 0
         ? rows.slice(0, limit)
         : rows;
-      
+
       const totalTeams = Array.isArray(rowsToRender) ? rowsToRender.length : 0;
 
       rowsToRender.forEach((row) => {
@@ -420,27 +428,27 @@
       return byText || leaguesCache[0] || null;
     };
 
-   // ============ FUNCIONES DE NOTICIAS - SOLO API REAL ============
+    // ============ FUNCIONES DE NOTICIAS - SOLO API REAL ============
 
-// Carga la última noticia de una competición - SIEMPRE DESDE LA API
-const loadLatestNews = async (competitionKey) => {
-    try {
+    // Carga la última noticia de una competición - SIEMPRE DESDE LA API
+    const loadLatestNews = async (competitionKey) => {
+      try {
         // Mapeo de keys a códigos de competición para Football-Data.org
         const competitionCodes = {
-            'laliga': 'PD',
-            'premier': 'PL',
-            'seriea': 'SA',
-            'bundesliga': 'BL1',
-            'ligue1': 'FL1',
-            'ucl': 'CL',
-            'uel': 'EL',
-            'uecl': 'UCL'
+          'laliga': 'PD',
+          'premier': 'PL',
+          'seriea': 'SA',
+          'bundesliga': 'BL1',
+          'ligue1': 'FL1',
+          'ucl': 'CL',
+          'uel': 'EL',
+          'uecl': 'UCL'
         };
 
         const code = competitionCodes[competitionKey];
         if (!code) {
-            console.error('Código de competición no encontrado:', competitionKey);
-            return;
+          console.error('Código de competición no encontrado:', competitionKey);
+          return;
         }
 
         // Mostrar estado de carga
@@ -449,28 +457,28 @@ const loadLatestNews = async (competitionKey) => {
         // Llamar a nuestra API para obtener el último partido REAL
         const response = await fetch(`/api/news?mode=latest&league=${code}&ts=${Date.now()}`);
         const data = await response.json();
-        
+
         if (data.success && data.match) {
-            // Tenemos datos REALES de la API
-            updateNewsCard(data.match);
-            console.log(`Noticia cargada: ${data.match.league} - ${data.match.home} vs ${data.match.away}`);
+          // Tenemos datos REALES de la API
+          updateNewsCard(data.match);
+          console.log(`Noticia cargada: ${data.match.league} - ${data.match.home} vs ${data.match.away}`);
         } else {
-            // La API devolvió error pero no tenemos placeholder
-            console.error('No hay datos disponibles de la API:', data.error);
-            showNewsError(`No hay partidos disponibles para esta competición`);
+          // La API devolvió error pero no tenemos placeholder
+          console.error('No hay datos disponibles de la API:', data.error);
+          showNewsError(`No hay partidos disponibles para esta competición`);
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Error cargando noticia desde API:', error);
         showNewsError('Error al cargar los datos. Inténtalo de nuevo.');
-    }
-};
+      }
+    };
 
-// Muestra estado de carga en la tarjeta de noticias
-const showNewsLoading = () => {
-    const newsContent = document.getElementById('homeNewsContent');
-    if (!newsContent) return;
-    
-    newsContent.innerHTML = `
+    // Muestra estado de carga en la tarjeta de noticias
+    const showNewsLoading = () => {
+      const newsContent = document.getElementById('homeNewsContent');
+      if (!newsContent) return;
+
+      newsContent.innerHTML = `
         <div class="news__image-wrap news__image-wrap--teams">
             <div class="news__team">
                 <img class="news__team-logo" src="/assets/img/logo.png" alt="Cargando..." loading="lazy">
@@ -492,14 +500,14 @@ const showNewsLoading = () => {
             <a class="home-news__link news__link" href="/noticias">Ver más resultados</a>
         </div>
     `;
-};
+    };
 
-// Muestra error en la tarjeta de noticias
-const showNewsError = (errorMessage) => {
-    const newsContent = document.getElementById('homeNewsContent');
-    if (!newsContent) return;
-    
-    newsContent.innerHTML = `
+    // Muestra error en la tarjeta de noticias
+    const showNewsError = (errorMessage) => {
+      const newsContent = document.getElementById('homeNewsContent');
+      if (!newsContent) return;
+
+      newsContent.innerHTML = `
         <div class="news__image-wrap news__image-wrap--teams">
             <div class="news__team">
                 <img class="news__team-logo" src="/assets/img/logo.png" alt="Error" loading="lazy">
@@ -521,35 +529,35 @@ const showNewsError = (errorMessage) => {
             <a class="home-news__link news__link" href="/noticias">Ver otras competiciones</a>
         </div>
     `;
-};
+    };
 
-// Actualiza la tarjeta de noticias con datos REALES de la API
-const updateNewsCard = (match) => {
-    const newsContent = document.getElementById('homeNewsContent');
-    if (!newsContent) return;
+    // Actualiza la tarjeta de noticias con datos REALES de la API
+    const updateNewsCard = (match) => {
+      const newsContent = document.getElementById('homeNewsContent');
+      if (!newsContent) return;
 
-    // Determinar si hay marcador o es un próximo partido
-    const hasScore = match.scoreHome !== null && match.scoreAway !== null && 
-                    match.status === 'FINISHED';
-    const scoreDisplay = hasScore ? `${match.scoreHome} - ${match.scoreAway}` : 'VS';
+      // Determinar si hay marcador o es un próximo partido
+      const hasScore = match.scoreHome !== null && match.scoreAway !== null &&
+        match.status === 'FINISHED';
+      const scoreDisplay = hasScore ? `${match.scoreHome} - ${match.scoreAway}` : 'VS';
 
-    // Formatear fecha en español
-    let formattedDate = '';
-    if (match.date) {
+      // Formatear fecha en español
+      let formattedDate = '';
+      if (match.date) {
         try {
-            const dateObj = new Date(match.date);
-            formattedDate = dateObj.toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
+          const dateObj = new Date(match.date);
+          formattedDate = dateObj.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
         } catch (e) {
-            formattedDate = match.date;
+          formattedDate = match.date;
         }
-    }
+      }
 
-    // Construir HTML con los datos REALES de la API
-    newsContent.innerHTML = `
+      // Construir HTML con los datos REALES de la API
+      newsContent.innerHTML = `
         <div class="news__image-wrap news__image-wrap--teams">
             <div class="news__team">
                 <img class="news__team-logo" 
@@ -594,13 +602,13 @@ const updateNewsCard = (match) => {
             </a>
         </div>
     `;
-};
+    };
 
     // Función para cargar una competición específica desde los botones destacados
     const loadFeaturedCompetition = async (competitionKey) => {
       // Buscar la competición en el caché por su key
       const league = leaguesCache.find(item => item.__key === competitionKey);
-      
+
       if (!league) {
         setStatus(`No se pudo cargar ${competitionKey}`, true);
         return;
@@ -608,21 +616,21 @@ const updateNewsCard = (match) => {
 
       // Actualizar el select para reflejar la competición seleccionada
       select.value = league.__selectValue;
-      
+
       // Establecer límite de 4 equipos en la tabla
-      if (standingsTable) {
-        standingsTable.dataset.limit = "4";
+      if (standingsTable && isHomePage) {
+        standingsTable.dataset.limit = "5"; // HOME: 5 equipos
       }
-      
+
       // Cargar los datos de la competición (clasificación)
       await loadTeams(league);
-      
+
       // CARGAR LA NOTICIA DE ESA MISMA COMPETICIÓN
       await loadLatestNews(competitionKey);
-      
+
       // Scroll suave hacia la tabla de clasificación
-      document.getElementById('home-standings')?.scrollIntoView({ 
-        behavior: 'smooth' 
+      document.getElementById('home-standings')?.scrollIntoView({
+        behavior: 'smooth'
       });
     };
 
@@ -645,24 +653,24 @@ const updateNewsCard = (match) => {
         if (button) {
           // Remover listeners anteriores para evitar duplicados
           button.removeEventListener('click', window[`__featured_${key}_handler`]);
-          
+
           // Crear nuevo handler
           const handler = async (event) => {
             event.preventDefault();
-            
+
             // Mostrar estado de carga
             setStatus(`Cargando clasificación de ${key}...`);
-            
+
             // Asegurar que las competiciones estén cargadas
             if (leaguesCache.length === 0) {
               setStatus('Cargando competiciones...', false);
               await loadCompetitions();
             }
-            
+
             // Cargar la competición destacada
             await loadFeaturedCompetition(key);
           };
-          
+
           // Guardar referencia del handler
           window[`__featured_${key}_handler`] = handler;
           button.addEventListener('click', handler);
@@ -670,52 +678,52 @@ const updateNewsCard = (match) => {
       });
     };
 
-const loadCompetitions = async () => {
-    setStatus("Cargando competiciones...");
-    select.disabled = true;
-    clearStandings();
-    clearTeams();
+    const loadCompetitions = async () => {
+      setStatus("Cargando competiciones...");
+      select.disabled = true;
+      clearStandings();
+      clearTeams();
 
-    try {
+      try {
         const payload = await fetchJson(
-            `${API_BASE}/all_leagues.php`,
-            "No se pudieron cargar las competiciones."
+          `${API_BASE}/all_leagues.php`,
+          "No se pudieron cargar las competiciones."
         );
 
         leaguesCache = filterAllowedCompetitions(payload?.leagues);
 
         if (leaguesCache.length === 0) {
-            throw new Error("No se pudieron encontrar las competiciones permitidas.");
+          throw new Error("No se pudieron encontrar las competiciones permitidas.");
         }
 
         select.innerHTML = '<option value="">Selecciona una competición</option>';
         leaguesCache.forEach((league) => {
-            const option = document.createElement("option");
-            option.value = league.__selectValue;
-            option.textContent = league.__label || league.strLeague;
-            select.appendChild(option);
+          const option = document.createElement("option");
+          option.value = league.__selectValue;
+          option.textContent = league.__label || league.strLeague;
+          select.appendChild(option);
         });
 
         select.disabled = false;
-        
+
         // Configurar botones destacados
         setupFeaturedButtons();
-        
+
         const defaultLeague = findDefaultSpanishLeague();
         if (defaultLeague) {
-            select.value = defaultLeague.__selectValue;
-            await loadTeams(defaultLeague);
-            
-            // CARGAR NOTICIA REAL DE LA LIGA DESDE LA API
-            await loadLatestNews('laliga');
-            return;
+          select.value = defaultLeague.__selectValue;
+          await loadTeams(defaultLeague);
+
+          // CARGAR NOTICIA REAL DE LA LIGA DESDE LA API
+          await loadLatestNews('laliga');
+          return;
         }
 
         setStatus("Competiciones cargadas. Elige una para ver sus equipos.");
-    } catch (error) {
+      } catch (error) {
         setStatus(error.message || "Error al cargar competiciones.", true);
-    }
-};
+      }
+    };
 
     const loadTeams = async (league) => {
       if (!league) return;
@@ -730,7 +738,7 @@ const loadCompetitions = async () => {
       clearStandings();
       clearTeams();
       setStatus(`Cargando ranking y equipos de ${leagueName}...`);
-      
+
       try {
         let standingsRows = [];
         let seasonLoaded = "";
@@ -825,7 +833,7 @@ const loadCompetitions = async () => {
         });
 
         renderTeams(rankedTeams);
-        
+
         if (teamsMap.size > 0) {
           setStatus(`Ranking y equipos cargados para ${leagueName} (${seasonLoaded}).`);
         } else {
@@ -842,7 +850,7 @@ const loadCompetitions = async () => {
       if (standingsTable) {
         standingsTable.dataset.limit = "0";
       }
-      
+
       const league = leaguesCache.find((item) => item.__selectValue === event.target.value);
       if (!league) {
         clearStandings();

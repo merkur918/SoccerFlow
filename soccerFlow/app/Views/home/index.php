@@ -141,7 +141,7 @@
                     <span class="home-competitions__legend-item home-competitions__legend-item--playoff" data-legend="playoff">Clasifica (9-24)</span>
                 </div>
                 <div class="home-competitions__table-wrapper">
-                    <table class="home-competitions__table" id="standingsTable" data-limit="4" hidden>
+                    <table class="home-competitions__table" id="standingsTable" data-limit="0" hidden>
                         <thead>
                             <tr>
                                 <th>#</th>
