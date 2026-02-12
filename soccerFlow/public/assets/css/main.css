@@ -3678,6 +3678,28 @@ flex-direction: column;
 gap: 10px;
 }
 
+.home-news__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-news__card .news__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.home-news__card .news__content-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.home-news__card .news__link {
+  margin-top: 20px; /* Espacio superior */
+  align-self: flex-start;
+}
+
 .home-news__link {
 align-self: flex-start;
 padding: 8px 14px;

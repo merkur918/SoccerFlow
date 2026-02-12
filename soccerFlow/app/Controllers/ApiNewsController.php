@@ -5,33 +5,41 @@ class ApiNewsController extends ApiController
     private const BASE_URL = 'https://api.football-data.org/v4/';
 
     // GET /api/news
-    public function index(): void
-    {
-        $this->requireMethod('GET');
+// MODIFICA el método index() para aceptar el modo 'latest'
+public function index(): void
+{
+    $this->requireMethod('GET');
 
-        $mode = strtolower(trim($_GET['mode'] ?? 'events'));
-        if ($mode === 'leagues') {
-            $this->sendLeagues();
-            return;
-        }
-
-        $leagueCode = trim($_GET['league'] ?? '');
-        $type = strtolower(trim($_GET['type'] ?? 'next'));
-        $seasonParam = trim($_GET['season'] ?? '');
-
-        if ($leagueCode === '') {
-            $this->fail('Liga requerida', 400);
-        }
-
-        $season = is_numeric($seasonParam) ? (int) $seasonParam : $this->defaultSeason();
-        $events = $this->fetchLeagueEvents($leagueCode, $season, $type);
-
-        if ($events === null) {
-            $this->fail('No se pudieron obtener partidos del proveedor.', 502);
-        }
-
-        $this->json(['events' => $events], 200);
+    $mode = strtolower(trim($_GET['mode'] ?? 'events'));
+    
+    if ($mode === 'leagues') {
+        $this->sendLeagues();
+        return;
     }
+    
+    // NUEVO: Modo para última noticia
+    if ($mode === 'latest') {
+        $this->latest();
+        return;
+    }
+
+    $leagueCode = trim($_GET['league'] ?? '');
+    $type = strtolower(trim($_GET['type'] ?? 'next'));
+    $seasonParam = trim($_GET['season'] ?? '');
+
+    if ($leagueCode === '') {
+        $this->fail('Liga requerida', 400);
+    }
+
+    $season = is_numeric($seasonParam) ? (int) $seasonParam : $this->defaultSeason();
+    $events = $this->fetchLeagueEvents($leagueCode, $season, $type);
+
+    if ($events === null) {
+        $this->fail('No se pudieron obtener partidos del proveedor.', 502);
+    }
+
+    $this->json(['events' => $events], 200);
+}
 
     private function sendLeagues(): void
     {
@@ -274,4 +282,178 @@ class ApiNewsController extends ApiController
 
         return 0;
     }
+    
+public function latest(): void
+{
+    $this->requireMethod('GET');
+    
+    $league = trim($_GET['league'] ?? '');
+    if ($league === '') {
+        $this->json(['success' => false, 'error' => 'Liga requerida'], 400);
+        return;
+    }
+
+    $token = $this->env('FOOTBALL_DATA_TOKEN');
+    if (!$token) {
+        $this->json(['success' => false, 'error' => 'Token no configurado'], 500);
+        return;
+    }
+
+    try {
+        // PRIMERO: Intentar obtener TODOS los partidos FINALIZADOS de la temporada actual
+        $season = $this->defaultSeason();
+        $url = "https://api.football-data.org/v4/competitions/{$league}/matches?status=FINISHED&season={$season}";
+        
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'GET',
+                'timeout' => 8,
+                'header' => implode("\r\n", [
+                    'User-Agent: SoccerFlow/1.0',
+                    'Accept: application/json',
+                    'X-Auth-Token: ' . $token,
+                ]) . "\r\n",
+            ]
+        ]);
+
+        $response = @file_get_contents($url, false, $context);
+        
+        if ($response !== false) {
+            $data = json_decode($response, true);
+            $matches = $data['matches'] ?? [];
+            
+            if (!empty($matches)) {
+                // ORDENAR POR FECHA DESCENDENTE (más reciente primero)
+                usort($matches, function($a, $b) {
+                    return strtotime($b['utcDate'] ?? '') - strtotime($a['utcDate'] ?? '');
+                });
+                
+                // Tomar el PRIMERO (más reciente)
+                $match = $matches[0];
+                $home = $match['homeTeam'] ?? [];
+                $away = $match['awayTeam'] ?? [];
+                $score = $match['score'] ?? [];
+                $fullTime = $score['fullTime'] ?? [];
+                $competition = $data['competition'] ?? [];
+                
+                $this->json([
+                    'success' => true,
+                    'match' => [
+                        'title' => ($home['name'] ?? 'Local') . ' vs ' . ($away['name'] ?? 'Visitante'),
+                        'date' => substr($match['utcDate'] ?? '', 0, 10),
+                        'time' => substr($match['utcDate'] ?? '', 11, 5),
+                        'home' => $home['name'] ?? 'Local',
+                        'away' => $away['name'] ?? 'Visitante',
+                        'homeLogo' => $home['crest'] ?? '',
+                        'awayLogo' => $away['crest'] ?? '',
+                        'scoreHome' => $fullTime['home'] ?? null,
+                        'scoreAway' => $fullTime['away'] ?? null,
+                        'venue' => $match['venue'] ?? '',
+                        'league' => $competition['name'] ?? '',
+                        'leagueCode' => $league,
+                        'status' => $match['status'] ?? 'FINISHED',
+                        'season' => $season,
+                        'matchday' => $match['matchday'] ?? null
+                    ]
+                ], 200);
+                return;
+            }
+        }
+
+        // SEGUNDO: Si no hay finalizados, intentar con el PRÓXIMO PARTIDO
+        $url = "https://api.football-data.org/v4/competitions/{$league}/matches?status=SCHEDULED&season={$season}&limit=1";
+        $response = @file_get_contents($url, false, $context);
+        
+        if ($response !== false) {
+            $data = json_decode($response, true);
+            $matches = $data['matches'] ?? [];
+            
+            if (!empty($matches)) {
+                // ORDENAR POR FECHA ASCENDENTE (más próximo primero)
+                usort($matches, function($a, $b) {
+                    return strtotime($a['utcDate'] ?? '') - strtotime($b['utcDate'] ?? '');
+                });
+                
+                $match = $matches[0];
+                $home = $match['homeTeam'] ?? [];
+                $away = $match['awayTeam'] ?? [];
+                $competition = $data['competition'] ?? [];
+                
+                $this->json([
+                    'success' => true,
+                    'match' => [
+                        'title' => ($home['name'] ?? 'Local') . ' vs ' . ($away['name'] ?? 'Visitante'),
+                        'date' => substr($match['utcDate'] ?? '', 0, 10),
+                        'time' => substr($match['utcDate'] ?? '', 11, 5),
+                        'home' => $home['name'] ?? 'Local',
+                        'away' => $away['name'] ?? 'Visitante',
+                        'homeLogo' => $home['crest'] ?? '',
+                        'awayLogo' => $away['crest'] ?? '',
+                        'scoreHome' => null,
+                        'scoreAway' => null,
+                        'venue' => $match['venue'] ?? '',
+                        'league' => $competition['name'] ?? '',
+                        'leagueCode' => $league,
+                        'status' => $match['status'] ?? 'SCHEDULED',
+                        'season' => $season,
+                        'matchday' => $match['matchday'] ?? null
+                    ]
+                ], 200);
+                return;
+            }
+        }
+
+        // TERCERO: Intentar con la temporada anterior si no hay partidos en la actual
+        $season = $this->defaultSeason() - 1;
+        $url = "https://api.football-data.org/v4/competitions/{$league}/matches?status=FINISHED&season={$season}&limit=50";
+        $response = @file_get_contents($url, false, $context);
+        
+        if ($response !== false) {
+            $data = json_decode($response, true);
+            $matches = $data['matches'] ?? [];
+            
+            if (!empty($matches)) {
+                // ORDENAR POR FECHA DESCENDENTE (más reciente primero)
+                usort($matches, function($a, $b) {
+                    return strtotime($b['utcDate'] ?? '') - strtotime($a['utcDate'] ?? '');
+                });
+                
+                $match = $matches[0];
+                $home = $match['homeTeam'] ?? [];
+                $away = $match['awayTeam'] ?? [];
+                $score = $match['score'] ?? [];
+                $fullTime = $score['fullTime'] ?? [];
+                $competition = $data['competition'] ?? [];
+                
+                $this->json([
+                    'success' => true,
+                    'match' => [
+                        'title' => ($home['name'] ?? 'Local') . ' vs ' . ($away['name'] ?? 'Visitante'),
+                        'date' => substr($match['utcDate'] ?? '', 0, 10),
+                        'time' => substr($match['utcDate'] ?? '', 11, 5),
+                        'home' => $home['name'] ?? 'Local',
+                        'away' => $away['name'] ?? 'Visitante',
+                        'homeLogo' => $home['crest'] ?? '',
+                        'awayLogo' => $away['crest'] ?? '',
+                        'scoreHome' => $fullTime['home'] ?? null,
+                        'scoreAway' => $fullTime['away'] ?? null,
+                        'venue' => $match['venue'] ?? '',
+                        'league' => $competition['name'] ?? '',
+                        'leagueCode' => $league,
+                        'status' => $match['status'] ?? 'FINISHED',
+                        'season' => $season,
+                        'matchday' => $match['matchday'] ?? null
+                    ]
+                ], 200);
+                return;
+            }
+        }
+
+        // Si no hay ningún partido, devolver error 404
+        $this->json(['success' => false, 'error' => "No hay partidos disponibles para esta competición"], 404);
+        
+    } catch (Exception $e) {
+        $this->json(['success' => false, 'error' => $e->getMessage()], 500);
+    }
+}
 }

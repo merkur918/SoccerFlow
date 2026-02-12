@@ -158,14 +158,32 @@
                 </div>
                 <div id="teamsGrid" class="home-competitions__teams" aria-live="polite"></div>
             </div>
-            <article class="home-news__card">
-                <img src="/assets/img/Fondo.jpg" alt="Resumen jornada">
-                <div class="home-news__card-body">
-                    <h3>El Valencia gana 3-0 en casa</h3>
-                    <p>Crónica de la jornada y destacados de los partidos más importantes.</p>
-                    <a class="home-news__link" href="/noticias">Leer más</a>
+ <!-- TARJETA DE NOTICIAS CON MISMO ESTILO QUE LA VISTA NEWS -->
+        <article class="home-news__card news__card">
+            <div id="homeNewsContent" class="news__content">
+                <!-- El contenido se cargará dinámicamente con JavaScript -->
+                <div class="news__image-wrap news__image-wrap--teams">
+                    <div class="news__team">
+                        <img class="news__team-logo" src="/assets/img/logo.png" alt="Local" loading="lazy">
+                        <span class="news__team-name">Cargando...</span>
+                    </div>
+                    <span class="news__vs">VS</span>
+                    <div class="news__team">
+                        <img class="news__team-logo" src="/assets/img/logo.png" alt="Visitante" loading="lazy">
+                        <span class="news__team-name">Cargando...</span>
+                    </div>
                 </div>
-            </article>
+                <div class="news__content-inner">
+                    <h3 class="news__headline">Cargando última noticia...</h3>
+                    <p class="news__desc"></p>
+                    <div class="news__meta">
+                        <span class="news__date"></span>
+                        <span class="news__venue"></span>
+                    </div>
+                    <a class="home-news__link news__link" href="/noticias">Ver más resultados</a>
+                </div>
+            </div>
+        </article>
         </div>
     </section>
 </section>
