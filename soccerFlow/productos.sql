@@ -1,4 +1,3 @@
--- Insertar productos de botas
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
 ('Nike Mercurial Superfly 10 Elite', 'Botas de fútbol de perfil alto para terreno firme', 279.99, 'Nike', NULL, 'botas', 'Masculino'),
 ('Nike Tiempo Maestro Academy', 'Botas de fútbol de perfil bajo para terreno blando', 89.99, 'Nike', NULL, 'botas', 'Masculino'),
@@ -200,8 +199,6 @@ INSERT INTO product_images (product_id, image_url) VALUES
 (@bota14_id, 'soccerFlow/public/assets/img/products/botas/Joma-Aguila-Top-FG-3.png'),
 (@bota14_id, 'soccerFlow/public/assets/img/products/botas/Joma-Aguila-Top-FG-4.png');
 
-
--- Insertar camisetas
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
 ('Camiseta Real Madrid 2025/26 Local', 'Camiseta auténtica inspirada en el nuevo Bernabéu, con diseño premium y rendimiento profesional.', 129.99, 'Adidas', 'Real Madrid', 'camisetas', 'Masculino'),
 ('Camiseta Real Madrid 2025/26 Visitante', 'Camiseta auténtica inspirada en las noches del Bernabéu, con diseño metalizado y rendimiento profesional.', 119.99, 'Adidas', 'Real Madrid', 'camisetas', 'Femenino'),
@@ -222,139 +219,104 @@ INSERT INTO products (name, description, price, brand, team, category, gender) V
 
 SET @realmadrid_local_id = (SELECT ID FROM products WHERE name = 'Camiseta Real Madrid 2025/26 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@realmadrid_local_id, 'XS', 'Blanca ', 15),
-(@realmadrid_local_id, 'S', 'Blanca ', 15),
-(@realmadrid_local_id, 'M', 'Blanca ', 15),
-(@realmadrid_local_id, 'L', 'Blanca ', 15),
-(@realmadrid_local_id, 'XL', 'Blanca ', 15),
-(@realmadrid_local_id, 'XXL', 'Blanca ', 15);
+(@realmadrid_local_id, 'S', 'Blanca', 12),
+(@realmadrid_local_id, 'M', 'Blanca', 18),
+(@realmadrid_local_id, 'L', 'Blanca', 20),
+(@realmadrid_local_id, 'XL', 'Blanca', 15);
 
 SET @realmadrid_visitante_id = (SELECT ID FROM products WHERE name = 'Camiseta Real Madrid 2025/26 Visitante');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@realmadrid_visitante_id, 'XS', 'Azul Marino', 15),
+(@realmadrid_visitante_id, 'XS', 'Azul Marino', 10),
 (@realmadrid_visitante_id, 'S', 'Azul Marino', 15),
-(@realmadrid_visitante_id, 'M', 'Azul Marino', 15),
-(@realmadrid_visitante_id, 'L', 'Azul Marino', 15),
-(@realmadrid_visitante_id, 'XL', 'Azul Marino', 15),
-(@realmadrid_visitante_id, 'XXL', 'Azul Marino', 15);
+(@realmadrid_visitante_id, 'M', 'Azul Marino', 23),
+(@realmadrid_visitante_id, 'XL', 'Azul Marino', 17);
 
 SET @barcelona_local_id = (SELECT ID FROM products WHERE name = 'Camiseta FC Barcelona 2025/26 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@barcelona_local_id, 'XS', 'Azul / Rojo', 15),
-(@barcelona_local_id, 'S', 'Azul / Rojo', 15),
-(@barcelona_local_id, 'M', 'Azul / Rojo', 15),
-(@barcelona_local_id, 'L', 'Azul / Rojo', 15),
-(@barcelona_local_id, 'XL', 'Azul / Rojo', 15),
-(@barcelona_local_id, 'XXL', 'Azul / Rojo ', 15);
+(@barcelona_local_id, 'XS', 'Azul/Rojo', 14),
+(@barcelona_local_id, 'M', 'Azul/Rojo', 18),
+(@barcelona_local_id, 'L', 'Azul/Rojo', 19),
+(@barcelona_local_id, 'XXL', 'Azul/Rojo', 16);
 
 SET @barcelona_visitante_id = (SELECT ID FROM products WHERE name = 'Camiseta FC Barcelona 2025/26 Visitante');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@barcelona_visitante_id, 'XS', 'Amarillo ', 15),
-(@barcelona_visitante_id, 'S', 'Amarillo ', 15),
-(@barcelona_visitante_id, 'M', 'Amarillo ', 15),
-(@barcelona_visitante_id, 'L', 'Amarillo ', 15),
-(@barcelona_visitante_id, 'XL', 'Amarillo ', 15),
-(@barcelona_visitante_id, 'XXL', 'Amarillo ', 15);
+(@barcelona_visitante_id, 'XS', 'Amarillo', 14),
+(@barcelona_visitante_id, 'S', 'Amarillo', 11),
+(@barcelona_visitante_id, 'L', 'Amarillo', 17),
+(@barcelona_visitante_id, 'XL', 'Amarillo', 22);
 
 SET @ATM_id = (SELECT ID FROM products WHERE name = 'Camiseta Atlético de Madrid 2025/26 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@ATM_id, 'XS', 'Blanco / Rojo', 15),
-(@ATM_id, 'S', 'Blanco / Rojo', 15),
-(@ATM_id, 'M', 'Blanco / Rojo', 15),
-(@ATM_id, 'L', 'Blanco / Rojo', 15),
-(@ATM_id, 'XL', 'Blanco / Rojo', 15),
-(@ATM_id, 'XXL', 'Blanco / Rojo', 15);
+(@ATM_id, 'L', 'Blanco/Rojo', 13),
+(@ATM_id, 'XL', 'Blanco/Rojo', 19),
+(@ATM_id, 'XXL', 'Blanco/Rojo', 25);
 
 SET @VCF_local_id = (SELECT ID FROM products WHERE name = 'Camiseta Valencia CF 2025/26 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@VCF_local_id, 'XS', 'Blanco', 15),
-(@VCF_local_id, 'S', 'Blanco', 15),
-(@VCF_local_id, 'M', 'Blanco', 15),
-(@VCF_local_id, 'L', 'Blanco', 15),
-(@VCF_local_id, 'XL', 'Blanco', 15),
-(@VCF_local_id, 'XXL', 'Blanco', 15);
+(@VCF_local_id, 'XS', 'Blanco', 16),
+(@VCF_local_id, 'S', 'Blanco', 10),
+(@VCF_local_id, 'L', 'Blanco', 18),
+(@VCF_local_id, 'XL', 'Blanco', 12),
+(@VCF_local_id, 'XXL', 'Blanco', 14);
 
 SET @VCF_visitante_id = (SELECT ID FROM products WHERE name = 'Camiseta Valencia CF 2025/26 Alternativa');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@VCF_visitante_id, 'XS', 'Azul / Rojo / Amarillo', 15),
-(@VCF_visitante_id, 'S', 'Azul / Rojo / Amarillo', 15),
-(@VCF_visitante_id, 'M', 'Azul / Rojo / Amarillo', 15),
-(@VCF_visitante_id, 'L', 'Azul / Rojo / Amarillo', 15),
-(@VCF_visitante_id, 'XL', 'Azul / Rojo / Amarillo', 15),
-(@VCF_visitante_id, 'XXL', 'Azul / Rojo / Amarillo', 15);
+(@VCF_visitante_id, 'S', 'Azul/Rojo/Amarillo', 12),
+(@VCF_visitante_id, 'M', 'Azul/Rojo/Amarillo', 21),
+(@VCF_visitante_id, 'L', 'Azul/Rojo/Amarillo', 13);
 
 SET @LVFC_id = (SELECT ID FROM products WHERE name = 'Camiseta Liverpool FC 2025/26 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@LVFC_id, 'XS', 'Rojo', 15),
-(@LVFC_id, 'S', 'Rojo', 15),
-(@LVFC_id, 'M', 'Rojo', 15),
-(@LVFC_id, 'L', 'Rojo', 15),
-(@LVFC_id, 'XL', 'Rojo', 15),
-(@LVFC_id, 'XXL', 'Rojo', 15);
+(@LVFC_id, 'S', 'Rojo', 22),
+(@LVFC_id, 'M', 'Rojo', 17),
+(@LVFC_id, 'L', 'Rojo', 14),
+(@LVFC_id, 'XL', 'Rojo', 16);
 
 SET @betis_id = (SELECT ID FROM products WHERE name = 'Camiseta Betis 2025/26 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@betis_id, 'XS', 'Verde / Blanco', 15),
-(@betis_id, 'S', 'Verde / Blanco', 15),
-(@betis_id, 'M', 'Verde / Blanco', 15),
-(@betis_id, 'L', 'Verde / Blanco', 15),
-(@betis_id, 'XL', 'Verde / Blanco', 15),
-(@betis_id, 'XXL', 'Verde / Blanco', 15);
-
+(@betis_id, 'XS', 'Verde/Blanco', 19),
+(@betis_id, 'S', 'Verde/Blanco', 15),
+(@betis_id, 'M', 'Verde/Blanco', 11);
 
 SET @espana_id = (SELECT ID FROM products WHERE name = 'Camiseta España 2026 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@espana_id, 'XS', 'Rojo', 15),
-(@espana_id, 'S', 'Rojo', 15),
-(@espana_id, 'M', 'Rojo', 15),
-(@espana_id, 'L', 'Rojo', 15),
-(@espana_id, 'XL', 'Rojo', 15),
-(@espana_id, 'XXL', 'Rojo', 15);
+(@espana_id, 'S', 'Rojo', 25),
+(@espana_id, 'M', 'Rojo', 20),
+(@espana_id, 'XL', 'Rojo', 18),
+(@espana_id, 'XXL', 'Rojo', 13);
 
 SET @argentina_id = (SELECT ID FROM products WHERE name = 'Camiseta Argentina 2026 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@argentina_id, 'XS', 'Azul Celeste / Blanca', 15),
-(@argentina_id, 'S', 'Azul Celeste / Blanca', 15),
-(@argentina_id, 'M', 'Azul Celeste / Blanca', 15),
-(@argentina_id, 'L', 'Azul Celeste / Blanca', 15),
-(@argentina_id, 'XL', 'Azul Celeste / Blanca', 15),
-(@argentina_id, 'XXL', 'Azul Celeste / Blanca', 15);
+(@argentina_id, 'XS', 'Azul Celeste/Blanca', 17),
+(@argentina_id, 'M', 'Azul Celeste/Blanca', 21),
+(@argentina_id, 'L', 'Azul Celeste/Blanca', 13),
+(@argentina_id, 'XXL', 'Azul Celeste/Blanca', 12);
 
 SET @brasil_id = (SELECT ID FROM products WHERE name = 'Camiseta Brasil 2026 Visitante');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@brasil_id, 'XS', 'Azul', 15),
-(@brasil_id, 'S', 'Azul', 15),
-(@brasil_id, 'M', 'Azul', 15),
-(@brasil_id, 'L', 'Azul', 15),
-(@brasil_id, 'XL', 'Azul', 15),
-(@brasil_id, 'XXL', 'Azul', 15);
+(@brasil_id, 'M', 'Azul', 30),
+(@brasil_id, 'L', 'Azul', 18),
+(@brasil_id, 'XL', 'Azul', 19);
 
 SET @manCity_id = (SELECT ID FROM products WHERE name = 'Camiseta Manchester City 2025/26 Local');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@manCity_id, 'XS', 'Azul Celeste', 15),
-(@manCity_id, 'S', 'Azul Celeste', 15),
-(@manCity_id, 'M', 'Azul Celeste', 15),
-(@manCity_id, 'L', 'Azul Celeste', 15),
-(@manCity_id, 'XL', 'Azul Celeste', 15),
-(@manCity_id, 'XXL', 'Azul Celeste', 15);
+(@manCity_id, 'S', 'Azul Celeste', 14),
+(@manCity_id, 'M', 'Azul Celeste', 16),
+(@manCity_id, 'L', 'Azul Celeste', 12),
+(@manCity_id, 'XL', 'Azul Celeste', 15);
 
 SET @bayern_id = (SELECT ID FROM products WHERE name = 'Camiseta Bayern Munich 2025/26 Portero');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@bayern_id, 'XS', 'Verde', 15),
-(@bayern_id, 'S', 'Verde', 15),
-(@bayern_id, 'M', 'Verde', 15),
-(@bayern_id, 'L', 'Verde', 15),
-(@bayern_id, 'XL', 'Verde', 15),
-(@bayern_id, 'XXL', 'Verde', 15);
+(@bayern_id, 'M', 'Verde', 14),
+(@bayern_id, 'L', 'Verde', 16),
+(@bayern_id, 'XL', 'Verde', 12);
 
 SET @psg_id = (SELECT ID FROM products WHERE name = 'Camiseta PSG 2025/26 Visitante');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@psg_id, 'XS', 'Blanca / Azul / Rojo', 15),
-(@psg_id, 'S', 'Blanca / Azul / Rojo', 15),
-(@psg_id, 'M', 'Blanca / Azul / Rojo', 15),
-(@psg_id, 'L', 'Blanca / Azul / Rojo', 15),
-(@psg_id, 'XL', 'Blanca / Azul / Rojo', 15),
-(@psg_id, 'XXL', 'Blanca / Azul / Rojo', 15);
+(@psg_id, 'S', 'Blanca/Azul/Rojo', 19),
+(@psg_id, 'M', 'Blanca/Azul/Rojo', 11),
+(@psg_id, 'L', 'Blanca/Azul/Rojo', 17),
+(@psg_id, 'XXL', 'Blanca/Azul/Rojo', 18);
 
 INSERT INTO product_images (product_id, image_url) VALUES
 (@realmadrid_local_id, 'soccerFlow/public/assets/img/products/camisetas/Madrid-Local-1.png'),
@@ -388,7 +350,6 @@ INSERT INTO product_images (product_id, image_url) VALUES
 (@psg_id, 'soccerFlow/public/assets/img/products/camisetas/psg-1.png'),
 (@psg_id, 'soccerFlow/public/assets/img/products/camisetas/psg-2.png');
 
--- Insertar guantes
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
 ('Adidas Predator League', 'Guantes adidas Predator League con palma URG 3.0 de gran agarre y ajuste estable para máximo control.', 70.00, 'Adidas', NULL, 'guantes', 'Masculino'),
 ('Nike Grip3', 'Guantes Nike Grip3 con espuma envolvente para mayor agarre, estabilidad y control en cada parada.', 69.99, 'Nike', NULL, 'guantes', 'Masculino'),
@@ -503,7 +464,6 @@ INSERT INTO product_images (product_id, image_url) VALUES
 (@guante10_id, 'soccerFlow/public/assets/img/products/guantes/10-1.png'),
 (@guante10_id, 'soccerFlow/public/assets/img/products/guantes/10-2.png');
 
--- Insertar chandals
 INSERT INTO products (name, description, price, brand, team, category, gender) VALUES
 ('Chandal Real Madrid 2025/26', 'Chándal adidas del Real Madrid 25/26 con escudo oficial y tecnología AEROREADY para máxima comodidad.', 130.00, 'Adidas', 'Real Madrid', 'chandals', 'Masculino'),
 ('Chandal FC Barcelona 2025/26', 'Chándal de entrenamiento del FC Barcelona con tecnología Nike Dri‑FIT, escudo oficial y diseño con chaqueta de cremallera y pantalón ajustable.', 139.99, 'Nike', 'FC Barcelona', 'chandals', 'Masculino'),
@@ -516,96 +476,74 @@ INSERT INTO products (name, description, price, brand, team, category, gender) V
 ('Chandal Inter de Milan 2025/26', 'Chándal del Inter con tejido Woven ligero y cómodo, ideal para entrenar o relajarte con el estilo clásico de Nike.', 137.99, 'Nike', 'Inter de Milan', 'chandals', 'Masculino'),
 ('Chandal Francia 2026', 'Chándal de fútbol de tejido Knit Nike Dri-FIT - Hombre', 97.99, 'Nike', 'Francia', 'chandals', 'Masculino');
 
--- Insertar variantes para chandals 
 SET @chandal_realmadrid_id = (SELECT ID FROM products WHERE name = 'Chandal Real Madrid 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_realmadrid_id, 'XS', 'Verde Lima / Caqui Oscuro', 15),
-(@chandal_realmadrid_id, 'S', 'Verde Lima / Caqui Oscuro', 15),
-(@chandal_realmadrid_id, 'M', 'Verde Lima / Caqui Oscuro', 15),
+(@chandal_realmadrid_id, 'S', 'Verde Lima / Caqui Oscuro', 18),
+(@chandal_realmadrid_id, 'M', 'Verde Lima / Caqui Oscuro', 22),
 (@chandal_realmadrid_id, 'L', 'Verde Lima / Caqui Oscuro', 15),
-(@chandal_realmadrid_id, 'XL', 'Verde Lima / Caqui Oscuro', 15),
-(@chandal_realmadrid_id, 'XXL', 'Verde Lima / Caqui Oscuro', 15);
+(@chandal_realmadrid_id, 'XL', 'Verde Lima / Caqui Oscuro', 20);
 
 SET @chandal_barcelona_id = (SELECT ID FROM products WHERE name = 'Chandal FC Barcelona 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_barcelona_id, 'XS', 'Negro / Escarlata', 15),
-(@chandal_barcelona_id, 'S', 'Negro / Escarlata', 15),
-(@chandal_barcelona_id, 'M', 'Negro / Escarlata', 15),
-(@chandal_barcelona_id, 'L', 'Negro / Escarlata', 15),
-(@chandal_barcelona_id, 'XL', 'Negro / Escarlata', 15),
-(@chandal_barcelona_id, 'XXL', 'Negro / Escarlata', 15);
+(@chandal_barcelona_id, 'XS', 'Negro / Escarlata', 25),
+(@chandal_barcelona_id, 'M', 'Negro / Escarlata', 19),
+(@chandal_barcelona_id, 'L', 'Negro / Escarlata', 14),
+(@chandal_barcelona_id, 'XXL', 'Negro / Escarlata', 16);
 
 SET @chandal_valencia_id = (SELECT ID FROM products WHERE name = 'Chandal Valencia CF 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_valencia_id, 'XS', 'Negro / Naranja', 15),
-(@chandal_valencia_id, 'S', 'Negro / Naranja', 15),
-(@chandal_valencia_id, 'M', 'Negro / Naranja', 15),
-(@chandal_valencia_id, 'L', 'Negro / Naranja', 15),
-(@chandal_valencia_id, 'XL', 'Negro / Naranja', 15),
-(@chandal_valencia_id, 'XXL', 'Negro / Naranja', 15);
+(@chandal_valencia_id, 'XS', 'Negro / Naranja', 17),
+(@chandal_valencia_id, 'S', 'Negro / Naranja', 23),
+(@chandal_valencia_id, 'XL', 'Negro / Naranja', 21),
+(@chandal_valencia_id, 'XXL', 'Negro / Naranja', 13);
 
 SET @chandal_mancity_id = (SELECT ID FROM products WHERE name = 'Chandal Manchester City 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_mancity_id, 'XS', 'Negro / Azul Celeste', 15),
-(@chandal_mancity_id, 'S', 'Negro / Azul Celeste', 15),
-(@chandal_mancity_id, 'M', 'Negro / Azul Celeste', 15),
-(@chandal_mancity_id, 'L', 'Negro / Azul Celeste', 15),
-(@chandal_mancity_id, 'XL', 'Negro / Azul Celeste', 15),
-(@chandal_mancity_id, 'XXL', 'Negro / Azul Celeste', 15);
+(@chandal_mancity_id, 'S', 'Negro / Azul Celeste', 24),
+(@chandal_mancity_id, 'M', 'Negro / Azul Celeste', 27),
+(@chandal_mancity_id, 'L', 'Negro / Azul Celeste', 18),
+(@chandal_mancity_id, 'XL', 'Negro / Azul Celeste', 15);
 
 SET @chandal_bayern_id = (SELECT ID FROM products WHERE name = 'Chandal Bayern Munich 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_bayern_id, 'XS', 'Negro / Rojo', 15),
-(@chandal_bayern_id, 'S', 'Negro / Rojo', 15),
-(@chandal_bayern_id, 'M', 'Negro / Rojo', 15),
-(@chandal_bayern_id, 'L', 'Negro / Rojo', 15),
-(@chandal_bayern_id, 'XL', 'Negro / Rojo', 15),
-(@chandal_bayern_id, 'XXL', 'Negro / Rojo', 15);
+(@chandal_bayern_id, 'S', 'Negro / Rojo', 26),
+(@chandal_bayern_id, 'M', 'Negro / Rojo', 30),
+(@chandal_bayern_id, 'XL', 'Negro / Rojo', 19),
+(@chandal_bayern_id, 'XXL', 'Negro / Rojo', 14);
 
 SET @chandal_psg_id = (SELECT ID FROM products WHERE name = 'Chandal PSG 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_psg_id, 'XS', 'Azul Marino / Rojo', 15),
-(@chandal_psg_id, 'S', 'Azul Marino / Rojo', 15),
-(@chandal_psg_id, 'M', 'Azul Marino / Rojo', 15),
-(@chandal_psg_id, 'L', 'Azul Marino / Rojo', 15),
-(@chandal_psg_id, 'XL', 'Azul Marino / Rojo', 15),
-(@chandal_psg_id, 'XXL', 'Azul Marino / Rojo', 15);
+(@chandal_psg_id, 'XS', 'Azul Marino / Rojo', 16),
+(@chandal_psg_id, 'M', 'Azul Marino / Rojo', 22),
+(@chandal_psg_id, 'L', 'Azul Marino / Rojo', 20),
+(@chandal_psg_id, 'XXL', 'Azul Marino / Rojo', 13);
 
 SET @chandal_atm_id = (SELECT ID FROM products WHERE name = 'Chandal Atletico de Madrid 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_atm_id, 'XS', 'Gris / Rojo', 15),
-(@chandal_atm_id, 'S', 'Gris / Rojo', 15),
-(@chandal_atm_id, 'M', 'Gris / Rojo', 15),
-(@chandal_atm_id, 'L', 'Gris / Rojo', 15),
-(@chandal_atm_id, 'XL', 'Gris / Rojo', 15),
-(@chandal_atm_id, 'XXL', 'Gris / Rojo', 15);
+(@chandal_atm_id, 'S', 'Gris / Rojo', 28),
+(@chandal_atm_id, 'M', 'Gris / Rojo', 25),
+(@chandal_atm_id, 'L', 'Gris / Rojo', 21),
+(@chandal_atm_id, 'XL', 'Gris / Rojo', 17);
 
 SET @chandal_chelsea_id = (SELECT ID FROM products WHERE name = 'Chandal Chelsea 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_chelsea_id, 'XS', 'Verde', 15),
-(@chandal_chelsea_id, 'S', 'Verde', 15),
-(@chandal_chelsea_id, 'M', 'Verde', 15),
-(@chandal_chelsea_id, 'L', 'Verde', 15),
-(@chandal_chelsea_id, 'XL', 'Verde', 15),
-(@chandal_chelsea_id, 'XXL', 'Verde', 15);
+(@chandal_chelsea_id, 'XS', 'Verde', 19),
+(@chandal_chelsea_id, 'S', 'Verde', 23),
+(@chandal_chelsea_id, 'M', 'Verde', 26),
+(@chandal_chelsea_id, 'XL', 'Verde', 15);
 
 SET @chandal_inter_id = (SELECT ID FROM products WHERE name = 'Chandal Inter de Milan 2025/26');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_inter_id, 'XS', 'Negro / Azul', 15),
-(@chandal_inter_id, 'S', 'Negro / Azul', 15),
-(@chandal_inter_id, 'M', 'Negro / Azul', 15),
-(@chandal_inter_id, 'L', 'Negro / Azul', 15),
-(@chandal_inter_id, 'XL', 'Negro / Azul', 15),
-(@chandal_inter_id, 'XXL', 'Negro / Azul', 15);
+(@chandal_inter_id, 'M', 'Negro / Azul', 29),
+(@chandal_inter_id, 'L', 'Negro / Azul', 24),
+(@chandal_inter_id, 'XL', 'Negro / Azul', 18);
 
 SET @chandal_francia_id = (SELECT ID FROM products WHERE name = 'Chandal Francia 2026');
 INSERT INTO products_variants (product_id, size, color, stock) VALUES
-(@chandal_francia_id, 'XS', 'Azul Marino / Blanco', 15),
-(@chandal_francia_id, 'S', 'Azul Marino / Blanco', 15),
-(@chandal_francia_id, 'M', 'Azul Marino / Blanco', 15),
-(@chandal_francia_id, 'L', 'Azul Marino / Blanco', 15),
-(@chandal_francia_id, 'XL', 'Azul Marino / Blanco', 15),
-(@chandal_francia_id, 'XXL', 'Azul Marino / Blanco', 15);
+(@chandal_francia_id, 'XS', 'Azul Marino / Blanco', 20),
+(@chandal_francia_id, 'S', 'Azul Marino / Blanco', 27),
+(@chandal_francia_id, 'L', 'Azul Marino / Blanco', 22),
+(@chandal_francia_id, 'XL', 'Azul Marino / Blanco', 16);
 
 
 INSERT INTO product_images (product_id, image_url) VALUES

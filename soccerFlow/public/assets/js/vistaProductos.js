@@ -107,6 +107,25 @@ products.forEach(product => {
         selectSizes.appendChild(opt);
       });
     }
+    //Si es camisetas -> tallas alfabeticas
+        if (categoria === 'camisetas') {
+      ['XS', 'S', 'M', 'L', 'XL', 'XXL'].forEach(talla => {
+        const opt = document.createElement('option');
+        opt.value = `size-${talla}`;
+        opt.textContent = `Talla ${talla}`;
+        selectSizes.appendChild(opt);
+      });
+    }
+
+    //Si es chandals -> tallas alfabeticas
+            if (categoria === 'chandals') {
+      ['XS', 'S', 'M', 'L', 'XL', 'XXL'].forEach(talla => {
+        const opt = document.createElement('option');
+        opt.value = `size-${talla}`;
+        opt.textContent = `Talla ${talla}`;
+        selectSizes.appendChild(opt);
+      });
+    }
 
     // Si es camisetas o guantes -> tallas S M L
     if ( categoria === 'guantes') {
