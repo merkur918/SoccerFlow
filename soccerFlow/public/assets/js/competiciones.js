@@ -54,6 +54,9 @@
 
     let leaguesCache = [];
 
+    // Establecer límite por defecto (0 = sin límite, muestra todos)
+    standingsTable.dataset.limit = "4";
+
     // Mensajería de estado para feedback visual rápido.
     const setStatus = (message, isError = false) => {
       status.textContent = message;
@@ -135,9 +138,16 @@
     const renderStandings = (rows, teamsMap = new Map(), leagueKey = "") => {
       standingsBody.innerHTML = "";
       updateQualificationLegend(leagueKey);
-      const totalTeams = Array.isArray(rows) ? rows.length : 0;
+      
+      // Obtener el límite actual del dataset
+      const limit = Number(standingsTable?.dataset?.limit || 0);
+      const rowsToRender = Number.isFinite(limit) && limit > 0
+        ? rows.slice(0, limit)
+        : rows;
+      
+      const totalTeams = Array.isArray(rowsToRender) ? rowsToRender.length : 0;
 
-      rows.forEach((row) => {
+      rowsToRender.forEach((row) => {
         const tr = document.createElement("tr");
         const rank = readNumberStat(row, ["intRank", "strRank"]);
         const rankNumber = toRankNumber(rank);
@@ -410,6 +420,77 @@
       return byText || leaguesCache[0] || null;
     };
 
+    // Función para cargar una competición específica desde los botones destacados
+    const loadFeaturedCompetition = async (competitionKey) => {
+      // Buscar la competición en el caché por su key
+      const league = leaguesCache.find(item => item.__key === competitionKey);
+      
+      if (!league) {
+        setStatus(`No se pudo cargar ${competitionKey}`, true);
+        return;
+      }
+
+      // Actualizar el select para reflejar la competición seleccionada
+      select.value = league.__selectValue;
+      
+      // Establecer límite de 4 equipos en la tabla
+      if (standingsTable) {
+        standingsTable.dataset.limit = "4";
+      }
+      
+      // Cargar los datos de la competición
+      await loadTeams(league);
+      
+      // Scroll suave hacia la tabla de clasificación
+      document.getElementById('home-standings')?.scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    };
+
+    // Configurar event listeners para los botones de competiciones destacadas
+    const setupFeaturedButtons = () => {
+      // Mapeo de IDs de botones a keys de competiciones
+      const buttonMap = [
+        { id: 'button-laLiga', key: 'laliga' },
+        { id: 'button-premier', key: 'premier' },
+        { id: 'button-serieA', key: 'seriea' },
+        { id: 'button-bundes', key: 'bundesliga' },
+        { id: 'button-ligue1', key: 'ligue1' },
+        { id: 'button-champions', key: 'ucl' },
+        { id: 'button-europa', key: 'uel' },
+        { id: 'button-conference', key: 'uecl' }
+      ];
+
+      buttonMap.forEach(({ id, key }) => {
+        const button = document.getElementById(id);
+        if (button) {
+          // Remover listeners anteriores para evitar duplicados
+          button.removeEventListener('click', window[`__featured_${key}_handler`]);
+          
+          // Crear nuevo handler
+          const handler = async (event) => {
+            event.preventDefault();
+            
+            // Mostrar estado de carga
+            setStatus(`Cargando clasificación de ${key}...`);
+            
+            // Asegurar que las competiciones estén cargadas
+            if (leaguesCache.length === 0) {
+              setStatus('Cargando competiciones...', false);
+              await loadCompetitions();
+            }
+            
+            // Cargar la competición destacada
+            await loadFeaturedCompetition(key);
+          };
+          
+          // Guardar referencia del handler
+          window[`__featured_${key}_handler`] = handler;
+          button.addEventListener('click', handler);
+        }
+      });
+    };
+
     const loadCompetitions = async () => {
       setStatus("Cargando competiciones...");
       select.disabled = true;
@@ -438,6 +519,10 @@
         });
 
         select.disabled = false;
+        
+        // Configurar botones destacados después de cargar competiciones
+        setupFeaturedButtons();
+        
         const defaultLeague = findDefaultSpanishLeague();
         if (defaultLeague) {
           select.value = defaultLeague.__selectValue;
@@ -464,22 +549,27 @@
       clearStandings();
       clearTeams();
       setStatus(`Cargando ranking y equipos de ${leagueName}...`);
+      
       try {
         let standingsRows = [];
         let seasonLoaded = "";
 
         if (leagueId) {
           for (const season of seasonsToTry) {
-            const standingsPayload = await fetchJson(
-              `${API_BASE}/lookuptable.php?l=${encodeURIComponent(leagueId)}&s=${encodeURIComponent(season)}`,
-              "No se pudo cargar el ranking."
-            );
+            try {
+              const standingsPayload = await fetchJson(
+                `${API_BASE}/lookuptable.php?l=${encodeURIComponent(leagueId)}&s=${encodeURIComponent(season)}`,
+                "No se pudo cargar el ranking."
+              );
 
-            const rows = standingsPayload?.table;
-            if (Array.isArray(rows) && rows.length > 0) {
-              standingsRows = rows;
-              seasonLoaded = season;
-              break;
+              const rows = standingsPayload?.table;
+              if (Array.isArray(rows) && rows.length > 0) {
+                standingsRows = rows;
+                seasonLoaded = season;
+                break;
+              }
+            } catch (error) {
+              // Continuar con la siguiente temporada
             }
           }
         }
@@ -508,22 +598,21 @@
 
         standingsRows = sortRowsByRank(standingsRows);
 
-        const limit = Number(standingsTable?.dataset?.limit || 0);
-        const limitedRows = Number.isFinite(limit) && limit > 0
-          ? standingsRows.slice(0, limit)
-          : standingsRows;
-
         let teams = [];
         if (leagueId && namesToTry.length > 0) {
           for (const name of namesToTry) {
-            const payload = await fetchJson(
-              `${API_BASE}/search_all_teams.php?l=${encodeURIComponent(name)}`,
-              "No se pudieron cargar los equipos."
-            );
+            try {
+              const payload = await fetchJson(
+                `${API_BASE}/search_all_teams.php?l=${encodeURIComponent(name)}`,
+                "No se pudieron cargar los equipos."
+              );
 
-            if (Array.isArray(payload?.teams) && payload.teams.length > 0) {
-              teams = payload.teams;
-              break;
+              if (Array.isArray(payload?.teams) && payload.teams.length > 0) {
+                teams = payload.teams;
+                break;
+              }
+            } catch (error) {
+              // Continuar con el siguiente nombre
             }
           }
         }
@@ -532,7 +621,12 @@
           (Array.isArray(teams) ? teams : []).map((team) => [normalizeTeamName(team?.strTeam), team])
         );
 
-        renderStandings(limitedRows, teamsMap, league.__key);
+        renderStandings(standingsRows, teamsMap, league.__key);
+
+        const limit = Number(standingsTable?.dataset?.limit || 0);
+        const limitedRows = Number.isFinite(limit) && limit > 0
+          ? standingsRows.slice(0, limit)
+          : standingsRows;
 
         const rankedTeams = limitedRows.map((row) => {
           const teamName = row?.strTeam || "Equipo";
@@ -550,6 +644,7 @@
         });
 
         renderTeams(rankedTeams);
+        
         if (teamsMap.size > 0) {
           setStatus(`Ranking y equipos cargados para ${leagueName} (${seasonLoaded}).`);
         } else {
@@ -560,7 +655,13 @@
       }
     };
 
+    // Event listener para el select
     select.addEventListener("change", (event) => {
+      // Cuando se cambia manualmente desde el select, mostrar TODOS los equipos
+      if (standingsTable) {
+        standingsTable.dataset.limit = "0";
+      }
+      
       const league = leaguesCache.find((item) => item.__selectValue === event.target.value);
       if (!league) {
         clearStandings();
