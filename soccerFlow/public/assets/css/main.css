@@ -589,6 +589,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1000;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .header-container {
@@ -2205,7 +2206,7 @@ body {
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-color: rgba(197, 196, 196, 0.9);
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -3187,7 +3188,7 @@ body {
 HOME (ESTILO FUTBOL STADIUM)
 ============================================ */
 .home {
-background: #f4f6fb;
+background-color: rgba(197, 196, 196, 0.9);
 color: #10151b;
 padding: 20px 0 80px;
 width: 100%;
