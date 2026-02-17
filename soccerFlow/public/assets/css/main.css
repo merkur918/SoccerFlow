@@ -2136,6 +2136,10 @@ body {
   .product__description-text {
     font-size: 1rem;
   }
+   .size-error-message {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2183,26 +2187,12 @@ body {
     padding: 15px 20px;
     font-size: 1.1rem;
   }
-  
+   .size-error-message {
+    font-size: 14px;
+    padding: 8px 14px;
+    border-left-width: 4px;
+  }
 }
-/* Para móviles */
-@media (max-width: 768px) {
-    .size-error-message {
-        font-size: 12px;
-        padding: 6px 10px;
-        margin-bottom: 6px;
-    }
-}
-
-/* Para pantallas muy pequeñas */
-@media (max-width: 480px) {
-    .size-error-message {
-        font-size: 11px;
-        padding: 5px 8px;
-        border-left-width: 3px;
-    }
-}
-
 /* ============================================
    AJUSTES PARA TIENDA (no afectar detalle)
    ============================================ */

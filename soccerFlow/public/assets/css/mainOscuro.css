@@ -2583,6 +2583,29 @@ body {
 .product__description-text::-webkit-scrollbar-thumb:hover {
   background: var(--light-color);
 }
+.size-error-message {
+    color: #ff6b6b;                         
+    font-size: clamp(16px, 4vw, 20px);     
+    font-weight: 600;                       
+    margin-bottom: 12px;                  
+    padding: 12px 18px;                    
+    background-color: #2d1a1a;              
+    border-radius: 8px;                      
+    border-left: 6px solid #ff6b6b;           
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+
+.size-error-message::before {
+    content: "⚠️";
+    margin-right: 10px;
+    font-size: 22px;                        
+    display: inline-block;
+    vertical-align: middle;
+    filter: brightness(1.2);
+}
 
 /* ============================================
    RESPONSIVE PARA DETALLE DEL PRODUCTO
@@ -2693,6 +2716,10 @@ body {
   .product__description-text {
     font-size: 1rem;
   }
+   .size-error-message {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2739,6 +2766,11 @@ body {
   .product__size-select {
     padding: 15px 20px;
     font-size: 1.1rem;
+  }
+   .size-error-message {
+    font-size: 14px;
+    padding: 8px 14px;
+    border-left-width: 4px;
   }
 }
 
