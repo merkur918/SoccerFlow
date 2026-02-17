@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <style>
@@ -17,7 +18,7 @@
             padding: 25px;
             border-radius: 10px;
             border-top: 4px solid #079C40;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
@@ -75,53 +76,55 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Gracias por tu compra, <?= htmlspecialchars($nombre) ?>!</h2>
-    <p>Esta es la factura simulada de tu compra en <strong>SoccerFlow</strong>.</p>
+    <div class="container">
+        <h2>Gracias por tu compra, <?= htmlspecialchars($nombre) ?>!</h2>
+        <p>Esta es la factura simulada de tu compra en <strong>SoccerFlow</strong>.</p>
 
-    <div class="invoice-meta">
-        <div><strong>Factura:</strong> <?= htmlspecialchars($invoiceId) ?></div>
-        <div><strong>Fecha:</strong> <?= htmlspecialchars($invoiceDate) ?></div>
+        <div class="invoice-meta">
+            <div><strong>Factura:</strong> <?= htmlspecialchars($invoiceId) ?></div>
+            <div><strong>Fecha:</strong> <?= htmlspecialchars($invoiceDate) ?></div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Talla</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($items as $item): ?>
+                    <?php
+                    $itemName = htmlspecialchars($item['name'] ?? 'Producto');
+                    $itemSize = htmlspecialchars($item['size'] ?? '-');
+                    $qty = (int)($item['quantity'] ?? 0);
+                    $price = number_format((float)($item['unit_price'] ?? 0), 2);
+                    $subtotal = number_format($qty * (float)($item['unit_price'] ?? 0), 2);
+                    ?>
+                    <tr>
+                        <td><?= $itemName ?></td>
+                        <td><?= $itemSize ?></td>
+                        <td><?= $qty ?></td>
+                        <td>$<?= $price ?></td>
+                        <td>$<?= $subtotal ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <div class="total">Total: $<?= number_format($total, 2) ?></div>
+
+        <div class="footer">
+            © <?= date('Y') ?> SoccerFlow — Tu plataforma de fútbol
+        </div>
     </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Talla</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($items as $item): ?>
-            <?php
-                $itemName = htmlspecialchars($item['name'] ?? 'Producto');
-                $itemSize = htmlspecialchars($item['size'] ?? '-');
-                $qty = (int)($item['quantity'] ?? 0);
-                $price = number_format((float)($item['unit_price'] ?? 0), 2);
-                $subtotal = number_format($qty * (float)($item['unit_price'] ?? 0), 2);
-            ?>
-            <tr>
-                <td><?= $itemName ?></td>
-                <td><?= $itemSize ?></td>
-                <td><?= $qty ?></td>
-                <td>$<?= $price ?></td>
-                <td>$<?= $subtotal ?></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-
-    <div class="total">Total: $<?= number_format($total, 2) ?></div>
-
-    <div class="footer">
-        © <?= date('Y') ?> SoccerFlow — Tu plataforma de fútbol
-    </div>
-</div>
 
 </body>
+
 </html>

@@ -31,58 +31,58 @@ class CartController extends Controller
     }
 
     public function add()
-{
-    // 1) Asegurarnos que es POST
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: index.php?ctl=productos');
+    {
+        // 1) Asegurarnos que es POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: index.php?ctl=productos');
+            exit;
+        }
+
+        // 2) Recoger datos del formulario
+        $productId = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
+        $size = trim($_POST['size'] ?? '');
+        $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 0;
+
+        // 3) Validaciones mínimas
+        if ($productId <= 0 || $quantity <= 0 || $size === '') {
+            echo "Datos incompletos";
+            exit;
+        }
+
+        // 4) Guardar en BD
+        $userId = (int)($_SESSION['usuarioId'] ?? 0);
+        if ($userId <= 0) {
+            header('Location: index.php?ctl=login');
+            exit;
+        }
+
+        $cartModel = new Cart();
+        $cartId = $cartModel->getActiveCartId($userId);
+
+        if (!$cartId) {
+            $cartId = $cartModel->createCart($userId);
+        }
+
+        $variantId = $cartModel->findVariantId($productId, $size);
+        if (!$variantId) {
+            echo "No se encontró variante para esa talla";
+            exit;
+        }
+
+        $productModel = new Productos();
+        $unitPrice = $productModel->getPriceById($productId);
+
+        if ($unitPrice === null) {
+            echo "Producto no encontrado";
+            exit;
+        }
+
+        $cartModel->addItem($cartId, $variantId, $quantity, $unitPrice);
+
+        // Redirigir al carrito
+        header('Location: index.php?ctl=cart');
         exit;
     }
-
-    // 2) Recoger datos del formulario
-    $productId = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
-    $size = trim($_POST['size'] ?? '');
-    $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 0;
-
-    // 3) Validaciones mínimas
-    if ($productId <= 0 || $quantity <= 0 || $size === '') {
-        echo "Datos incompletos";
-        exit;
-    }
-
-    // 4) Guardar en BD
-    $userId = (int)($_SESSION['usuarioId'] ?? 0);
-    if ($userId <= 0) {
-        header('Location: index.php?ctl=login');
-        exit;
-    }
-
-    $cartModel = new Cart();
-    $cartId = $cartModel->getActiveCartId($userId);
-
-    if (!$cartId) {
-        $cartId = $cartModel->createCart($userId);
-    }
-
-    $variantId = $cartModel->findVariantId($productId, $size);
-    if (!$variantId) {
-        echo "No se encontró variante para esa talla";
-        exit;
-    }
-
-    $productModel = new Productos();
-    $unitPrice = $productModel->getPriceById($productId);
-
-    if ($unitPrice === null) {
-        echo "Producto no encontrado";
-        exit;
-    }
-
-    $cartModel->addItem($cartId, $variantId, $quantity, $unitPrice);
-
-    // Redirigir al carrito
-    header('Location: index.php?ctl=cart');
-    exit;
-}
 
     public function remove()
     {
@@ -163,9 +163,9 @@ class CartController extends Controller
         include __DIR__ . '/../Views/emails/invoice.php';
         $html = ob_get_clean();
 
-        $altText = "Factura SoccerFlow\n".
-            "Factura: {$invoiceId}\n".
-            "Fecha: {$invoiceDate}\n".
+        $altText = "Factura SoccerFlow\n" .
+            "Factura: {$invoiceId}\n" .
+            "Fecha: {$invoiceDate}\n" .
             "Total: $" . number_format($total, 2);
 
         $sendResult = MailConfig::send($email, 'Factura de tu compra - SoccerFlow', $html, $altText);
@@ -184,7 +184,4 @@ class CartController extends Controller
         ]);
         exit;
     }
-
-
-
 }

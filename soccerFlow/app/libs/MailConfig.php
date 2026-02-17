@@ -33,7 +33,6 @@ class MailConfig
 
             $mail->send();
             return true;
-
         } catch (Exception $e) {
             return $mail->ErrorInfo;
         }

@@ -8,7 +8,6 @@ abstract class ApiController
     public function __construct(SessionManager $session)
     {
         $this->session = $session;
-       
     }
 
     protected function json(array $payload, int $status = 200): void

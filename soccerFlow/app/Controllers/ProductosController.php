@@ -10,7 +10,7 @@ class ProductosController extends Controller
         $productos = $model->getAll(); //Lista de productos
 
         $sizesMap = $model->getSizesMap(); //Mapa de tallas del producto
-        
+
 
         // Agregar imagen principal a cada producto
         foreach ($productos as &$p) {
@@ -28,7 +28,7 @@ class ProductosController extends Controller
         ]);
     }
 
- 
+
 
 
 
