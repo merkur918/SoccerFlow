@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <style>
@@ -17,7 +18,7 @@
             padding: 25px;
             border-radius: 10px;
             border-top: 4px solid #079C40;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .header-title {
@@ -63,27 +64,29 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1 class="header-title">SOCCER FLO<span>W</span></h1>
-    <img class="logo" src="https://tuservidor.com/assets/img/logo.png" alt="Logo Soccer Flow">
+        <h1 class="header-title">SOCCER FLO<span>W</span></h1>
+        <img class="logo" src="https://tuservidor.com/assets/img/logo.png" alt="Logo Soccer Flow">
 
-    <p>Hola <?= $nombre ?>,</p>
+        <p>Hola <?= $nombre ?>,</p>
 
-    <p>Hemos recibido una solicitud para restablecer tu contraseña.  
-    Para continuar, haz clic en el siguiente botón:</p>
+        <p>Hemos recibido una solicitud para restablecer tu contraseña.
+            Para continuar, haz clic en el siguiente botón:</p>
 
-    <a class="btn" href="<?= $resetUrl ?>">Restablecer Contraseña</a>
+        <a class="btn" href="<?= $resetUrl ?>">Restablecer Contraseña</a>
 
-    <p style="margin-top:20px;">Si no solicitaste este cambio, puedes ignorar este mensaje.</p>
+        <p style="margin-top:20px;">Si no solicitaste este cambio, puedes ignorar este mensaje.</p>
 
-    <div class="footer">
-        © <?= date('Y') ?> SoccerFlow — Tu plataforma de fútbol
+        <div class="footer">
+            © <?= date('Y') ?> SoccerFlow — Tu plataforma de fútbol
+        </div>
+
     </div>
 
-</div>
-
 </body>
+
 </html>

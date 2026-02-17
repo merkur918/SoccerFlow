@@ -1,8 +1,15 @@
 <?php
 
-
+/**
+ * Controlador de la página principal
+ * Prepara y muestra los productos destacados en el home
+ */
 class HomeController extends Controller
 {
+    /**
+     * Carga la página de inicio con 4 productos aleatorios
+     * Obtiene todos los productos, selecciona 4 al azar y les añade imagen y tallas
+     */
     public function index(): void
     {
         $model = new Productos();
@@ -29,6 +36,9 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * Limpia y formatea rutas de imágenes para el navegador
+     */
     private function normalizeImagePath(?string $path): string
     {
         if (!$path) {

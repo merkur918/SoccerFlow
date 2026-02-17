@@ -2,6 +2,9 @@
 
 class AuthController extends Controller
 {
+    /**
+     * Renderiza la vista de registro con valores por defecto
+     */
     private function renderRegister(array $data = []): void
     {
         $defaults = [
@@ -13,6 +16,9 @@ class AuthController extends Controller
         $this->render('auth/register', array_merge($defaults, $data), false);
     }
 
+    /**
+     * Renderiza la vista de login con valores por defecto
+     */
     private function renderLogin(array $data = []): void
     {
         $defaults = [
@@ -24,24 +30,18 @@ class AuthController extends Controller
         $this->render('auth/login', array_merge($defaults, $data), false);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | REGISTER VIEW
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Muestra el formulario de registro
+     */
     public function index(): void
     {
         $this->renderRegister();
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | CREATE USER
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Procesa el formulario de registro
+     * Valida datos, verifica email duplicado, crea usuario y envía email de verificación
+     */
     public function create(): void
     {
         $nombre = recoge('nombre');
@@ -93,13 +93,10 @@ class AuthController extends Controller
         $this->render('auth/Email', [], false);
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | VERIFY EMAIL
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Verifica el token de email enviado al usuario
+     * Si es válido, marca el email como verificado y redirige al login
+     */
     public function verifyEmail(): void
     {
         $token = $_GET['token'] ?? '';
@@ -115,24 +112,18 @@ class AuthController extends Controller
     }
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | LOGIN VIEW
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Muestra el formulario de login
+     */
     public function login(): void
     {
         $this->renderLogin();
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | AUTHENTICATE
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Procesa el formulario de login
+     * Verifica credenciales y email verificado, luego inicia sesión
+     */
     public function authenticate(): void
     {
         $email = recoge('email');
@@ -167,25 +158,18 @@ class AuthController extends Controller
         exit;
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | REQUEST PASSWORD VIEW
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Muestra el formulario para solicitar recuperación de contraseña
+     */
     public function requestPassword(): void
     {
         $this->render('auth/passw', [], false);
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | SEND RESET EMAIL
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Procesa la solicitud de recuperación
+     * Envía email con token para restablecer contraseña
+     */
     public function sendPasswordEmail(): void
     {
         $email = recoge('email');
@@ -215,13 +199,9 @@ class AuthController extends Controller
         $this->render('auth/password-email-sent', [], false);
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | VERIFY RESET TOKEN
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Verifica el token de recuperación y muestra formulario para nueva contraseña
+     */
     public function passwordVerify(): void
     {
         $token = $_GET['token'] ?? '';
@@ -238,13 +218,10 @@ class AuthController extends Controller
         ], false);
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE PASSWORD
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Actualiza la contraseña del usuario
+     * Valida que las contraseñas coincidan y actualiza en BD
+     */
     public function passwordUpdate(): void
     {
         $password = recoge('password');
@@ -276,13 +253,9 @@ class AuthController extends Controller
         exit;
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | LOGOUT
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Cierra la sesión del usuario y redirige al login
+     */
     public function logout(): void
     {
         $this->session->logout();

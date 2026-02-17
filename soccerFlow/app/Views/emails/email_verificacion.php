@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <style>
@@ -17,7 +18,7 @@
             padding: 25px;
             border-radius: 10px;
             border-top: 4px solid #079C40;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
@@ -53,21 +54,23 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Hola <?= $nombre ?></h2>
+    <div class="container">
+        <h2>Hola <?= $nombre ?></h2>
 
-    <p>Gracias por registrarte en <strong>SoccerFlow</strong>. Para activar tu cuenta, haz clic en el siguiente botón:</p>
+        <p>Gracias por registrarte en <strong>SoccerFlow</strong>. Para activar tu cuenta, haz clic en el siguiente botón:</p>
 
-    <a class="btn" href="<?= $verifyUrl ?>">Verificar cuenta</a>
+        <a class="btn" href="<?= $verifyUrl ?>">Verificar cuenta</a>
 
-    <p style="margin-top:20px;">Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>
+        <p style="margin-top:20px;">Si no solicitaste esta cuenta, puedes ignorar este mensaje.</p>
 
-    <div class="footer">
-        © <?= date('Y') ?> SoccerFlow — Tu plataforma de fútbol
+        <div class="footer">
+            © <?= date('Y') ?> SoccerFlow — Tu plataforma de fútbol
+        </div>
     </div>
-</div>
 
 </body>
+
 </html>

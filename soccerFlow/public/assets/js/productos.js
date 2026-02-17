@@ -1,8 +1,8 @@
-     // Función para buscar productos por nombre
-      const searchInput = document.querySelector('.product__search-input');
+// Función para buscar productos por nombre
+const searchInput = document.querySelector('.product__search-input');
 
 searchInput.addEventListener('input', function () {
-   const searchTerm = this.value.trim().toLowerCase();
+    const searchTerm = this.value.trim().toLowerCase();
 
     const products = document.querySelectorAll('.product__block');
 
@@ -17,7 +17,7 @@ searchInput.addEventListener('input', function () {
     });
 });
 // Función para ordenar productos por precio
-     const priceFilter = document.querySelector('.product__order-price');
+const priceFilter = document.querySelector('.product__order-price');
 priceFilter.addEventListener('change', function () {
     const selectedOption = this.value;
     const productsContainer = document.querySelector('.product__container');

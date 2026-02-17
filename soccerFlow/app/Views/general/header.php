@@ -1,18 +1,33 @@
 <?php
+// Inicializamos el contador del carrito a 0 por defecto
 $cartCount = 0;
+
+// Verificamos si existe la sesión y si el usuario está logueado
 if (isset($session) && $session->isLoggedIn()) {
+    // Si está logueado, creamos una instancia del modelo Cart
     $cartModel = new Cart();
+    // Obtenemos el número de productos en el carrito del usuario actual
     $cartCount = $cartModel->getCartCountByUser((int)$session->getUserId());
 }
 ?>
-<header class="header"> 
-    <div class="header-container"> 
-        <div class="brand-section"> 
-            <a href="/" class="home-link"> 
-                <h1 class="title">SOCCER FLO<span class="green-w">W</span></h1> 
-            </a> 
-                <img class="soccer-ball" src="/assets/img/logo.png" alt="Pelota de fútbol">
-        
+
+<!-- Cabecera principal del sitio que aparece en todas las páginas -->
+<header class="header">
+    <!-- Contenedor interno que centra y organiza el contenido del header -->
+    <div class="header-container">
+
+        <!-- SECCIÓN DE MARCA: Logo y nombre del sitio -->
+        <div class="brand-section">
+            <!-- Enlace que lleva a la página principal -->
+            <a href="/" class="home-link">
+                <!-- Título con la palabra "SOCCER FLOW" y la W en verde -->
+                <h1 class="title">SOCCER FLO<span class="green-w">W</span></h1>
+            </a>
+            <!-- Logo gráfico (pelota de fútbol) -->
+            <img class="soccer-ball" src="/assets/img/logo.png" alt="Pelota de fútbol">
+        </div>
+
+        <!-- NAVEGACIÓN PRINCIPAL: Menú con enlaces a las secciones importantes -->
         <nav class="main-nav">
             <ul class="nav-list">
                 <li class="nav-item"><a href="/productos" class="nav-link">Tienda</a></li>
@@ -21,66 +36,89 @@ if (isset($session) && $session->isLoggedIn()) {
                 <li class="nav-item"><a href="/contactanos" class="nav-link">Contactanos</a></li>
             </ul>
         </nav>
-        
+
+        <!-- ACCIONES DE USUARIO: Carrito, perfil y cambio de tema -->
         <div class="user-actions">
-             <a href="/cart">
-            <button class="icon-btn cart-btn" aria-label="Carrito de compras (<?= (int)$cartCount ?>)" data-count="<?= (int)$cartCount ?>">
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-                </svg>
-            </button>
-            </a>
-            
-            <div class="user-dropdown">
-                <button class="icon-btn user-btn" aria-label="Perfil de usuario" id="userMenuButton">
+
+            <!-- BOTÓN DEL CARRITO: Muestra el contador de productos -->
+            <a href="/cart">
+                <button class="icon-btn cart-btn"
+                    aria-label="Carrito de compras (<?= (int)$cartCount ?>)"
+                    data-count="<?= (int)$cartCount ?>">
+                    <!-- Icono SVG del carrito -->
                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
                     </svg>
                 </button>
-                
+            </a>
+
+            <!-- DROPDOWN DE USUARIO: Menú desplegable para login/perfil -->
+            <div class="user-dropdown">
+                <!-- Botón que abre el menú desplegable -->
+                <button class="icon-btn user-btn" aria-label="Perfil de usuario" id="userMenuButton">
+                    <!-- Icono SVG de usuario (silueta de persona) -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                </button>
+
+                <!-- Menú desplegable (contenido dinámico según sesión) -->
                 <div class="dropdown-menu" id="userDropdown">
+
                     <?php if (isset($session) && $session->isLoggedIn()): ?>
-                        <!-- Usuario logueado -->
+                        <!-- === CONTENIDO PARA USUARIO LOGUEADO === -->
+
+                        <!-- Cabecera con nombre del usuario -->
                         <div class="dropdown-header">
-                          <strong><?= htmlspecialchars($session->getUserName() ?: 'Usuario'); ?></strong>
+                            <strong><?= htmlspecialchars($session->getUserName() ?: 'Usuario'); ?></strong>
                         </div>
+
+                        <!-- Opción de cerrar sesión -->
                         <a href="/logout" class="dropdown-item">
                             <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                                <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
                             </svg>
                             Cerrar Sesión
                         </a>
+
                     <?php else: ?>
-                        <!-- Usuario no logueado -->
+                        <!-- === CONTENIDO PARA USUARIO NO LOGUEADO === -->
+
+                        <!-- Opción de iniciar sesión -->
                         <a href="/login" class="dropdown-item">
                             <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
+                                <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
                             </svg>
                             Iniciar Sesión
                         </a>
+
+                        <!-- Opción de registrarse -->
                         <a href="/register" class="dropdown-item">
                             <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                             </svg>
                             Registrarse
                         </a>
+
                     <?php endif; ?>
                 </div>
             </div>
-            
+
+            <!-- BOTÓN DE CAMBIO DE TEMA (claro/oscuro) -->
             <button class="icon-btn theme-btn" aria-label="Cambiar tema">
+                <!-- Icono del sol (tema claro) - visible por defecto -->
                 <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" />
                 </svg>
+                <!-- Icono de la luna (tema oscuro) - oculto inicialmente -->
                 <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-                    <path d="M9.37 5.51c-.18.64-.27 1.31-.27 1.99 0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27C17.45 17.19 14.93 19 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                    <path d="M9.37 5.51c-.18.64-.27 1.31-.27 1.99 0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27C17.45 17.19 14.93 19 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
                 </svg>
             </button>
         </div>
     </div>
-    </main>
-
-<script src="/assets/js/header.js"></script>
-
-</body>
 </header>
+
+<!-- Script para la funcionalidad del header (dropdown, tema, etc.) -->
+<script src="/assets/js/header.js"></script>
+</body>

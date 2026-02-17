@@ -32,7 +32,7 @@ class SessionManager
 
         //pasa el parametri explicito, 
 
-        $this->apiMode = $apiMode ;
+        $this->apiMode = $apiMode;
 
         //Si pasan el parametro 
         $this->start();
@@ -42,10 +42,10 @@ class SessionManager
      * Decide si redirgir web o api
      */
 
-    private function shouldRedirect(?bool $redirect):bool{
+    private function shouldRedirect(?bool $redirect): bool
+    {
 
         return $redirect ?? !$this->apiMode;
-
     }
 
     // INICIALIZACIÓN SEGURA DE LA SESIÓN
@@ -94,9 +94,14 @@ class SessionManager
         session_destroy();
 
         $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000,
-            $params['path'], $params['domain'],
-            $params['secure'], $params['httponly']
+        setcookie(
+            session_name(),
+            '',
+            time() - 42000,
+            $params['path'],
+            $params['domain'],
+            $params['secure'],
+            $params['httponly']
         );
 
         header("Location: {$this->loginPage}");
@@ -121,8 +126,10 @@ class SessionManager
         }
 
         // Timeout por inactividad
-        if (isset($_SESSION['lastActivity']) &&
-            (time() - $_SESSION['lastActivity'] > $this->timeout)) {
+        if (
+            isset($_SESSION['lastActivity']) &&
+            (time() - $_SESSION['lastActivity'] > $this->timeout)
+        ) {
             $this->logout();
         }
 
@@ -135,16 +142,28 @@ class SessionManager
     }
 
     // GETTERS DE SESIÓN
-    public function getUserId()        { return $_SESSION['usuarioId'] ?? null; }
-    public function getUserName(): string { return $_SESSION['usuarioNombre'] ?? ''; }
-    public function getUserLevel(): int   { return $_SESSION['usuarioNivel'] ?? self::ROLE_INVITADO; }
-    public function get(string $index)    { return $_SESSION[$index] ?? null; }
+    public function getUserId()
+    {
+        return $_SESSION['usuarioId'] ?? null;
+    }
+    public function getUserName(): string
+    {
+        return $_SESSION['usuarioNombre'] ?? '';
+    }
+    public function getUserLevel(): int
+    {
+        return $_SESSION['usuarioNivel'] ?? self::ROLE_INVITADO;
+    }
+    public function get(string $index)
+    {
+        return $_SESSION[$index] ?? null;
+    }
 
     // ESTADO Y VALIDACIÓN DE ROLES
     public function isLoggedIn(): bool
     {
         return isset($_SESSION['usuarioId']) &&
-               $this->getUserLevel() > self::ROLE_INVITADO;
+            $this->getUserLevel() > self::ROLE_INVITADO;
     }
 
     public function hasLevel(int $requiredLevel): bool
@@ -153,28 +172,28 @@ class SessionManager
     }
 
     public function setUser(array $user): void
-{
-    $this->login(
-        $user['ID'],
-        $user['name'],
-        $user['usuarioNivel'] ?? self::ROLE_USUARIO
-    );
-}
-
-public function requireLogin(?bool $redirect = null): bool
-{
-    if($this->isLoggedIn()) return true;
-    
-    if($this->shouldRedirect($redirect)){
-        header("Location: {$this->loginPage}");
-        exit();
+    {
+        $this->login(
+            $user['ID'],
+            $user['name'],
+            $user['usuarioNivel'] ?? self::ROLE_USUARIO
+        );
     }
 
-    /**
-     * Si $redirect es true redirige 
-     * Si $redirect es false no redirige
-     * Si $redirect es null decide segun Api Mode
-     */
-    return false;
-}
+    public function requireLogin(?bool $redirect = null): bool
+    {
+        if ($this->isLoggedIn()) return true;
+
+        if ($this->shouldRedirect($redirect)) {
+            header("Location: {$this->loginPage}");
+            exit();
+        }
+
+        /**
+         * Si $redirect es true redirige 
+         * Si $redirect es false no redirige
+         * Si $redirect es null decide segun Api Mode
+         */
+        return false;
+    }
 }

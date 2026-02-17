@@ -44,7 +44,7 @@ $isApi =
 
 
 // Crear sesión UNA sola vez
-$session = new SessionManager('login',600, $isApi);
+$session = new SessionManager('login', 600, $isApi);
 $session->checkSecurity();
 
 // ------------------------------
@@ -86,7 +86,7 @@ $map = [
     'logout' => [
         'controller' => 'AuthController',
         'action' => 'logout',
-        'nivel' => 5 
+        'nivel' => 5
     ],
 
     'verify-email' => [
@@ -122,13 +122,13 @@ $map = [
         'action' => 'passwordUpdate',
         'nivel' => 0
     ],
-//Cargar pagina de contacto
+    //Cargar pagina de contacto
     'contactanos' => [
         'controller' => 'ContactController',
         'action'     => 'index',
         'nivel'      => 0
-],
-   // Cargar pagina de productos
+    ],
+    // Cargar pagina de productos
     'productos' => [
         'controller' => 'ProductosController',
         'action'     => 'index',
@@ -180,44 +180,44 @@ $map = [
      */
 
     // ------------------------------
-// API v1 - Auth
-// ------------------------------
-'api/v1/auth/register' => [
-    'controller' => 'ApiAuthController',
-    'action' => 'register',
-    'nivel' => 0
-],
-'api/v1/auth/login' => [
-    'controller' => 'ApiAuthController',
-    'action' => 'login',
-    'nivel' => 0
-],
-'api/v1/auth/me' => [
-    'controller' => 'ApiAuthController',
-    'action' => 'me',
-    'nivel' => 5
-],
-'api/v1/auth/logout' => [
-    'controller' => 'ApiAuthController',
-    'action' => 'logout',
-    'nivel' => 5
-],
-'api/v1/auth/verify-email' => [
-    'controller' => 'ApiAuthController',
-    'action' => 'verifyEmail',
-    'nivel' => 0
-],
-// API - Noticias
-'api/news' => [
-    'controller' => 'ApiNewsController',
-    'action' => 'index',
-    'nivel' => 0
-],
-'product-details' => [
-    'controller' => 'ProductosDetailController',
-    'action'     => 'details',
-    'nivel'      => 0
-],
+    // API v1 - Auth
+    // ------------------------------
+    'api/v1/auth/register' => [
+        'controller' => 'ApiAuthController',
+        'action' => 'register',
+        'nivel' => 0
+    ],
+    'api/v1/auth/login' => [
+        'controller' => 'ApiAuthController',
+        'action' => 'login',
+        'nivel' => 0
+    ],
+    'api/v1/auth/me' => [
+        'controller' => 'ApiAuthController',
+        'action' => 'me',
+        'nivel' => 5
+    ],
+    'api/v1/auth/logout' => [
+        'controller' => 'ApiAuthController',
+        'action' => 'logout',
+        'nivel' => 5
+    ],
+    'api/v1/auth/verify-email' => [
+        'controller' => 'ApiAuthController',
+        'action' => 'verifyEmail',
+        'nivel' => 0
+    ],
+    // API - Noticias
+    'api/news' => [
+        'controller' => 'ApiNewsController',
+        'action' => 'index',
+        'nivel' => 0
+    ],
+    'product-details' => [
+        'controller' => 'ProductosDetailController',
+        'action'     => 'details',
+        'nivel'      => 0
+    ],
 
 ];
 
@@ -257,19 +257,18 @@ if ($requiredLevel > 0 && !$session->hasLevel($requiredLevel)) {
 
     $isLogged = $session->isLoggedIn();
 
-    if($isApi){
+    if ($isApi) {
         //401(no autenticado) o 403(Sin permisos)
         http_response_code($isLogged ? 403 : 401);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode([
-            'ok'=>false,
+            'ok' => false,
             'message' => $isLogged ? 'No autorizado' : 'No autenticado'
-        ],JSON_UNESCAPED_UNICODE);
-    }else{
+        ], JSON_UNESCAPED_UNICODE);
+    } else {
         require __DIR__ . '/../app/Views/error/error.php';
     }
     exit();
-    
 }
 
 
@@ -280,19 +279,18 @@ $controller = new $controlador($session);
 
 if (!method_exists($controller, $actionName)) {
 
-    if($isApi) {
+    if ($isApi) {
         http_response_code(404);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode([
-            'ok'=>false,
+            'ok' => false,
             'message' => $actionName . " " . "No encontrado"
-        ],JSON_UNESCAPED_UNICODE);
-        
-    }else{
+        ], JSON_UNESCAPED_UNICODE);
+    } else {
         header("HTTP/1.0 404 Not Found");
         echo "<h1>Error 404: Acción '$actionName' no encontrada</h1>";
     }
-    
+
     exit;
 }
 

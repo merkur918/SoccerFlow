@@ -1,9 +1,9 @@
 RewriteEngine On
 
-# 🔥 NO tocar archivos reales (css/js/img)
+# NO tocar archivos reales (css/js/img)
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# 🔥 todo lo demás → router
+# todo lo demás → router
 RewriteRule ^ index.php [QSA,L]
