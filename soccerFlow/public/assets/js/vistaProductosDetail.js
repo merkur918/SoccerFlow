@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPlus = document.querySelector('.quantity-btn.plus');
     const form = document.querySelector('.product__form');
     const sizeSelect = document.querySelector('.product__size-select');
+    const sizeErrorMsg = document.querySelector('.size-error-message');
 
     const mainImg = document.querySelector('.product__img');
     const thumbs = document.querySelectorAll('.product__images-preview-img');
@@ -58,8 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', (e) => {
             if (!sizeSelect.value) {
                 e.preventDefault();
-                alert('Selecciona una talla antes de agregar al carrito.');
+                if (sizeErrorMsg) {
+                    sizeErrorMsg.style.display = 'block';
+                }
                 sizeSelect.focus();
+            }
+        });
+          sizeSelect.addEventListener('change', () => {
+            if (sizeSelect.value && sizeErrorMsg) {
+                sizeErrorMsg.style.display = 'none';
             }
         });
     }

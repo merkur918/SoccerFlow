@@ -41,7 +41,9 @@ if (!empty($producto)){
                         </div>
                     </div>
 
-                    
+                    <div class="size-error-message">
+                        Por favor, selecciona una talla
+                       </div>
                     <label class="product__size-label" for="size">Talla:</label>
                     <select class="product__size-select" id="size" name="size">
                         <option value="" disabled selected>Escoge tu talla</option>
