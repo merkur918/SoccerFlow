@@ -25,25 +25,45 @@
             <?php endif; ?>
 
             <!-- Campo de nombre de usuario -->
-            <input type="text" name="nombre" placeholder="NOMBRE DE USUARIO" required>
-            <!-- Contenedor para mostrar errores específicos del campo nombre
+            <div class="contacto__form-group">
+                <label for="name" class="contacto__form-label">
+                    Nombre <span class="contacto__form-required">*</span>
+                </label>
+                <input type="text" name="nombre" placeholder="NOMBRE DE USUARIO" required>
+                <!-- Contenedor para mostrar errores específicos del campo nombre
                  Muestra el error si existe en el array $errores, o vacío si no hay error -->
-            <p class="register__field-error" data-error-for="nombre"><?= htmlspecialchars($errores['nombre'] ?? '') ?></p>
+                <p class="register__field-error" data-error-for="nombre"><?= htmlspecialchars($errores['nombre'] ?? '') ?></p>
+            </div>
 
             <!-- Campo de email (validación HTML5 tipo email) -->
-            <input type="email" name="email" placeholder="DIRECCIÓN DE CORREO ELECTRÓNICO" required>
-            <!-- Error específico para el campo email -->
-            <p class="register__field-error" data-error-for="email"><?= htmlspecialchars($errores['email'] ?? '') ?></p>
+            <div class="contacto__form-group">
+                <label for="email" class="contacto__form-label">
+                    Email <span class="contacto__form-required">*</span>
+                </label>
+                <input type="email" name="email" placeholder="DIRECCIÓN DE CORREO ELECTRÓNICO" required>
+                <!-- Error específico para el campo email -->
+                <p class="register__field-error" data-error-for="email"><?= htmlspecialchars($errores['email'] ?? '') ?></p>
+            </div>
 
             <!-- Campo de contraseña -->
-            <input type="password" name="password" placeholder="CONTRASEÑA" required>
-            <!-- Error específico para el campo contraseña -->
-            <p class="register__field-error" data-error-for="password"><?= htmlspecialchars($errores['password'] ?? '') ?></p>
+            <div class="contacto__form-group">
+                <label for="password" class="contacto__form-label">
+                    Contraseña <span class="contacto__form-required">*</span>
+                </label>
+                <input type="password" name="password" placeholder="CONTRASEÑA" required>
+                <!-- Error específico para el campo contraseña -->
+                <p class="register__field-error" data-error-for="password"><?= htmlspecialchars($errores['password'] ?? '') ?></p>
+            </div>
 
             <!-- Campo de confirmación de contraseña (debe coincidir con el anterior) -->
-            <input type="password" name="password_confirm" placeholder="CONFIRMAR CONTRASEÑA" required>
-            <!-- Error específico para el campo confirmación -->
-            <p class="register__field-error" data-error-for="password_confirm"><?= htmlspecialchars($errores['password_confirm'] ?? '') ?></p>
+            <div class="contacto__form-group">
+                <label for="password_confirm" class="contacto__form-label">
+                    Confirmar Contraseña <span class="contacto__form-required">*</span>
+                </label>
+                <input type="password" name="password_confirm" placeholder="CONFIRMAR CONTRASEÑA" required>
+                <!-- Error específico para el campo confirmación -->
+                <p class="register__field-error" data-error-for="password_confirm"><?= htmlspecialchars($errores['password_confirm'] ?? '') ?></p>
+            </div>
 
             <!-- Checkbox para suscripción a notificaciones/publicidad -->
             <div class="register__checkbox">
@@ -57,8 +77,8 @@
 
             <!-- Botón principal para enviar el formulario y completar el registro -->
             <button class="register__button" type="submit">Enviar</button>
-        
+
         </form>
-    
+
     </div>
 </div>

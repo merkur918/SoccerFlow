@@ -110,10 +110,10 @@
                     <!-- Grupo de campo: Mensaje (textarea para texto largo) -->
                     <div class="contacto__form-group">
                         <label for="mensaje" class="contacto__form-label">
-                            Mensaje <span class="contacto__form-required">*</span>
+                            Mensaje
                         </label>
                         <textarea id="mensaje" name="mensaje" class="contacto__form-textarea"
-                            placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            placeholder="Escribe tu mensaje aquí..."></textarea>
                     </div>
 
                     <!-- Botón de envío del formulario -->

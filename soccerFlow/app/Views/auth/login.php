@@ -31,14 +31,24 @@
             <?php endif; ?>
 
             <!-- Campo de email: obligatorio, tipo email para validación básica en navegador -->
-            <input type="email" name="email" placeholder="DIRECCIÓN DE CORREO ELECTRÓNICO" required>
-            <!-- Contenedor para mostrar errores de validación del campo email (usado por JavaScript) -->
-            <p class="login__field-error" data-error-for="email"></p>
+            <div class="contacto__form-group">
+                <label for="email" class="contacto__form-label">
+                    Email <span class="contacto__form-required">*</span>
+                </label>
+                <input type="email" name="email" placeholder="DIRECCIÓN DE CORREO ELECTRÓNICO" required>
+                <!-- Contenedor para mostrar errores de validación del campo email (usado por JavaScript) -->
+                <p class="login__field-error" data-error-for="email"></p>
+            </div>
 
             <!-- Campo de contraseña: obligatorio, tipo password para ocultar caracteres -->
+              <div class="contacto__form-group">
+                <label for="password" class="contacto__form-label">
+                    Contraseña <span class="contacto__form-required">*</span>
+                </label>
             <input type="password" name="password" placeholder="CONTRASEÑA" required>
             <!-- Contenedor para mostrar errores de validación del campo contraseña -->
             <p class="login__field-error" data-error-for="password"></p>
+            </div>
 
             <!-- Checkbox para la opción "Mantener sesión iniciada" -->
             <div class="login__checkbox">
