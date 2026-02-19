@@ -69,25 +69,30 @@ if (!empty($producto)) {
                     <div class="size-error-message">
                         Por favor, selecciona una talla
                        </div>
+                        <!-- SELECTOR DE TALLA -->
                     <label class="product__size-label" for="size">Talla:</label>
                     <select class="product__size-select" id="size" name="size">
                         <option value="" disabled selected>Escoge tu talla</option>
                         <?php if (!empty($sizes)): ?>
+                            <!-- Si hay tallas específicas del producto, las mostramos -->
                             <?php foreach ($sizes as $size): ?>
                                 <option value="<?= htmlspecialchars($size) ?>"><?= htmlspecialchars($size) ?></option>
                             <?php endforeach; ?>
                         <?php else: ?>
+                             <!-- Si no hay tallas específicas, mostramos opciones por defecto -->
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
                             <option value="XL">XL</option>
                         <?php endif; ?>
                     </select>
-
+                         <!-- Botón de envío del formulario -->
                     <input class="product__cart-button" type="submit" value="🛒 Agregar al Carrito">
                     
                 </form>
+                 <!-- DESCRIPCIÓN DETALLADA DEL PRODUCTO -->
                 <div class="product__description">
+                    <!-- Lista con todas las características del producto -->
                     <ul>
                     <li><p class="product__description-text"><?php  echo $descripcion ?></p></li>
                     <li><p class="product__description-text">Marca: <?php  echo $marca ?></li>
@@ -98,50 +103,6 @@ if (!empty($producto)) {
 
                 </div>
 
-                <!-- SELECTOR DE TALLA -->
-                <label class="product__size-label" for="size">Talla:</label>
-                <select class="product__size-select" id="size" name="size">
-                    <option value="" disabled selected>Escoge tu talla</option>
-                    <?php if (!empty($sizes)): ?>
-                        <!-- Si hay tallas específicas del producto, las mostramos -->
-                        <?php foreach ($sizes as $size): ?>
-                            <option value="<?= htmlspecialchars($size) ?>"><?= htmlspecialchars($size) ?></option>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <!-- Si no hay tallas específicas, mostramos opciones por defecto -->
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                    <?php endif; ?>
-                </select>
-
-                <!-- Botón de envío del formulario -->
-                <input class="product__cart-button" type="submit" value="🛒 Agregar al Carrito">
-
-            </form>
-
-            <!-- DESCRIPCIÓN DETALLADA DEL PRODUCTO -->
-            <div class="product__description">
-                <ul>
-                    <!-- Lista con todas las características del producto -->
-                    <li>
-                        <p class="product__description-text"><?php echo $descripcion ?></p>
-                    </li>
-                    <li>
-                        <p class="product__description-text">Marca: <?php echo $marca ?></p>
-                    </li>
-                    <li>
-                        <p class="product__description-text">Color: <?php echo $color ?></p>
-                    </li>
-                    <li>
-                        <p class="product__description-text">Equipo: <?php echo $equipo ?></p>
-                    </li>
-                    <li>
-                        <p class="product__description-text">Género: <?php echo $genero ?></p>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>
