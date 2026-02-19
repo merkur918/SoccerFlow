@@ -8,19 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!form) return;
 
     // Agregamos un event listener para cuando se envíe el formulario
-    form.addEventListener('submit', e => {
-        // Prevenimos el comportamiento por defecto (recargar la página)
-        e.preventDefault();
-
-        // Mostramos el mensaje de éxito añadiendo la clase 'mostrar'
-        mensaje.classList.add('mostrar');
-
-        // Configuramos un temporizador para ocultar el mensaje después de 3 segundos
-        setTimeout(() => {
-            mensaje.classList.remove('mostrar');
-        }, 3000);
-
-        // Limpiamos todos los campos del formulario
-        form.reset();
-    });
+form.addEventListener('submit', async e => { e.preventDefault(); 
+    // Evita recargar la página  
+const datos = new FormData(form); 
+const respuesta = await fetch('/contactanos_post', { method: 'POST', body: datos }); 
+const resultado = await respuesta.text(); 
+if (resultado === "success") 
+    { mensaje.classList.add('mostrar'); 
+        setTimeout(() => { mensaje.classList.remove('mostrar'); }, 3000); 
+        form.reset(); } 
+        else 
+            { alert("Hubo un error al enviar el mensaje"); } });
 });

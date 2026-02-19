@@ -72,7 +72,7 @@
             <div class="contacto__form">
                 <h2 class="contacto__info-title">Envíanos un Mensaje</h2>
                 <!-- Formulario con ID "formContacto" que usa el script de validación visto anteriormente -->
-                <form id="formContacto" method="post">
+                <form id="formContacto" action="/contactanos_post" method="post">
 
                     <!-- Grupo de campo: Nombre -->
                     <div class="contacto__form-group">

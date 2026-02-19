@@ -128,6 +128,12 @@ $map = [
         'action'     => 'index',
         'nivel'      => 0
     ],
+    // Procesar formulario de contacto
+    'contactanos_post' => [
+        'controller' => 'ContactController',
+        'action'     => 'saveMessage',
+        'nivel'      => 0
+    ],
     // Cargar pagina de productos
     'productos' => [
         'controller' => 'ProductosController',

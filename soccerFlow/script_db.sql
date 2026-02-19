@@ -110,3 +110,13 @@ CREATE TABLE order_items(
     FOREIGN KEY (product_variant_id) REFERENCES products_variants(ID) ON DELETE RESTRICT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE contactanos (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    asunto VARCHAR(255) NOT NULL,
+    mensaje TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
