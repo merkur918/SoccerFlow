@@ -22,6 +22,7 @@ docker compose up --build
 ```
 2. Abrir la app
 - Web: `http://localhost:8080`
+-- Web (HTTPS): `https://localhost:8443`
 - phpMyAdmin: `http://localhost:8081` (host: `db`, user: `root`, pass: `root`)
 
 ## Base de datos
