@@ -74,7 +74,6 @@
         // Extraemos todos los datos del evento con valores por defecto
         const title = event?.title || event?.strEvent || event?.league || "Partido";
         const date = formatDate(event?.date || event?.dateEvent, event?.time || event?.strTime);
-        const venue = event?.venue || event?.strVenue || "Estadio desconocido";
         const home = event?.home || event?.strHomeTeam || "-";
         const away = event?.away || event?.strAwayTeam || "-";
         const homeLogo = event?.homeLogo || "/assets/img/logo.png";
@@ -111,7 +110,6 @@
             <p class="news__desc">${home} ${score} ${away}</p>
             <div class="news__meta">
               <span>${date}</span>
-              <span>${venue}</span>
             </div>
           </div>
         `;
