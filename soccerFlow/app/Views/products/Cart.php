@@ -58,7 +58,7 @@
             <!-- MENSAJE DE CARRITO VACÍO (corregido e integrado) -->
             <div class="cart__empty">
                 <p>Tu carrito está vacío</p>
-                <a href="/productos" class="cart__continue-shopping">Seguir comprando</a>S
+                <a href="/productos" class="cart__continue-shopping">Seguir comprando</a>
             </div>
         <?php endif; ?>
     </div>
