@@ -14,6 +14,16 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Usuario admin por defecto contraseña "admin123"
+INSERT INTO users (name, email, password, rol, email_verified_at)
+VALUES (
+    'Administrador',
+    'admin@soccerflow.com',
+    '$2y$10$yMjGD3ptpnlEvfR4q6Hqa.ceXM5C835A/TgWgPNfVfzWtONt6.wn2', 
+    'admin',
+    NOW()
+);
+
 -- Tabla email_verifications (sin cambios)
 CREATE TABLE email_verifications (
     id INT AUTO_INCREMENT PRIMARY KEY,
