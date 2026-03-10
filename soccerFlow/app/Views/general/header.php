@@ -37,11 +37,10 @@ $isAdmin = isset($session) && $session->hasLevel(10);
                     <a href="/productos" class="nav-link">Tienda</a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="/competiciones" class="nav-link">Competiciones</a>
-                </li>
-
                 <?php if (!$isAdmin): ?>
+                    <li class="nav-item">
+                        <a href="/competiciones" class="nav-link">Competiciones</a>
+                    </li>
                     <li class="nav-item">
                         <a href="/noticias" class="nav-link">Noticias</a>
                     </li>
