@@ -44,10 +44,10 @@
                 <label for="category" class="add-product__form-label">Categoría</label>
                 <select id="category" name="category" required class="add-product__form-select">
                     <option value="">Selecciona categoría</option>
-                    <option value="camiseta">Camiseta</option>
-                    <option value="chandal">Chandal</option>
-                    <option value="botas">Botas</option>
-                    <option value="guantes">Guantes</option>
+                    <option value="camiseta" data-category="camiseta">Camiseta</option>
+                    <option value="chandal" data-category="chandal">Chandal</option>
+                    <option value="botas" data-category="botas">Botas</option>
+                    <option value="guantes" data-category="guantes">Guantes</option>
                 </select>
             </div>
 
