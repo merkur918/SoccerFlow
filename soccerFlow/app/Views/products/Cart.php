@@ -15,9 +15,11 @@
             <?php foreach ($items as $item): ?>
                 <?php
                 // Procesamiento de la imagen del producto
-                $img = $item['image_url'] ?? '/assets/img/products/placeholder.png';
-                // Limpia la ruta eliminando prefijos específicos del proyecto
-                $img = str_replace('soccerFlow/public', '', $img);
+                // Si hay imagen, construimos la ruta correcta
+                $img = !empty($item['image_url']) 
+                    ? '/assets/img/productAdmin/' . htmlspecialchars($item['image_url']) 
+                    : '/assets/img/products/placeholder.png';
+
                 // Asegura que la ruta comience con /
                 if ($img && $img[0] !== '/') $img = '/' . $img;
 
@@ -33,7 +35,7 @@
                     data-price="<?= $rawPrice ?>">
 
                     <!-- Imagen del producto -->
-                    <img src="<?= htmlspecialchars($img) ?>"
+                    <img src="<?= $img ?>"
                         alt="<?= htmlspecialchars($item['name']) ?>"
                         class="cart__product-image-window">
 

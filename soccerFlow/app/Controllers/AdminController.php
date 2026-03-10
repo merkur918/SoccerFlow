@@ -57,46 +57,51 @@ class AdminController extends Controller
             $uploadDir = __DIR__ . '/../../public/assets/img/productAdmin/';
             if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 
-            // Subir imágenes
-            if (!empty($_FILES['images']['name'][0])) {
-                $maxSize = 5 * 1024 * 1024; // 5 MB
-                $allowedMime = ['image/jpeg' => 'jpg', 'image/png' => 'png'];
+            $maxSize = 5 * 1024 * 1024; // 5 MB
+            $allowedMime = ['image/jpeg' => 'jpg', 'image/png' => 'png'];
 
-                foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
-                    $errores = [];
+            //Imagen principal
+            if (!empty($_FILES['main_image']['name'])) {
+                $tmpName = $_FILES['main_image']['tmp_name'];
+                $nameFile = $_FILES['main_image']['name'];
+                $error = $_FILES['main_image']['error'];
+                $size = $_FILES['main_image']['size'];
 
-                    // Validar errores de PHP
-                    if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK || $_FILES['images']['size'][$key] === 0) {
-                        $errores[] = "Error al subir {$_FILES['images']['name'][$key]}";
-                        continue;
-                    }
-                    if ($_FILES['images']['size'][$key] > $maxSize) {
-                        $errores[] = "El archivo {$_FILES['images']['name'][$key]} excede 5MB";
-                        continue;
-                    }
-
-                    // Validar MIME real
+                if ($error === UPLOAD_ERR_OK && $size > 0 && $size <= $maxSize) {
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mimeReal = finfo_file($finfo, $tmpName);
                     finfo_close($finfo);
 
-                    if (!array_key_exists($mimeReal, $allowedMime)) {
-                        $errores[] = "Tipo no permitido: {$mimeReal}";
-                        continue;
+                    if (array_key_exists($mimeReal, $allowedMime)) {
+                        $ext = $allowedMime[$mimeReal];
+                        $filename = uniqid('main_', true) . '.' . $ext;
+                        if (move_uploaded_file($tmpName, $uploadDir . $filename)) {
+                            $this->adminModel->addProductImage($productId, $filename, true); // true = principal
+                        }
                     }
+                }
+            }
 
-                    // Generar nombre seguro
+            //Imágenes secundarias
+            if (!empty($_FILES['images']['name'][0])) {
+                foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                    $error = $_FILES['images']['error'][$key];
+                    $size = $_FILES['images']['size'][$key];
+                    $nameFile = $_FILES['images']['name'][$key];
+
+                    if ($error !== UPLOAD_ERR_OK || $size === 0 || $size > $maxSize) continue;
+
+                    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                    $mimeReal = finfo_file($finfo, $tmpName);
+                    finfo_close($finfo);
+
+                    if (!array_key_exists($mimeReal, $allowedMime)) continue;
+
                     $ext = $allowedMime[$mimeReal];
-                    $filename = uniqid('prod_', true) . '.' . $ext;
-
-                    // Mover el archivo
-                    if (!move_uploaded_file($tmpName, $uploadDir . $filename)) {
-                        $errores[] = "No se pudo guardar {$filename}";
-                        continue;
+                    $filename = uniqid('sec_', true) . '.' . $ext;
+                    if (move_uploaded_file($tmpName, $uploadDir . $filename)) {
+                        $this->adminModel->addProductImage($productId, $filename, false); // false = secundaria
                     }
-
-                    // Guardar en la DB
-                    $this->adminModel->addProductImage($productId, $filename);
                 }
             }
 
@@ -107,6 +112,9 @@ class AdminController extends Controller
                     $this->adminModel->addProductVariant($productId, $talla, $stock, $color);
                 }
             }
+
+            // Después de añadir el producto y guardar imágenes y stock
+            $_SESSION['successMessage'] = "Producto añadido correctamente";
 
             // Redirigir al formulario nuevamente
             header('Location: /admin/createProduct');

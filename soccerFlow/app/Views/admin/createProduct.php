@@ -1,6 +1,16 @@
 <div class="add-product">
     <div class="add-product__body">
         <h2 class="section-title">Añadir Producto</h2>
+
+        <!-- 🔹 Mensaje de éxito centrado -->
+        <?php if (!empty($_SESSION['successMessage'])): ?>
+            <div class="add-product__success">
+                <?= htmlspecialchars($_SESSION['successMessage']) ?>
+            </div>
+            <?php unset($_SESSION['successMessage']); 
+            ?>
+        <?php endif; ?>
+
         <form action="/admin/createProduct" method="POST" enctype="multipart/form-data" class="add-product__form">
 
             <!-- Nombre -->
@@ -44,10 +54,10 @@
                 <label for="category" class="add-product__form-label">Categoría</label>
                 <select id="category" name="category" required class="add-product__form-select">
                     <option value="">Selecciona categoría</option>
-                    <option value="camiseta" data-category="camiseta">Camiseta</option>
-                    <option value="chandal" data-category="chandal">Chandal</option>
-                    <option value="botas" data-category="botas">Botas</option>
-                    <option value="guantes" data-category="guantes">Guantes</option>
+                    <option value="camiseta">Camiseta</option>
+                    <option value="chandal">Chandal</option>
+                    <option value="botas">Botas</option>
+                    <option value="guantes">Guantes</option>
                 </select>
             </div>
 
@@ -63,9 +73,15 @@
 
             <!-- Imágenes -->
             <div class="add-product__form-group">
-                <label for="images" class="add-product__form-label">Imágenes del producto</label>
-                <input type="file" id="images" name="images[]" accept="image/*" multiple required>
-                <small>Puedes seleccionar varias imágenes a la vez.</small>
+                <label for="main_image" class="add-product__form-label">Imagen principal</label>
+                <input type="file" id="main_image" name="main_image" accept="image/*" required>
+                <small>Esta será la imagen principal del producto.</small>
+            </div>
+
+            <div class="add-product__form-group">
+                <label for="images" class="add-product__form-label">Imágenes secundarias</label>
+                <input type="file" id="images" name="images[]" accept="image/*" multiple>
+                <small>Puedes seleccionar varias imágenes secundarias.</small>
             </div>
 
             <!-- Previsualización -->
@@ -83,7 +99,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL']; // para ropa
+                        $tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
                         foreach ($tallas as $talla): ?>
                             <tr>
                                 <td><?= $talla ?></td>
@@ -102,5 +118,7 @@
     </div>
 </div>
 
-<!-- Script para previsualizar imágenes -->
+<div id="toast-container"></div>
+
+<!-- Script para previsualizar imágenes y mostrar mensaje -->
 <script src="/assets/js/adminProduct.js"></script>

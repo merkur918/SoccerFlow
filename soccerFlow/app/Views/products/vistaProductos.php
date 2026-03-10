@@ -90,7 +90,6 @@
                 $id = $p['id'] ?? $p['ID'] ?? null; // ID del producto (acepta id o ID)
                 $name = htmlspecialchars($p['name'] ?? 'Producto'); // Nombre seguro
                 $price = number_format((float)($p['price'] ?? 0), 2); // Precio con 2 decimales
-                $img = htmlspecialchars($p['image'] ?? '/assets/img/products/placeholder.png'); // Imagen o placeholder
                 $category = htmlspecialchars($p['category'] ?? ''); // Categoría
                 $team = htmlspecialchars($p['team'] ?? ''); // Equipo
                 $brand = strtolower($p['brand'] ?? ''); // Marca (minúsculas)
@@ -98,6 +97,19 @@
                 $meta = trim($brand . ' - ' . $category); // Línea corta (marca + categoría)
                 $sizes = htmlspecialchars($p['sizes'] ?? ''); // Tallas
                 $sizes = strtolower($sizes); // Convertir a minúsculas
+
+                // Imagen segura: prioriza ruta original si existe, si no busca en productAdmin, si nada, placeholder
+                if (!empty($p['image'])) {
+                    $img = $p['image'];
+                    // Si la imagen no empieza con /assets, asumimos que está en productAdmin
+                    if (strpos($img, '/assets') !== 0) {
+                        $img = '/assets/img/productAdmin/' . htmlspecialchars($img);
+                    }
+                    $img = htmlspecialchars($img);
+                } else {
+                    // Si no hay imagen, usamos placeholder
+                    $img = '/assets/img/products/placeholder.png';
+                }
                 ?>
 
                 <!-- Enlace que envuelve toda la tarjeta del producto -->

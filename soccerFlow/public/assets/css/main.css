@@ -4543,6 +4543,7 @@ HOME (ESTILO FUTBOL STADIUM)
     margin-right: 10px;
   }
 }
+
 /* ============================================
    ADMIN - TABLA DE TALLAS Y STOCK (MODO CLARO)
    ============================================ */
@@ -4675,4 +4676,37 @@ HOME (ESTILO FUTBOL STADIUM)
   .product-sizes-table td:last-child {
     width: 80px;
   }
+}
+
+/* Contenedor del toast en la esquina superior derecha */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  /* Separación desde arriba */
+  right: 20px;
+  /* Separación desde la derecha */
+  z-index: 9999;
+}
+
+/* Estilo del mensaje de éxito */
+.toast-message {
+  background-color: #28a745;
+  /* Verde éxito */
+  color: white;
+  padding: 25px 40px;
+  /* Más grande que antes */
+  font-size: 22px;
+  /* Texto más grande */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  /* Sombra más pronunciada */
+  opacity: 0;
+  transform: translateX(50px) scale(0.8);
+  /* Animación inicial fuera de pantalla */
+  transition: all 0.5s ease;
+  text-align: center;
+  max-width: 300px;
+  /* Limitar ancho */
+  word-wrap: break-word;
+  /* Ajuste de texto */
 }
