@@ -19,7 +19,7 @@ INSERT INTO users (name, email, password, rol, email_verified_at)
 VALUES (
     'Administrador',
     'admin@soccerflow.com',
-    '$2y$10$yMjGD3ptpnlEvfR4q6Hqa.ceXM5C835A/TgWgPNfVfzWtONt6.wn2', 
+    '$2y$10$yMjGD3ptpnlEvfR4q6Hqa.ceXM5C835A/TgWgPNfVfzWtONt6.wn2', -- LA contraseña es "admin123" que esta encriptada 
     'admin',
     NOW()
 );
