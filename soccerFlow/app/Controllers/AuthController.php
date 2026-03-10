@@ -146,12 +146,15 @@ class AuthController extends Controller
             return;
         }
 
+        // Convertimos rol de BD a nivel de sesión
+        $nivel = $user['rol'] === 'admin' ? 10 : 5;
+
         unset($user['password']);
 
         $this->session->login(
             $user['ID'],
             $user['name'],
-            5
+            $nivel
         );
 
         header('Location: /home');

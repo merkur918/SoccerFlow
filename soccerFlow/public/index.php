@@ -185,6 +185,23 @@ $map = [
      * API V1 - AUTH
      */
 
+    // Panel de administración
+    'admin/user' => [
+        'controller' => 'AdminController',
+        'action'     => 'index',
+        'nivel'      => 10
+    ],
+    'admin/user/delete' => [
+        'controller' => 'AdminController',
+        'action'     => 'deleteUser',
+        'nivel'      => 10
+    ],
+    'admin/createProduct' => [
+        'controller' => 'AdminController',
+        'action'     => 'addProduct',
+        'nivel'      => 10
+    ],
+
     // ------------------------------
     // API v1 - Auth
     // ------------------------------

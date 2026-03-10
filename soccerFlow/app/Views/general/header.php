@@ -9,6 +9,8 @@ if (isset($session) && $session->isLoggedIn()) {
     // Obtenemos el número de productos en el carrito del usuario actual
     $cartCount = $cartModel->getCartCountByUser((int)$session->getUserId());
 }
+$isAdmin = isset($session) && $session->hasLevel(10);
+
 ?>
 
 <!-- Cabecera principal del sitio que aparece en todas las páginas -->
@@ -27,13 +29,41 @@ if (isset($session) && $session->isLoggedIn()) {
             <img class="soccer-ball" src="/assets/img/logo.png" alt="Pelota de fútbol">
         </div>
 
-        <!-- NAVEGACIÓN PRINCIPAL: Menú con enlaces a las secciones importantes -->
+        <!-- NAVEGACIÓN PRINCIPAL -->
         <nav class="main-nav">
             <ul class="nav-list">
-                <li class="nav-item"><a href="/productos" class="nav-link">Tienda</a></li>
-                <li class="nav-item"><a href="/competiciones" class="nav-link">Competiciones</a></li>
-                <li class="nav-item"><a href="/noticias" class="nav-link">Noticias</a></li>
-                <li class="nav-item"><a href="/contactanos" class="nav-link">Contactanos</a></li>
+
+                <li class="nav-item">
+                    <a href="/productos" class="nav-link">Tienda</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/competiciones" class="nav-link">Competiciones</a>
+                </li>
+
+                <?php if (!$isAdmin): ?>
+                    <li class="nav-item">
+                        <a href="/noticias" class="nav-link">Noticias</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/contactanos" class="nav-link">Contactanos</a>
+                    </li>
+                <?php endif; ?>
+
+
+                <?php if ($isAdmin): ?>
+
+                    <li class="nav-item">
+                        <a href="/admin/user" class="nav-link">Gestión de Usuarios</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/admin/createProduct" class="nav-link">Añadir Producto</a>
+                    </li>
+
+                <?php endif; ?>
+
             </ul>
         </nav>
 
