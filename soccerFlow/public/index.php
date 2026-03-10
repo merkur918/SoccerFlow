@@ -185,11 +185,11 @@ $map = [
      * API V1 - AUTH
      */
 
-    // Panel de administración
+    // Rutas de admin
     'admin/user' => [
         'controller' => 'AdminController',
         'action'     => 'index',
-        'nivel'      => 10
+        'nivel'      => 10 // admin
     ],
     'admin/user/delete' => [
         'controller' => 'AdminController',

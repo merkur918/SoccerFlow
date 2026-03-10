@@ -4130,3 +4130,351 @@ body {
     align-items: flex-start;
   }
 }
+
+/* ============================================
+   ADMIN - AÑADIR PRODUCTO (MODO OSCURO)
+   ============================================ */
+.add-product {
+  background-image: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.9)), url("/assets/img/Fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  padding-bottom: 60px;
+}
+
+.add-product__body {
+  background-color: var(--bg-dark);
+  backdrop-filter: blur(2px);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  box-shadow: 0 9px 20px rgba(0, 0, 0, 0.4);
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid var(--border-dark);
+}
+
+.add-product__title {
+  font-size: 2.8rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.add-product__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.add-product__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-product__form-label {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  font-weight: bold;
+}
+
+.add-product__form-input,
+.add-product__form-select,
+.add-product__form-textarea {
+  padding: 12px 15px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--secondary-color);
+  font-size: 1rem;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  transition: all 0.3s ease;
+  background: var(--bg-dark-medium);
+  color: var(--text-dark);
+}
+
+.add-product__form-input:focus,
+.add-product__form-select:focus,
+.add-product__form-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(7, 156, 64, 0.2);
+}
+
+.add-product__form-input:hover,
+.add-product__form-select:hover,
+.add-product__form-textarea:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-color);
+}
+
+.add-product__form-select option {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.add-product__form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.add-product__form-file {
+  padding: 12px 15px;
+  border-radius: var(--border-radius);
+  border: 2px dashed var(--secondary-color);
+  font-size: 1rem;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  transition: all 0.3s ease;
+  background: var(--bg-dark);
+  color: var(--text-gray);
+  cursor: pointer;
+}
+
+.add-product__form-file:hover {
+  border-color: var(--primary-color);
+  background: var(--bg-dark-medium);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.add-product__form-file::-webkit-file-upload-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin-right: 15px;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.add-product__form-file::-webkit-file-upload-button:hover {
+  background: var(--light-color);
+}
+
+.add-product__form-submit {
+  border-radius: var(--border-radius);
+  padding: 15px 30px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.add-product__form-submit:hover {
+  background-color: var(--light-color);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.add-product__form-submit:active {
+  transform: translateY(-1px);
+}
+
+.add-product__preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.add-product__preview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .add-product__body {
+    padding: 40px 30px;
+    margin-top: 60px;
+  }
+
+  .add-product__title {
+    font-size: 2.2rem;
+  }
+
+  .add-product__form-label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-product__body {
+    padding: 30px 20px;
+    margin-top: 40px;
+  }
+
+  .add-product__title {
+    font-size: 1.8rem;
+  }
+
+  .add-product__form-input,
+  .add-product__form-select,
+  .add-product__form-textarea,
+  .add-product__form-file {
+    padding: 10px 12px;
+  }
+
+  .add-product__form-file::-webkit-file-upload-button {
+    padding: 6px 12px;
+    margin-right: 10px;
+  }
+}
+/* ============================================
+   ADMIN - TABLA DE TALLAS Y STOCK (MODO OSCURO)
+   ============================================ */
+.product-sizes-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  margin: 10px 0;
+  border: 1px solid var(--border-dark);
+}
+
+.product-sizes-table thead {
+  background: var(--primary-color);
+  color: white;
+}
+
+.product-sizes-table th {
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: left;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.product-sizes-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border-dark);
+  color: var(--text-dark);
+}
+
+.product-sizes-table tbody tr:hover {
+  background: rgba(7, 156, 64, 0.1);
+}
+
+.product-sizes-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.product-sizes-table td:first-child {
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.product-sizes-table td:last-child {
+  width: 120px;
+}
+
+.product-sizes-table input[type="number"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid var(--border-dark);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Jersey 10", Arial, Helvetica, sans-serif;
+  transition: all var(--transition-normal);
+  background: var(--bg-dark-medium);
+  color: var(--text-dark);
+}
+
+.product-sizes-table input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(7, 156, 64, 0.2);
+}
+
+.product-sizes-table input[type="number"]:hover {
+  border-color: var(--light-color);
+}
+
+.product-sizes-table input[type="number"]::-webkit-inner-spin-button,
+.product-sizes-table input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.7;
+  height: 20px;
+  background: var(--bg-dark);
+  color: white;
+}
+
+.add-product__form-group small {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  margin-top: 5px;
+  display: block;
+  font-style: italic;
+}
+
+.add-product__form-group small::before {
+  content: "📸 ";
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-sizes-table {
+    font-size: 0.95rem;
+  }
+
+  .product-sizes-table th {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .product-sizes-table td {
+    padding: 8px 10px;
+  }
+
+  .product-sizes-table td:last-child {
+    width: 100px;
+  }
+
+  .product-sizes-table input[type="number"] {
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-sizes-table {
+    font-size: 0.9rem;
+  }
+
+  .product-sizes-table th {
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+
+  .product-sizes-table td {
+    padding: 6px 8px;
+  }
+
+  .product-sizes-table td:last-child {
+    width: 80px;
+  }
+}

@@ -14,7 +14,7 @@ class CartController extends Controller
         }
 
         // Verificar nivel
-        if ($_SESSION['usuarioNivel'] != 5) {
+        if ($_SESSION['usuarioNivel'] != 5 && $_SESSION['usuarioNivel'] != 10) {
             echo "No tienes permiso para acceder al carrito";
             exit;
         }
